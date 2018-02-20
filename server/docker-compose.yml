@@ -1,13 +1,6 @@
 version: "2"
 services:
   node:
-    image: "node:9.5.0-alpine"
-    user: "node"
-    working_dir: /home/node/app
-    environment:
-      - NODE_ENV=production
-    volumes:
-      - ./:/home/node/app
-    expose:
-      - "8081"
-    command: "npm start"
+    build: node
+    ports:
+      - "8080:8080"
