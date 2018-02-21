@@ -1,0 +1,32 @@
+#popup {
+  position: fixed;
+}
+.pop-container{
+  margin-top: -3em;
+  background-color: #246691;
+  border-radius: 10px;
+  padding-right: 7px;
+  margin-left: 25%;
+  height: 30em;
+  width: 50%;
+}
+.pop-input-mysize {
+  margin-top: .23em;
+  border-radius: 10px;
+  width: 91%;
+  margin-left: 2%;
+  margin-right: 7%;
+}
+.pop-input-mysize-text {
+  border-radius: 10px;
+  width: 91%;
+  height: 70%;
+  margin-left: 2%;
+  margin-right: 7%;
+}
+
+.urgent-check {
+  margin-top: 1%;
+  margin-left: 6%;
+  color: #c4c4c4;
+}

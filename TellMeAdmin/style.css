@@ -1,0 +1,66 @@
+body {
+  overflow: hidden;
+}
+.side {
+  background-color: #36475c;
+  width: 20%;
+  height: 100%;
+  float: right;
+}
+
+.top {
+  background-color: #246691;
+  height: 8rem;
+  border-style: solid;
+  border-width: 0px 0px 5px 0px;
+  border-color: #054770;
+  padding:1em 1em 1em 1em;
+}
+
+.logout {
+  background-color: red;
+  float: right;
+  height: 5.3rem;
+  width: 5.3rem;
+}
+
+.title {
+  font-size: 20px;
+  color: white;
+  margin-left: 40%;
+  display: inline;
+}
+
+img {
+  max-width:100%;
+  max-height:100%;
+}
+
+#annoucements {
+  margin-left: 10%;
+  height: 100%;
+  width: 60%;
+
+  overflow: auto;
+}
+
+
+
+@media screen and (max-width: 1024px) {
+
+}
+
+.container{
+  margin-top: 2em;
+  background-color: #246691;
+  border-radius: 10px;
+  padding-right: 7px;
+  height: 3.15em;
+  width: 50%;
+}
+
+.input-mysize {
+  border-radius: 10px;
+  width: 93%;
+  margin-right: 7%;
+}
