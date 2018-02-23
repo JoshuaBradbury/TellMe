@@ -1,7 +1,7 @@
 //
 //  ViewController.swift
 //  TellMe
-//
+//x
 //  Created by Sophia on 19.02.18.
 //  Copyright © 2018 Sophia Kalanovska. All rights reserved.
 //
@@ -12,7 +12,7 @@ import MSAL
 class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate {
     
     let kClientID = "e1d4c8a0-0063-44ea-baaf-496d6843fed2"
-    let kAuthority = "https://login.microsoftonline.com/common/v2.0"
+    let kAuthority = "https://login.microsoftonline.com/organizations/v2.0"
     
     let kGraphURI = "https://graph.microsoft.com/v1.0/me/"
     let kScopes: [String] = ["https://graph.microsoft.com/user.read"]
@@ -26,9 +26,8 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     // This button will invoke the call to the Microsoft Graph API. It uses the
     // built in Swift libraries to create a connection.
     
-    @IBAction func callGraphButton(_ sender: UIButton) {
-        
-        
+    
+    override func viewDidAppear(_ animated: Bool) {
         do {
             
             // We check to see if we have a current logged in user. If we don't, then we need to sign someone in.
@@ -87,12 +86,15 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
         }
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+     
         do {
             // Initialize a MSALPublicClientApplication with a given clientID and authority
             self.applicationContext = try MSALPublicClientApplication.init(clientId: kClientID, authority: kAuthority)
+            
         } catch {
             self.loggingText.text = "Unable to create Application Context. Error: \(error)"
         }
