@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Tellme</string>
+    <string name="app_name">TellMe</string>
+
+    <string name="title_activity_category">CategoryActivity</string>
 </resources>
