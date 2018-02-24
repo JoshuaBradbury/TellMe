@@ -40,7 +40,6 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
                 // Acquire a token for an existing user silently
                 
                 try self.applicationContext.acquireTokenSilent(forScopes: self.kScopes, user: applicationContext.users().first) { (result, error) in
-                    
                     if error == nil {
                         self.accessToken = (result?.accessToken)!
                         self.loggingText.text = "Refreshing token silently)"
@@ -63,16 +62,22 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
             
             if error.code == MSALErrorCode.interactionRequired.rawValue {
                 
-                self.applicationContext.acquireToken(forScopes: self.kScopes) { (result, error) in
-                    if error == nil {
-                        self.accessToken = (result?.accessToken)!
-                        self.loggingText.text = "Access token is \(self.accessToken)"
-                        self.signoutButton.isEnabled = true;
-                        self.getContentWithToken()
-                        
-                    } else  {
-                        self.loggingText.text = "Could not acquire token: \(error ?? "No error information" as! Error)"
-                    }
+                do {
+                    try self.applicationContext.acquireToken(forScopes: self.kScopes, user: applicationContext.users().first, uiBehavior: .MSALForceLogin, extraQueryParameters: ["domain_hint":"kcl.ac.uk"], completionBlock:{
+                        (result: MSALResult?, error: Error?) in
+                        if let result = result {
+                            self.accessToken = (result.accessToken)!
+                            self.loggingText.text = "Access token is \(self.accessToken)"
+                            self.signoutButton.isEnabled = true;
+                            self.getContentWithToken()
+                            
+                        }
+                        else {
+                          //
+                        }
+                    })
+                } catch let error {
+                    self.loggingText.text = "Could not acquire token: \(error )"
                 }
                 
             }
