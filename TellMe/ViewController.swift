@@ -42,15 +42,20 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
                 try self.applicationContext.acquireTokenSilent(forScopes: self.kScopes, user: applicationContext.users().first) { (result, error) in
                     if error == nil {
                         self.accessToken = (result?.accessToken)!
+                        DispatchQueue.main.async { // Correct
+                       
                         self.loggingText.text = "Refreshing token silently)"
                         self.loggingText.text = "Refreshed Access token is \(self.accessToken)"
-                        
                         self.signoutButton.isEnabled = true;
+                        }
+                       
+                       
                         self.getContentWithToken()
                         
                     } else {
+                        DispatchQueue.main.async { // Correct
                         self.loggingText.text = "Could not acquire token silently: \(error ?? "No error information" as! Error)"
-                        
+                        }
                     }
                 }
             }
