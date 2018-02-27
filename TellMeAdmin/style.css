@@ -30,14 +30,14 @@ body {
   margin-left: 40%;
   display: inline;
 }
-
+.annoucements {
+position: relative;
+}
 .postAnnouncement {
   padding-top: 20px;
   padding-bottom: 50px;
   margin-left: 30%;
-
-
-
+  position: absolute;
 }
 .btn {
   background: #fafafa;
@@ -99,15 +99,31 @@ img {
 
   overflow: auto;
 }
-
+.post {
+  background-color: #c4c4c4;
+  height: auto;
+  width: 80%;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  margin-left: 10%;
+  padding: 2em 5em;
+  border-radius: 10px;
+  display: block;
+}
+.annoucement-posts {
+  position: absolute;
+  z-index: 1;
+  width: 60%;
+  height: 100%;
+  overflow: auto;
+}
 .announcementsBoard {
   -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
     position: relative;
-    width: 700px;
-    padding-left: 15%;
-    height: 150px;
+    width: 50%;
+    height: auto;
     opacity: 0.53;
     margin: 11px;
     overflow: scroll;
@@ -129,6 +145,22 @@ img {
 }
 
 
+.container{
+  margin-top: 2em;
+  background-color: #246691;
+  border-radius: 10px;
+  padding-right: 7px;
+  height: 3.15em;
+  width: 50%;
+}
+
+.input-mysize {
+  border-radius: 10px;
+  width: 93%;
+  margin-right: 7%;
+  background-color:white;
+  border: 1px solid black;
+}
 
 
 @media screen and (max-width: 1024px) {

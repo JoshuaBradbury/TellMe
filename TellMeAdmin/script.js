@@ -14,6 +14,10 @@ newAnnouncementBtn.onclick = function() {
   $('body').click(function () {
      $('div#popcontainer').hide();
  });
+ /*$('body').click(function () {
+    $('div#announcementsBoard').hide();
+});*/
+
 }
 
 
