@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+
+ mysql-dev:
+  image: mysql:8.0.2
+  environment:
+   MYSQL_ROOT_PASSWORD: seggroupproj
+   MYSQL_DATABASE: database_mysql
+  ports:
+   - "3308:3308"
+  volumes:
+   - "./init.sql:/docker-entrypoint-initdb.d/init.sql"
+#   - "./my.cnf:/etc/mysql/conf.d/config-file.cnf"
+
+ admin:
+  image: adminer
+  ports:
+   - "8081:8081"
