@@ -31,7 +31,6 @@ var router = express.Router();
 router.use(morgan("dev"));
 
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: true }));
 
 router.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Credentials', true);
@@ -57,6 +56,55 @@ async function query(q, params) {
 	const query = await pool.query(q, params, queryError);
 
 	return query;
+}
+
+function convertUserToEmail(user) {
+    if (user && isString(user)) {
+        var u = user;
+
+        if (u.toLowerCase().indexOf("k") === -1) {
+            u = "k" + u;
+        }
+
+        if (u.indexOf("@") === -1) {
+            u = u + "@kcl.ac.uk";
+        }
+
+        return u;
+    }
+    return user;
+}
+
+function convertEmailToUser(user) {
+    if (user && isString(user)) {
+        var u = user;
+        if (u.indexOf("@") !== -1) {
+            u = u.split("@")[0];
+        }
+
+        if (u.toLowerCase().indexOf("k") !== -1) {
+            u = u.toLowerCase().replace("k", "");
+        }
+
+        u = Number(u);
+
+        if (u !== NaN) {
+            return u;
+        }
+    }
+    return user;
+}
+
+async function isUserAuthorisedForWrite(user) {
+    const q = await query("SELECT * FROM authorised_logins WHERE `email` = ? ", [convertUserToEmail(user)]);
+
+    return q && q[0][0].length > 0;
+}
+
+async function isUserAuthorisedForRead(user) {
+    const q = await query("SELECT * FROM students_in_groups WHERE `k_number` = ?", [convertEmailToUser(user)]);
+
+    return q && (q[0][0].length > 0 || isUserAuthorisedForWrite(user));
 }
 
 function isString(obj) {
