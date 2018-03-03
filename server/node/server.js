@@ -9,7 +9,6 @@ var mysql = require("mysql2/promise");
 
 
 var pool = mysql.createPool({
-  connectionLimit : 10,
   host            : "mysql-dev",
   user            : "root",
   password        : "seggroupproj",
@@ -124,6 +123,78 @@ router.post("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res,
 			}
 		} else {
 			res.status(400).json({"status": 400, "message": "Bad Request: name parameter must be specified in the body"});
+		}
+	} else {
+		res.sendStatus(406);
+	}
+}));
+
+router.put("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, next) => {
+	if (req.secure && req.accepts('application/json')) {
+		if (req.body.users && req.body.users.constructor === Array) {
+            var modid = false,
+                valid = false;
+
+            var groupid;
+            if (req.body.groupid) {
+                const q = await query("SELECT * FROM modules WHERE `module_id` = ?", [req.body.groupid]);
+
+                if (q[0].length > 0) {
+                    modid = true;
+                    valid = true;
+                    groupid = q[0][0].module_id;
+                }
+            }
+
+            if (req.body.group_name && isString(req.body.group_name)) {
+                valid = true;
+            }
+
+            if (valid) {
+                if (!modid) {
+                    const q = await query("SELECT * FROM modules WHERE `module_name` = ?", [req.body.group_name]);
+                    groupid = q[0][0].module_id;
+                }
+
+                var cleanUsers = [];
+                var users = req.body.users;
+
+                for (var i in users) {
+                    var user = users[i];
+                    if (user && isString(user)) {
+                        if (user.indexOf("@") !== -1) {
+                            user = user.split("@")[0];
+                        }
+
+                        if (user.toLowerCase().indexOf("k") !== -1) {
+                            user = user.toLowerCase().replace("k", "");
+                        }
+
+                        user = Number(user);
+
+                        if (user !== NaN) {
+                            cleanUsers.push(user);
+                        }
+                    }
+                }
+
+                var createdCount = 0;
+
+                for (var i in cleanUsers) {
+                    var user = cleanUsers[i];
+                    const sel = await query("SELECT * FROM students_in_groups WHERE `module_id` = ? and `k_number` = ?", [groupid, user]);
+                    if (sel[0].length == 0) {
+                        const q = await query("INSERT INTO students_in_groups SET ?", {"module_id": groupid, "k_number": user});
+                        createdCount += 1;
+                    }
+                }
+
+                res.status(201).json({"status": 201, "message": "Created: " + createdCount + " user(s) added to the group " + groupid})
+            } else {
+                res.status(400).json({"status": 400, "message": "Bad Request: groupid or group_name not specified or doesn't exist"})
+            }
+		} else {
+			res.status(400).json({"status": 400, "message": "Bad Request: users parameter must be specified as an array in the body"});
 		}
 	} else {
 		res.sendStatus(406);
