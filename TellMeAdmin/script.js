@@ -35,3 +35,26 @@ $(document)
     rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 16);
     this.rows = minRows + rows;
   });
+
+function submit(){
+  var title = document.getElementById("usr").value;
+  var text = document.getElementById("text").innerHTML;
+  if(title == "" || text == "") {
+    alert("Missing text field");
+  } else {
+    console.log(title);
+    console.log(text);
+    add_announcement(title, text);
+  }
+};
+
+/*Read text*/
+function add_announcement(title, text) {
+  var new_announcement = document.createElement("div");
+  var my_container = document.getElementById("announcements-container")
+  my_container.appendChild(new_announcement);
+  new_announcement.classList.add("post");
+  new_announcement.innerHTML += text;
+  console.log("created announcement");
+
+}
