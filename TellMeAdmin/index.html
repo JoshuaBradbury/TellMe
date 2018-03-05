@@ -5,6 +5,8 @@
   <link rel="stylesheet" href="style.css" type="text/css">
   <link rel="stylesheet" href="popup.css" type="text/css">
   <link rel="stylesheet" href="scroll.css" type="text/css">
+  <link rel="stylesheet" href="ecs.css" type="text/css">
+
 
 </head>
 
@@ -19,17 +21,25 @@
   </div>
 
   <div id="annoucements">
-    <div class="container" id="postBtn" onclick="show()"> <!--assign function to add icon when implemented-->
+    <div class="container" > <!--assign function to add icon when implemented-->
   <div class="form-group">
     <label for="usr"></label>
     <input type="text" class="form-control input-mysize" id="usr">
+    <div class="placeholder" id="postBtn"onclick="show()"></div>
   </div>
 </div>
 
 <div class="annoucement-posts" id="announcements-container">
-  <div class="post" id="announcement-module"><p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+    <div class="post" id="announcement-module"><div class="urgent-flag "></div> <!--urgent-flag & close contained in announcement-->
+            <div class="close" onclick="close()"></div> <!--add func close-->
+<p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
   </div>
-  <div class="post" id="announcement-module"><p>lolo</p>
+    
+  <div class="post" id="announcement-module">
+                        <div class="close" onclick="close()"></div> <!--add func close-->
+
+      <p>lolo</p>
+
   </div>
   <div class="post" id="announcement-module"><p></p>
   </div>

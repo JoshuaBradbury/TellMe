@@ -99,6 +99,7 @@ img {
 
   overflow: auto;
 }
+
 .post {
   background-color: #c4c4c4;
   height: auto;
@@ -110,6 +111,18 @@ img {
   border-radius: 10px;
   display: block;
 }
+.urgent-flag {
+    position: absolute;
+    margin-left: -10.2%;
+    margin-top: -3.5%;
+    height: 11%;
+    width: 10px;
+    background-color: red;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+
 .annoucement-posts {
   position: absolute;
   z-index: 1;
@@ -153,11 +166,18 @@ img {
   height: 3.15em;
   width: 50%;
 }
+.placeholder {
+    margin-left: 26%;
+    height: 10px;
+    width: 10px;
+     position: absolute;
+    background-color: red;
+}
 
 .input-mysize {
+     position: absolute;
   border-radius: 10px;
-  width: 93%;
-  margin-right: 7%;
+  width: 25%;
   background-color:white;
   border: 1px solid black;
 }

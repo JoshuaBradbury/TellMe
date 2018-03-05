@@ -46,10 +46,12 @@ function submit(){
   if(title == "" || text == "") {
     alert("Missing text field");
   } else {
+
     console.log(title);
     console.log(text);
     add_announcement(title, text);
   }
+    
 };
 
 /*Read text*/
