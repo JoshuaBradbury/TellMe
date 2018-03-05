@@ -3,16 +3,20 @@ var newAnnouncementBtn = document.getElementById('postBtn');
 
 newAnnouncementBtn.onclick = function() {
   var newA = document.getElementById('popcontainer');
+
   if (newA.style.display !== 'none') {
-    newA.style.display = 'none';
+    $('div#popcontainer').fadeOut("");
   } else {
-    newA.style.display = 'block';
+    $('div#popcontainer').fadeIn("");
   }
   document.getElementById("announcementsBoard").style.display="none";
   document.getElementById("postBtn").style.opacity = "0.5";
   document.getElementById("overlay").style.display = "block";
+
+
   $('body').click(function () {
      $('div#popcontainer').hide();
+
  });
  /*$('body').click(function () {
     $('div#announcementsBoard').hide();

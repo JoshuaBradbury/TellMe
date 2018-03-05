@@ -162,7 +162,35 @@ img {
   border: 1px solid black;
 }
 
+/*for div spikes*/
+.bubble:before {
+ 	content: '';
+	position: absolute;
+  left: auto;
+  right: -20px;
+  -webkit-transform: rotate(-45deg);
+   -moz-transform: rotate(-45deg);
+   -o-transform: rotate(-45deg);
+   -ms-transform: rotate(-45deg);
+   transform: rotate(-45deg);
 
+  top: -6px;
+	border: 20px solid transparent;
+	border-top-color: #246691;
+}
+.bubble2:before {
+ 	content: '';
+	position: absolute;
+  left: -20px;
+  -webkit-transform: rotate(45deg);
+   -moz-transform: rotate(45deg);
+   -o-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+   transform: rotate(45deg);
+  top: -6px;
+	border: 20px solid transparent;
+	border-top-color: #246691;
+}
 @media screen and (max-width: 1024px) {
 
 }
