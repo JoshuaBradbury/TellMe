@@ -10,6 +10,7 @@ newAnnouncementBtn.onclick = function() {
     $('div#popcontainer').fadeOut("");
   } else {
     $('div#popcontainer').fadeIn("");
+
   }
   document.getElementById("announcementsBoard").style.display="none";
   document.getElementById("postBtn").style.opacity = "0.5";
@@ -25,8 +26,29 @@ newAnnouncementBtn.onclick = function() {
 });*/
 
 }
+/*open csv ui*/
+var newGroupBtn = document.getElementById('csvBtn');
 
-/*
+newGroupBtn.onclick = function() {
+  var newA = document.getElementById('csvcontainer');
+
+  if (newA.style.display !== 'none') {
+    $('div#csvcontainer').fadeOut("");
+  } else {
+    $('div#csvcontainer').fadeIn("");
+
+  }
+  document.getElementById("announcementsBoard").style.display="none";
+  document.getElementById("csvBtn").style.opacity = "0.5";
+  document.getElementById("overlay").style.display = "block";
+
+
+  $('body').click(function () {
+     $('div#csvcontainer').hide();
+
+ });
+}
+/* NOT SURE WHAT THIS DOESSSSSSS
 $(document)
   .one('focus.autoExpand', 'textarea.autoExpand', function() {
     var savedValue = this.value;
@@ -49,7 +71,8 @@ function submit(){
   if(title == "" || text == "") {
     alert("Missing text field");
   } else {
-
+  $('.pop-container').remove(); //removes dropdown on exit
+  document.getElementById('usr').value=""; //clears text field on successful submit
     console.log(title);
     console.log(text);
     console.log(document.getElementById('title-text').innerHTML); //module code used to identify which module message belongs to
@@ -68,6 +91,7 @@ function add_announcement(title, text) {
   console.log("created announcement");
 
 }
+/*load in modules after page is opened initially*/
 $(document).ready(function(){
 
     for(var i = 0; i < json.length; i++) {
@@ -94,12 +118,29 @@ $(document).ready(function(){
 function update(e) {
   document.getElementById('title-text').innerHTML = e.innerHTML;
   $('.post').remove(); //clears existing announcements
+  $('.students').remove(); //clears existing students
+
   for(var i = 0; i < json.length; i++) {
     var obj = json[i];
     if(obj.ModuleName == e.innerHTML){
       for(var j = 0; j < obj.Announcements.length; j++) {
-        add_announcement(obj.Announcements[j],obj.Announcements[j])
-      }
+      add_announcement(obj.Announcements[j],obj.Announcements[j]);
+}
+        for(var x = 0; x < obj.students.length; x++) {
+            var new_mod = document.createElement("div");
+            var my_container = document.getElementById("left");
+            new_mod.classList.add("students");
+
+            my_container.appendChild(new_mod);
+            var text = document.createElement("h1");
+            text.id = "student-name";
+            text.innerHTML = obj.students[x];
+            text.onclick = function() {
+              update(this); return false;
+            }
+            new_mod.appendChild(text);
+        }
+
     }
 }
 

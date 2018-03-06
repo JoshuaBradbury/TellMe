@@ -43,3 +43,27 @@ margin-bottom: 2%;
  background-color:white;
  border: 1px solid black;
 }
+
+
+.csv-container{
+  padding-top: -1em;
+  background-color: #246691;
+  border-radius: 10px;
+  margin-left: 25%;
+  height: 30em;
+  width: 50%;
+  margin-top: -6.5%;
+  border-color: #246691;
+  padding-right: 7px;
+  padding-left: 1.1em;
+  position: relative;
+  z-index: 10;
+}
+
+
+.csv-input-mysize {
+  border-radius: 10px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right:10%;
+}

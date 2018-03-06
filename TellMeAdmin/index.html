@@ -10,7 +10,7 @@
 
 </head>
 
-<body>
+<body  class ="overlay" >
   <div class="top">
     <a href="https://www.kcl.ac.uk/"><img src="KCL-logo.png"></a>
     <div class="title" id="title-text">Group name</div>
@@ -62,7 +62,13 @@
       </div>
     </div>
   </div>
-
+  <!--csv popup-->
+<div class="csv-container" id="csvcontainer" style="display:none;">
+  <div class="form-group">
+    <label for="usr"></label>
+    <input type="text" class="form-control csv-input-mysize" id="usr">
+</div>
+</div>
 
 
     </div>
@@ -74,7 +80,7 @@
         <div class="modulemodule"><h1 id="module-name" onclick="update(this); return false;">Module3</h1></div>
         <div class="modulemodule"><h1 id="module-name" onclick="update(this); return false;">Module4</h1></div>
         <div class="modulemodule"><h1 id="module-name" onclick="update(this); return false;">Module5</h1></div>
--->
+--><div class="bottom" id="csvBtn">ADD</div>
       </div>
 
   </div>
