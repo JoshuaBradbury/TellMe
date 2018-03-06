@@ -110,6 +110,27 @@ function isString(obj) {
 	return typeof obj === 'string' || myVar instanceof String;
 }
 
+ router.post("/api/v1.0/new_announcement/", upload.array(), asyncMiddleware(async (req, res, next) => {
+        if(req.secure && req.accepts('application/json')){
+                if(req.body.groupname && req.body.new_announcement_text){
+                        var group_id = await query("SELECT `module_id` AS id FROM modules WHERE `module_name` = ?", [req.body.groupname]);
+                        var id = group_id[0];
+                        id = id[0];
+                        if(!group_id[0].length){
+                                res.status(400).json({"status": 400, "message": "Bad Request: no group with that name exists."});
+                        } else {
+                                var insert = {module_id: id.id, message: req.body.new_announcement_text};
+                                const q = await query('INSERT INTO messages_sent SET ?', insert);
+                                res.status(201).json({"status": 201, "message": "Successfully sent new announcement"});
+                        }
+                     } else {
+                        res.status(400).json({"status": 400, "message": "Bad Request: module name and announcement text parameters must be specified in the body"});
+                }
+        } else {
+                res.sendStatus(406);
+        }
+ }));
+
 router.post("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, next) => {
 	if (req.secure && req.accepts('application/json')) {
 		if (req.body.name && isString(req.body.name)) {
