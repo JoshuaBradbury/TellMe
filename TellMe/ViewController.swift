@@ -21,7 +21,6 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     var applicationContext = MSALPublicClientApplication.init()
     
     @IBOutlet weak var loggingText: UITextView!
-    @IBOutlet weak var signoutButton: UIButton!
     
     // This button will invoke the call to the Microsoft Graph API. It uses the
     // built in Swift libraries to create a connection.
@@ -46,7 +45,6 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
                        
                         self.loggingText.text = "Refreshing token silently)"
                         self.loggingText.text = "Refreshed Access token is \(self.accessToken)"
-                        self.signoutButton.isEnabled = true;
                         }
                        
                        
@@ -73,7 +71,6 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
                         if let result = result {
                             self.accessToken = (result.accessToken)!
                             self.loggingText.text = "Access token is \(self.accessToken)"
-                            self.signoutButton.isEnabled = true;
                             self.getContentWithToken()
                             
                         }
@@ -130,21 +127,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
             }
             }.resume()
     }
-    
-    @IBAction func signoutButton(_ sender: UIButton) {
-        
-        do {
-            
-            // Removes all tokens from the cache for this application for the provided user
-            // first parameter:   The user to remove from the cache
-            
-            try self.applicationContext.remove(self.applicationContext.users().first)
-            self.signoutButton.isEnabled = false;
-            
-        } catch let error {
-            self.loggingText.text = "Received error signing user out: \(error)"
-        }
-    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -152,9 +135,7 @@ class ViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate 
     }
     
     override func viewWillAppear(_ animated: Bool) {
+
         
-        if self.accessToken.isEmpty {
-            signoutButton.isEnabled = false;
-        }
     }
 }
