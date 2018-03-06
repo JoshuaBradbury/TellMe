@@ -1,4 +1,6 @@
 
+
+
 var newAnnouncementBtn = document.getElementById('postBtn');
 
 newAnnouncementBtn.onclick = function() {
@@ -24,7 +26,7 @@ newAnnouncementBtn.onclick = function() {
 
 }
 
-
+/*
 $(document)
   .one('focus.autoExpand', 'textarea.autoExpand', function() {
     var savedValue = this.value;
@@ -40,6 +42,7 @@ $(document)
     this.rows = minRows + rows;
   });
 
+/*Write announcement*/
 function submit(){
   var title = document.getElementById("usr").value;
   var text = document.getElementById("text").innerHTML;
@@ -49,12 +52,13 @@ function submit(){
 
     console.log(title);
     console.log(text);
-    add_announcement(title, text);
+    console.log(document.getElementById('title-text').innerHTML); //module code used to identify which module message belongs to
+    add_announcement(title, text); //calls add func
   }
-    
+
 };
 
-/*Read text*/
+/*Add announcement*/
 function add_announcement(title, text) {
   var new_announcement = document.createElement("div");
   var my_container = document.getElementById("announcements-container")
@@ -62,5 +66,41 @@ function add_announcement(title, text) {
   new_announcement.classList.add("post");
   new_announcement.innerHTML += text;
   console.log("created announcement");
+
+}
+$(document).ready(function(){
+
+    for(var i = 0; i < json.length; i++) {
+        var obj = json[i];
+        var new_mod = document.createElement("div");
+        var my_container = document.getElementById("right");
+        new_mod.classList.add("modulemodule");
+
+        my_container.appendChild(new_mod);
+        var text = document.createElement("h1");
+        text.id = "module-name";
+        text.innerHTML = obj.ModuleName;
+        text.onclick = function() {
+          update(this); return false;
+        }
+        new_mod.appendChild(text);
+    }
+  });
+/*
+ * update() changes divs/text to match selected module
+ * id module-name : selected module
+ * id title-text : top title text
+ */
+function update(e) {
+  document.getElementById('title-text').innerHTML = e.innerHTML;
+  $('.post').remove(); //clears existing announcements
+  for(var i = 0; i < json.length; i++) {
+    var obj = json[i];
+    if(obj.ModuleName == e.innerHTML){
+      for(var j = 0; j < obj.Announcements.length; j++) {
+        add_announcement(obj.Announcements[j],obj.Announcements[j])
+      }
+    }
+}
 
 }
