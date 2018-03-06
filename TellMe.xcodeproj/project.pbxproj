@@ -10,10 +10,10 @@
 		EC49B8CE203B994F00428779 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC49B8CD203B994F00428779 /* AppDelegate.swift */; };
 		EC49B8D0203B994F00428779 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC49B8CF203B994F00428779 /* ViewController.swift */; };
 		EC49B8D3203B994F00428779 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D1203B994F00428779 /* Main.storyboard */; };
-		EC49B8D5203B994F00428779 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D4203B994F00428779 /* Assets.xcassets */; };
-		EC49B8D8203B994F00428779 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D6203B994F00428779 /* LaunchScreen.storyboard */; };
 		EC49B8E3203B994F00428779 /* TellMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC49B8E2203B994F00428779 /* TellMeUITests.swift */; };
 		EC49B8F8203BA56C00428779 /* MSAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC49B8F7203BA56C00428779 /* MSAL.framework */; };
+		F4A323D62044B6D300362926 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D4203B994F00428779 /* Assets.xcassets */; };
+		F4A323D72044B72800362926 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D6203B994F00428779 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,8 +192,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC49B8D8203B994F00428779 /* LaunchScreen.storyboard in Resources */,
-				EC49B8D5203B994F00428779 /* Assets.xcassets in Resources */,
+				F4A323D72044B72800362926 /* LaunchScreen.storyboard in Resources */,
+				F4A323D62044B6D300362926 /* Assets.xcassets in Resources */,
 				EC49B8D3203B994F00428779 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,17 +384,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 65UDWSH428;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = TellMe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = k1630534.TellMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TellMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -403,17 +404,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 65UDWSH428;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = TellMe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = k1630534.TellMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TellMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -422,7 +424,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 65UDWSH428;
+				DEVELOPMENT_TEAM = PRG23MVE5M;
 				INFOPLIST_FILE = TellMeUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = k1630534.TellMeUITests;
@@ -438,7 +440,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 65UDWSH428;
+				DEVELOPMENT_TEAM = PRG23MVE5M;
 				INFOPLIST_FILE = TellMeUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = k1630534.TellMeUITests;
