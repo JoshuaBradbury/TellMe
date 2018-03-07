@@ -12,6 +12,7 @@
 		EC49B8D3203B994F00428779 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D1203B994F00428779 /* Main.storyboard */; };
 		EC49B8E3203B994F00428779 /* TellMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC49B8E2203B994F00428779 /* TellMeUITests.swift */; };
 		EC49B8F8203BA56C00428779 /* MSAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC49B8F7203BA56C00428779 /* MSAL.framework */; };
+		F43A272C2050427E00C077FB /* MSALHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43A272B2050427E00C077FB /* MSALHandler.swift */; };
 		F4A323D62044B6D300362926 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D4203B994F00428779 /* Assets.xcassets */; };
 		F4A323D72044B72800362926 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D6203B994F00428779 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		EC49B8E2203B994F00428779 /* TellMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TellMeUITests.swift; sourceTree = "<group>"; };
 		EC49B8E4203B994F00428779 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC49B8F7203BA56C00428779 /* MSAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MSAL.framework; path = Carthage/Build/iOS/MSAL.framework; sourceTree = "<group>"; };
+		F43A272B2050427E00C077FB /* MSALHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				EC49B8CD203B994F00428779 /* AppDelegate.swift */,
+				F43A272B2050427E00C077FB /* MSALHandler.swift */,
 				EC49B8CF203B994F00428779 /* ViewController.swift */,
 				EC49B8D1203B994F00428779 /* Main.storyboard */,
 				EC49B8D4203B994F00428779 /* Assets.xcassets */,
@@ -229,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F43A272C2050427E00C077FB /* MSALHandler.swift in Sources */,
 				EC49B8D0203B994F00428779 /* ViewController.swift in Sources */,
 				EC49B8CE203B994F00428779 /* AppDelegate.swift in Sources */,
 			);

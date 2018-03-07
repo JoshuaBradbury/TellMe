@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g8Z-ht-KBe">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,50 +19,45 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXW-2z-J7K">
-                                <rect key="frame" x="16" y="324" width="343" height="291"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" updatesFrequently="YES"/>
-                                </accessibility>
-                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KingImage" translatesAutoresizingMaskIntoConstraints="NO" id="sUy-if-PIL">
+                                <rect key="frame" x="0.0" y="219" width="375" height="330"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                        <color key="backgroundColor" red="0.8603319525718689" green="0.25659212470054626" blue="0.19603267312049866" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="sUy-if-PIL" firstAttribute="trailing" secondItem="RuG-5S-adQ" secondAttribute="trailing" id="6eG-x8-d4s"/>
+                            <constraint firstItem="sUy-if-PIL" firstAttribute="leading" secondItem="RuG-5S-adQ" secondAttribute="leading" id="Ppf-Ij-jSC"/>
+                            <constraint firstItem="sUy-if-PIL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="175" id="dyG-XR-BWh"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sUy-if-PIL" secondAttribute="bottom" constant="229" id="eVg-iL-A7N"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="RuG-5S-adQ"/>
                     </view>
                     <navigationItem key="navigationItem" id="bU6-C6-vVm"/>
-                    <connections>
-                        <outlet property="loggingText" destination="qXW-2z-J7K" id="uqO-Yw-AsK"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="479.19999999999999" y="137.18140929535232"/>
+            <point key="canvasLocation" x="479.19999999999999" y="136.69950738916256"/>
         </scene>
-        <!--Tell Me -->
-        <scene sceneID="Xop-rJ-9Us">
+        <!--View Controller-->
+        <scene sceneID="bL3-Aj-ekp">
             <objects>
-                <navigationController title="Tell Me " automaticallyAdjustsScrollViewInsets="NO" id="g8Z-ht-KBe" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8nL-wS-Ync">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Sf2-EP-u4c"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QLw-Na-4Y5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="LUi-hO-JiB" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="p6t-BI-xuA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Nxd-bJ-Yno"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xtQ-V8-Tu8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-230" y="136"/>
+            <point key="canvasLocation" x="1249" y="136"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="KingImage" width="894" height="681"/>
+    </resources>
 </document>
