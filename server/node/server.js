@@ -244,6 +244,26 @@ router.get("/api/v1.0/announcement/:groupid", upload.array(), (req, res, next) =
 	}
 });
 
+router.post("/api/v1.0/announcement/", upload.array(), asyncMiddleware(async (req, res, next) => {
+        if (req.secure && req.accepts('application/json')) {
+                if (req.body.groupid && req.body.announcement && isString(req.body.announcement)) {
+                        var idExists = await query("SELECT * FROM modules WHERE `module_id` = ?", [req.body.groupid]);
+                        if (!idExists[0].length) {
+                                res.status(400).json({"status": 400, "message": "Bad Request: no group with that id exists."});
+                        } else {
+                                var insert = {module_id: req.body.groupid, message: req.body.announcement};
+                                const q = await query('INSERT INTO messages_sent SET ?', insert);
+                                res.status(202).json({"status": 202, "message": "Successfully sent new announcement"});
+                        }
+                     } else {
+                        res.status(400).json({"status": 400, "message": "Bad Request: module name and announcement text parameters must be specified in the body"});
+                }
+        } else {
+                res.sendStatus(406);
+        }
+}));
+
+
 app.use(router);
 
 https.createServer(options, app).listen(443, function() {
