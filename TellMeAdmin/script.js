@@ -1,9 +1,9 @@
 
 
 
-var newAnnouncementBtn = document.getElementById('postBtn');
 
-newAnnouncementBtn.onclick = function() {
+document.getElementById('postBtn').onclick = function() {
+  console.log("clicked");
   var newA = document.getElementById('popcontainer');
 
   if (newA.style.display !== 'none') {
@@ -21,9 +21,6 @@ newAnnouncementBtn.onclick = function() {
      $('div#popcontainer').hide();
 
  });
- /*$('body').click(function () {
-    $('div#announcementsBoard').hide();
-});*/
 
 }
 /*open csv ui*/
@@ -48,7 +45,7 @@ newGroupBtn.onclick = function() {
 
  });
 }
-/* NOT SURE WHAT THIS DOESSSSSSS
+/* NOT SURE WHAT THIS DOES BUT IT BREAKS THE CODE
 $(document)
   .one('focus.autoExpand', 'textarea.autoExpand', function() {
     var savedValue = this.value;
@@ -71,8 +68,9 @@ function submit(){
   if(title == "" || text == "") {
     alert("Missing text field");
   } else {
-  $('.pop-container').remove(); //removes dropdown on exit
+  $('.pop-container').fadeOut(); //removes dropdown on exit
   document.getElementById('usr').value=""; //clears text field on successful submit
+  document.getElementById('text').value=""; //@TODO doesnt work!!
     console.log(title);
     console.log(text);
     console.log(document.getElementById('title-text').innerHTML); //module code used to identify which module message belongs to
@@ -86,16 +84,21 @@ function add_announcement(title, text) {
   var new_announcement = document.createElement("div");
   var my_container = document.getElementById("announcements-container")
   var urgent_flag = document.createElement("div");
-  var close = document.createElement("div");
   urgent_flag.classList.add("urgent-flag");
-  close.classList.add("close");
-  close.onclick = function() {deleteannouncement(this);}
-  new_announcement.appendChild(urgent_flag);
-  new_announcement.appendChild(close);
+
+
+  //new_announcement.appendChild(urgent_flag);
   my_container.appendChild(new_announcement);
   new_announcement.classList.add("post");
+  new_announcement.id = "announcement-module";
   new_announcement.innerHTML += text;
   console.log("created announcement");
+  var close = document.createElement("h1");
+  close.classList.add("close");
+  close.onclick = function() {
+    deleteannouncement(this); return false;
+  }
+  new_announcement.appendChild(close);
 
 }
 /*load in modules after page is opened initially*/
@@ -131,7 +134,7 @@ function update(e) {
     var obj = json[i];
     if(obj.ModuleName == e.innerHTML){
       for(var j = 0; j < obj.Announcements.length; j++) {
-      add_announcement(obj.Announcements[j],obj.Announcements[j]);
+      add_announcement(obj.Announcements[j],obj.Announcements[j]); //change when format is decided
 }
         for(var x = 0; x < obj.students.length; x++) {
             var new_mod = document.createElement("div");
