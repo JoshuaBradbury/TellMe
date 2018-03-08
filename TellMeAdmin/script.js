@@ -85,6 +85,13 @@ function submit(){
 function add_announcement(title, text) {
   var new_announcement = document.createElement("div");
   var my_container = document.getElementById("announcements-container")
+  var urgent_flag = document.createElement("div");
+  var close = document.createElement("div");
+  urgent_flag.classList.add("urgent-flag");
+  close.classList.add("close");
+  close.onclick = function() {deleteannouncement(this);}
+  new_announcement.appendChild(urgent_flag);
+  new_announcement.appendChild(close);
   my_container.appendChild(new_announcement);
   new_announcement.classList.add("post");
   new_announcement.innerHTML += text;
@@ -144,4 +151,15 @@ function update(e) {
     }
 }
 
+}
+
+/*Delete announcement*/
+function deleteannouncement(e) {
+  var answer = confirm("Delete this announcement?")
+  if (answer) {
+    e.parentNode.parentNode.removeChild(e.parentNode);
+  }
+  else {
+    //some code
+  }
 }

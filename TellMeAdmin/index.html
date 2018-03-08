@@ -30,19 +30,15 @@
 </div>
 
 <div class="annoucement-posts" id="announcements-container">
-    <div class="post" id="announcement-module"><div class="urgent-flag "></div> <!--urgent-flag & close contained in announcement-->
-            <div class="close" onclick="close()"></div> <!--add func close-->
-<p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+
+    <div class="post" id="announcement-module">
+      <div class="urgent-flag "></div> <!--urgent-flag & close contained in announcement-->
+      <div class="close" onclick="deleteannouncement(this)"></div> <!--add func close-->
+      <p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
   </div>
 
-  <div class="post" id="announcement-module">
-                        <div class="close" onclick="close()"></div> <!--add func close-->
 
-      <p>lolo</p>
 
-  </div>
-  <div class="post" id="announcement-module"><p></p>
-  </div>
 
 </div>
 
@@ -67,6 +63,9 @@
   <div class="form-group">
     <label for="usr"></label>
     <input type="text" class="form-control csv-input-mysize" id="usr">
+    <br>
+    <input type="file" class="submitBtn" id="txtFileUpload" accept=".csv" value="Submit csv" />
+
 </div>
 </div>
 
