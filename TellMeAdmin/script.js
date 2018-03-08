@@ -1,28 +1,26 @@
-
-var newAnnouncementBtn = document.getElementById('postBtn');
-
-newAnnouncementBtn.onclick = function() {
-  var newA = document.getElementById('popcontainer');
-
-  if (newA.style.display !== 'none') {
+function new_announcement_fade_in_out() {
+  if ($('#popcontainer').css('display') !== 'none') {
     $('div#popcontainer').fadeOut("");
+    $('#screen-cover').fadeOut("");
   } else {
     $('div#popcontainer').fadeIn("");
+    $('#screen-cover').fadeIn("");
   }
-  document.getElementById("announcementsBoard").style.display="none";
-  document.getElementById("postBtn").style.opacity = "0.5";
-  document.getElementById("overlay").style.display = "block";
-
-
-  $('body').click(function () {
-     $('div#popcontainer').hide();
-
- });
- /*$('body').click(function () {
-    $('div#announcementsBoard').hide();
-});*/
-
 }
+
+//gets rid of screen cover if active and clicked on
+$('#screen-cover').click(function() {
+  if($(this).css('display') !== 'none') {
+    new_announcement_fade_in_out();
+  }
+});
+
+//add screen cover and pop container
+$('#usr').click(function() {
+  if($('#screen-cover').css('display') == 'none'){
+    new_announcement_fade_in_out();
+  }
+});
 
 
 $(document)
@@ -53,6 +51,19 @@ function submit(){
   }
     
 };
+
+document.getElementById('submitBtn').onclick = function(){
+
+  var messageText = document.getElementById('new_announcement_text_box').innerHTML;
+  var group = "testGroupName";
+  var send = {"groupname" : group, "new_announcement_text" : messageText };
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", '/new_announcement', true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(send);
+
+}
 
 /*Read text*/
 function add_announcement(title, text) {

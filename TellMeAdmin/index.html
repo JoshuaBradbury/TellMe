@@ -10,6 +10,10 @@
 
   <body>
 
+    <div id = "screen-cover">
+      <!-- used to put opaque grey over screen when announcement is being written -->
+    </div>
+
     <div class="top">
       <a href="https://www.kcl.ac.uk/">
         <img src="KCL-logo.png"></a>
@@ -26,7 +30,7 @@
         <div class="form-group">
           <label for="usr"></label>
           <input type="text" class="form-control input-mysize" id="usr">
-          <div class="placeholder" id="postBtn"onclick="show()"></div>
+          <div class="placeholder" id="postBtn"onclick="new_announcement_fade_in_out()"></div>
         </div>
       </div>
 
