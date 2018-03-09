@@ -1,32 +1,73 @@
-#popup {
-  position: fixed;
-}
+
 .pop-container{
-  margin-top: -3em;
+  padding-top: -1em;
   background-color: #246691;
-  border-radius: 10px;
-  padding-right: 7px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   margin-left: 25%;
   height: 30em;
   width: 50%;
+  border-color: #246691;
+  padding-right: 7px;
+  padding-left: 1.1em;
+  position: relative;
+  z-index: 5;
 }
+
+
 .pop-input-mysize {
-  margin-top: .23em;
   border-radius: 10px;
   width: 91%;
-  margin-left: 2%;
-  margin-right: 7%;
-}
-.pop-input-mysize-text {
-  border-radius: 10px;
-  width: 91%;
-  height: 70%;
   margin-left: 2%;
   margin-right: 7%;
 }
 
+
 .urgent-check {
-  margin-top: 1%;
+  margin-top: 7%;
   margin-left: 6%;
   color: #c4c4c4;
+}
+
+
+.text{
+border-radius: 10px;
+width: 93%;
+margin-right: 7%;
+margin-top: 3%;
+margin-bottom: 2%;
+ min-width: 80px;
+ word-break: break-all;
+ cursor: text;
+ height: 200px;
+ background-color:white;
+ border: 1px solid black;
+}
+
+
+.csv-container{
+  padding-top: -1em;
+  background-color: #246691;
+  border-radius: 10px;
+  margin-left: 25%;
+  height: 30em;
+  width: 50%;
+  margin-top: -3em;
+  border-color: #246691;
+  padding-right: 7px;
+  padding-left: 1.1em;
+  position: relative;
+  z-index: 5;
+
+}
+
+#txtFileUpload {
+  margin-left: 10%;
+  width: 80%;
+}
+.csv-input-mysize {
+  border-radius: 10px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right:10%;
 }

@@ -1,0 +1,22 @@
+.modulemodule {
+  margin: 10% 10%;
+  width 80%;
+  height: 3em;
+  background-color: green;
+  border-radius: 10px;
+}
+.students {
+  margin: 10% 10%;
+  width 80%;
+  height: 3em;
+  background-color: green;
+  border-radius: 10px;
+}
+
+.bottom {
+  width: 100%;
+  height: 3em;
+  bottom: 3em;
+  position: absolute;
+  background: #B2B2B2;
+}
