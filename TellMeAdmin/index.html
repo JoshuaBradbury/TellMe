@@ -14,10 +14,12 @@
   <div class="top">
     <a href="https://www.kcl.ac.uk/"><img src="KCL-logo.png"></a>
     <div class="title" id="title-text">Group name</div>
+    <div class="settings"></div>
     <button id="login" onclick="loginOrOut()"></button>
   </div>
 
   <div class="side" id="left">
+
   </div>
 
   <div id="annoucements">
@@ -31,13 +33,6 @@
 
 <div class="annoucement-posts" id="announcements-container">
 
-    <div class="post" id="announcement-module">
-      <div class="urgent-flag "></div> <!--urgent-flag & close contained in announcement-->
-      <h1 class="close" onclick="deleteannouncement(this)"></h1> <!--add func close-->
-      <p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh<br>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
-  </div>
-
-
 
 
 </div>
@@ -46,9 +41,9 @@
     <div class="form-group bubble">
       <label for="usr"></label>
       <div class = "text" id="text" contenteditable="true"></div>
-    <button onclick="document.execCommand('bold');">Bold</button>
-    <button onclick="document.execCommand('italic');">Italic</button>
-    <button onclick="document.execCommand('underline');">Underline</button>
+      <input type="button" class="textBtn" id="textBtn" onclick="document.execCommand('bold');"value ="Bold"/>
+      <input type="button" class="textBtn" id="textBtn" onclick="document.execCommand('italic');" value = "Italic"/>
+      <input type="button" class="textBtn" id="textBtn" onclick="document.execCommand('underline');" value = "Underline"/>
       <div class="urgent-check">
         <input class="urgent-check-box" type="checkbox" value="" id="defaultCheck1">
         <label class="urgent-check-label" for="defaultCheck1">
@@ -57,7 +52,14 @@
         <input type="button" class="submitBtn" id="submitBtn" onclick="submit()" value="Submit announcement" />
       </div>
     </div>
-  </div>
+<!-- not sure what this code is here for?
+    background-image: -webkit-linear-gradient(top, #fafafa, #c9c9c9);
+  background-image: -moz-linear-gradient(top, #fafafa, #c9c9c9);
+  background-image: -ms-linear-gradient(top, #fafafa, #c9c9c9);
+  background-image: -o-linear-gradient(top, #fafafa, #c9c9c9);
+  background-image: linear-gradient(to bottom, #fafafa, #c9c9c9);
+  -->
+</div>
   <!--csv popup-->
 <div class="csv-container" id="csvcontainer" style="display:none;">
   <div class="form-group">
@@ -79,7 +81,7 @@
         <div class="modulemodule"><h1 id="module-name" onclick="update(this); return false;">Module3</h1></div>
         <div class="modulemodule"><h1 id="module-name" onclick="update(this); return false;">Module4</h1></div>
         <div class="modulemodule"><h1 id="module-name" onclick="update(this); return false;">Module5</h1></div>
---><div class="bottom" id="csvBtn">ADD</div>
+--><a href="#"><div class="bottom" id="csvBtn">ADD</div></a>
       </div>
 
   </div>

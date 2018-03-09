@@ -84,17 +84,32 @@ function add_announcement(title, text) {
   var new_announcement = document.createElement("div");
   var my_container = document.getElementById("announcements-container")
   var urgent_flag = document.createElement("div");
-  urgent_flag.classList.add("urgent-flag");
 
 
-  //new_announcement.appendChild(urgent_flag);
+
+  new_announcement.appendChild(urgent_flag); //adds urgent flag
   my_container.appendChild(new_announcement);
   new_announcement.classList.add("post");
-  new_announcement.id = "announcement-module";
-  new_announcement.innerHTML += text;
-  console.log("created announcement");
-  var close = document.createElement("h1");
+  var text_container = document.createElement("div");
+  text_container.classList.add("text-container");
+  var close = document.createElement("div");
   close.classList.add("close");
+
+  if(title == "urgent") { //change
+    new_announcement.classList.add("urgent");
+
+  } else {
+    //text_container.style.marginRight = "10px";
+
+    text_container.classList.add("extra-margin");
+    close.style.marginLeft = "10px";
+  }
+  new_announcement.appendChild(text_container); //adds urgent flag
+
+  new_announcement.id = "announcement-module";
+  text_container.innerHTML += text;
+  console.log("created announcement");
+
   close.onclick = function() {
     deleteannouncement(this); return false;
   }
@@ -145,9 +160,6 @@ function update(e) {
             var text = document.createElement("h1");
             text.id = "student-name";
             text.innerHTML = obj.students[x];
-            text.onclick = function() {
-              update(this); return false;
-            }
             new_mod.appendChild(text);
         }
 
