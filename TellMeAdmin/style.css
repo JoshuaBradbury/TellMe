@@ -21,6 +21,7 @@ body {
   border-color: #054770;
   padding:1em 1em 1em 1em;
 }
+
 img {
   float: left;
 
@@ -191,17 +192,18 @@ word-wrap:break-word;}
     transition: font-size 200ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
-
+/*main announcement input box*/
 .container{
   margin-top: 2em;
   background-color: #246691;
   border-radius: 10px;
-  padding-right: 7px;
   height: 3.15em;
-  width: 50%;
+  width: 34em;
 }
+
+/*placeholder for new announcement icon*/
 .placeholder {
-    margin-left: 30%;
+    margin-left: 29.5em;
     margin-top: 0.15%;
     height: 30px;
     width: 30px;
@@ -210,15 +212,16 @@ word-wrap:break-word;}
     vertical-align:
 }
 
+/*text input line within announcement input box*/
 .input-mysize {
-     position: absolute;
+  position: absolute;
   border-radius: 10px;
-  width: 29.5%;
+  width: 29em;
   background-color:white;
   border: 1px solid black;
 }
 
-/*for div spikes*/
+/*triangles to fill in area between main announcement and popup area*/
 .bubble:before {
  	content: '';
 	position: absolute;
@@ -234,6 +237,7 @@ word-wrap:break-word;}
 	border: 20px solid transparent;
 	border-top-color: #246691;
 }
+
 .bubble2:before {
  	content: '';
 	position: absolute;
