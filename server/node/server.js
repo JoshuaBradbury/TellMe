@@ -110,19 +110,78 @@ function isString(obj) {
 	return typeof obj === 'string' || myVar instanceof String;
 }
 
+async function getGroupByNameOrId(gid, gname) {
+    var groupq,
+        modid = false,
+        valid = false,
+        foundGroup = false;
+    if (gid) {
+        const q = await query("SELECT * FROM modules WHERE `module_id` = ?", [gid]);
+
+        if (q[0].length > 0) {
+            modid = true;
+            valid = true;
+            groupq = q;
+        }
+    }
+
+    if (gname && isString(gname)) {
+        valid = true;
+    }
+
+    if (valid) {
+        if (!modid) {
+            const q = await query("SELECT * FROM modules WHERE `module_name` = ?", [gname]);
+            groupq = q;
+
+            if (groupq[0].length == 0) {
+                return [];
+            }
+        }
+
+        return groupq;
+    }
+    return [];
+}
+
+router.get("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, next) => {
+	if (req.secure && req.accepts('application/json')) {
+        var groupq = await getGroupByNameOrId(req.query.groupId, req.query.groupName);
+
+        if (groupq.length > 0) {
+            res.status(200).json({"status": 200, "message": "Ok: group found", "groupId": groupq[0][0].module_id, "groupName": groupq[0][0].module_name});
+        } else if (req.query.groupId || req.query.groupName) {
+            res.status(400).json({"status": 400, "message": "Bad Request: groupId or groupName isn't valid"});
+        } else {
+            const q = await query("SELECT * FROM modules");
+
+            var groups = [];
+
+            for (var i in q[0]) {
+                var row = q[0][i];
+                groups.push({"groupId": row.module_id, "groupName": row.module_name});
+            }
+
+            res.status(200).json({"status": 200, "message": "Ok: All " + q[0].length + " group(s) have been selected", "groups": groups});
+        }
+	} else {
+		res.sendStatus(406);
+	}
+}));
+
 router.post("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, next) => {
 	if (req.secure && req.accepts('application/json')) {
-		if (req.body.name && isString(req.body.name)) {
-			const existing = await query("SELECT * FROM modules WHERE `module_name` = ?", [req.body.name]);
+		if (req.body.groupName && isString(req.body.groupName)) {
+			const existing = await query("SELECT * FROM modules WHERE `module_name` = ?", [req.body.groupName]);
 			if (existing[0].length == 0) {
-				var group = { module_name: req.body.name };
+				var group = { module_name: req.body.groupName };
 				const q = await query('INSERT INTO modules SET ?', group);
-				res.status(201).json({"status": 201, "message": "Created: group created", "groupid": q[0].insertId});
+				res.status(201).json({"status": 201, "message": "Created: group created", "groupid": q[0].insertId, "groupName": req.body.groupName});
 			} else {
 				res.status(400).json({"status": 400, "message": "Bad Request: Group already exists. If you want information about the group use GET, or if you want to add/remove members use PUT"});
 			}
 		} else {
-			res.status(400).json({"status": 400, "message": "Bad Request: name parameter must be specified in the body"});
+			res.status(400).json({"status": 400, "message": "Bad Request: groupName must be specified in the body"});
 		}
 	} else {
 		res.sendStatus(406);
@@ -132,32 +191,11 @@ router.post("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res,
 router.put("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, next) => {
 	if (req.secure && req.accepts('application/json')) {
 		if (req.body.users && req.body.users.constructor === Array) {
-            var modid = false,
-                valid = false;
-
-            var groupid;
-            if (req.body.groupid) {
-                const q = await query("SELECT * FROM modules WHERE `module_id` = ?", [req.body.groupid]);
-
-                if (q[0].length > 0) {
-                    modid = true;
-                    valid = true;
-                    groupid = q[0][0].module_id;
-                }
-            }
-
-            if (req.body.group_name && isString(req.body.group_name)) {
-                valid = true;
-            }
-
-            if (valid) {
-                if (!modid) {
-                    const q = await query("SELECT * FROM modules WHERE `module_name` = ?", [req.body.group_name]);
-                    groupid = q[0][0].module_id;
-                }
-
-                var cleanUsers = [];
-                var users = req.body.users;
+            var groupq = await getGroupByNameOrId(req.body.groupId, req.body.groupName);
+            if (groupq.length > 0) {
+                var groupid = groupq[0][0].module_id,
+                    cleanUsers = [],
+                    users = req.body.users;
 
                 for (var i in users) {
                     var user = users[i];
@@ -189,9 +227,9 @@ router.put("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, 
                     }
                 }
 
-                res.status(201).json({"status": 201, "message": "Created: " + createdCount + " user(s) added to the group " + groupid})
+                res.status(201).json({"status": 201, "message": "Created: " + createdCount + " user(s) added to the group " + groupid});
             } else {
-                res.status(400).json({"status": 400, "message": "Bad Request: groupid or group_name not specified or doesn't exist"})
+                res.status(400).json({"status": 400, "message": "Bad Request: groupId or groupName must be specified in the body"});
             }
 		} else {
 			res.status(400).json({"status": 400, "message": "Bad Request: users parameter must be specified as an array in the body"});
@@ -203,17 +241,13 @@ router.put("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, 
 
 router.delete("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, next) => {
 	if (req.secure && req.accepts('application/json')) {
-		if (req.body.name && isString(req.body.name)) {
-			const existing = await query("SELECT * FROM modules WHERE `module_name` = ?", [req.body.name]);
-			if (existing[0].length == 0) {
-				res.status(400).json({"status": 400, "message": "Bad Request: Group doesn't exist"});
-			} else {
-				const q = await query("DELETE FROM modules WHERE `module_name` = ?", [req.body.name]);
+        var groupq = getGroupByNameOrId(req.body.groupId, req.body.groupName);
+        if (groupq.length > 0) {
+			const q = await query("DELETE FROM modules WHERE `module_name` = ?", [req.body.name]);
 
-				res.status(200).json({"status": 200, "message": "Ok: " + q[0].affectedRows + " group(s) deleted"});
-			}
+			res.status(200).json({"status": 200, "message": "Ok: " + q[0].affectedRows + " group(s) deleted"});
 		} else {
-			res.status(400).json({"status": 400, "message": "Bad Request: name parameter must be specified in the body"});
+			res.status(400).json({"status": 400, "message": "Bad Request: groupName or groupId must be specified in the body"});
 		}
 	} else {
 		res.sendStatus(406);
@@ -262,7 +296,6 @@ router.post("/api/v1.0/announcement/", upload.array(), asyncMiddleware(async (re
                 res.sendStatus(406);
         }
 }));
-
 
 app.use(router);
 
