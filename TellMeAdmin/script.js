@@ -118,7 +118,9 @@ function add_announcement(title, text) {
 }
 /*load in modules after page is opened initially*/
 $(document).ready(function(){
-
+  if (screen.width <=1024) { //testing for screen width
+    console.log(screen.width )
+  }
     for(var i = 0; i < json.length; i++) {
         var obj = json[i];
         var new_mod = document.createElement("div");
@@ -177,4 +179,14 @@ function deleteannouncement(e) {
   else {
     //some code
   }
+}
+
+/*Some responsive stuff*/
+function respModules(){
+  console.log("display");
+  document.getElementById("right").style.display="block";
+}
+function respStudents(){
+  console.log("display");
+  document.getElementById("left").style.display="block";
 }
