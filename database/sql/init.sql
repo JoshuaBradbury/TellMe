@@ -1,0 +1,18 @@
+CREATE TABLE modules (module_id INT NOT NULL AUTO_INCREMENT,
+                      module_name VARCHAR(100),
+                      PRIMARY KEY (module_id));
+
+CREATE TABLE messages_sent (module_id INT,
+                            message TEXT,
+                            FOREIGN KEY(module_id)
+                            REFERENCES modules(module_id)
+                            ON DELETE CASCADE);
+
+CREATE TABLE students_in_groups(module_id INT NOT NULL,
+                                k_number INT NOT NULL,
+                                FOREIGN KEY (module_id)
+                                REFERENCES modules(module_id)
+                                ON DELETE CASCADE);
+
+CREATE TABLE authorised_logins (email VARCHAR(100) NOT NULL,
+                                PRIMARY KEY(email));

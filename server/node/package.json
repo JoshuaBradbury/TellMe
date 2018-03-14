@@ -1,0 +1,17 @@
+{
+  "name": "tellme",
+  "version": "1.0.0",
+  "description": "The TellMe Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "4.16.1",
+    "body-parser": "1.18.2",
+    "multer": "1.3.0",
+    "morgan": "1.9.0",
+    "mysql2": "1.5.2"
+  },
+  "author": ""
+}
