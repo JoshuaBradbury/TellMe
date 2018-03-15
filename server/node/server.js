@@ -278,6 +278,52 @@ router.get("/api/v1.0/announcement/:groupid", upload.array(), (req, res, next) =
 	}
 });
 
+router.get("/api/v1.0/announcement/:groupid", upload.array(), asyncMiddleware(async (req, res, next) => {
+    if (req.secure && req.accepts('application/json')) {
+            var retval;
+            if (req.query) {
+                if (req.query.date) {
+                    var dayStart = req.query.date + " 00:00:00";
+                    var dayEnd = req.query.date + " 23:59:59";
+                    retval = await query("SELECT `message` FROM messages_sent WHERE `announcement_datetime` BETWEEN ? AND ?", [dayStart, dayEnd]);
+                } else if (req.query.n) {
+                    if (req.query.n == "all") {
+                        retval = await query("SELECT `message` FROM messages_sent WHERE `module_id` = ?", [req.params.groupid]);
+                    } else {
+                        var count = Number(req.query.n);
+                        if (count) {
+                            retval = await query("SELECT `message` FROM messages_sent WHERE `module_id` = ? ORDER BY announcement_id DESC LIMIT ?", [req.params.groupid, count]);
+                        }
+                    }
+                }
+                retval = retval[0];
+                res.status(200).json({"announcements":{retval}});
+            } else {
+                res.sendStatus(400);
+            }
+    } else {
+        res.sendStatus(406);
+    }
+}));
+
+router.delete("/api/v1.0/announcement/", upload.array(), asyncMiddleware(async (req, res, next) => {
+    if (req.secure && req.accepts('application/json')) {
+        if (req.body.announcement_id) {
+            var announcementExists = await query('SELECT * FROM messages_sent WHERE `announcement_id` = ?', [req.body.announcement_id]);
+            if (!announcementExists[0].length) {
+                res.status(400).json({"status": 400, "message": "Bad Request: announcement does not exist."});
+            } else {
+                const deleteQuery = await query('DELETE FROM messages_sent WHERE `announcement_id` = ?', [req.body.announcement_id]);
+                res.status(202).json({"status": 202, "message": "Successfully deleted announcement."});
+            }
+        } else {
+            res.status(400).json({"status": 400, "message": "Bad Request: announcement id missing."});
+        }
+    } else {
+        res.sendStatus(406);
+    }
+}));
+
 router.post("/api/v1.0/announcement/", upload.array(), asyncMiddleware(async (req, res, next) => {
         if (req.secure && req.accepts('application/json')) {
                 if (req.body.groupid && req.body.announcement && isString(req.body.announcement)) {
