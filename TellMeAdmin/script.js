@@ -5,7 +5,7 @@ document.getElementById('titleBtn').onclick = function() {
   console.log("clicked");
 
     $('div#popcontainer').fadeIn("");
-  
+
   document.getElementById("announcementsBoard").style.display="none";
   document.getElementById("postBtn").style.opacity = "0.5";
   document.getElementById("overlay").style.display = "block";
@@ -65,10 +65,12 @@ $(document)
 
 /*Write announcement*/
 function submit(){
-  var title = document.getElementById("usr").value;
+  var title = document.getElementById("titleBtn").value;
   var text = document.getElementById("text").innerHTML;
   if(title == "" || text == "") {
     alert("Missing text field");
+    console.log(title);
+    console.log(text);
   } else {
   $('.pop-container').fadeOut(); //removes dropdown on exit
   document.getElementById('usr').value=""; //clears text field on successful submit
