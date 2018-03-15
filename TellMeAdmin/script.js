@@ -1,27 +1,29 @@
 
 
+/*titleBtn opens pop up when text field is pressed*/
+document.getElementById('titleBtn').onclick = function() {
+  console.log("clicked");
 
-
+    $('div#popcontainer').fadeIn("");
+  
+  document.getElementById("announcementsBoard").style.display="none";
+  document.getElementById("postBtn").style.opacity = "0.5";
+  document.getElementById("overlay").style.display = "block";
+}
 document.getElementById('postBtn').onclick = function() {
   console.log("clicked");
   var newA = document.getElementById('popcontainer');
-
   if (newA.style.display !== 'none') {
     $('div#popcontainer').fadeOut("");
   } else {
     $('div#popcontainer').fadeIn("");
-
   }
   document.getElementById("announcementsBoard").style.display="none";
   document.getElementById("postBtn").style.opacity = "0.5";
   document.getElementById("overlay").style.display = "block";
-
-
   $('body').click(function () {
      $('div#popcontainer').hide();
-
  });
-
 }
 /*open csv ui*/
 var newGroupBtn = document.getElementById('csvBtn');
