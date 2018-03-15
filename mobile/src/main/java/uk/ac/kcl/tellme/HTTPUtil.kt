@@ -31,7 +31,7 @@ fun post(url: String, json: String): String {
             .build()
     val response = client.newCall(request).execute()
     return response.body()!!.string()
-}s
+}
 
 @Throws(IOException::class)
 fun put(url: String, json: String): String {
