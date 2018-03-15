@@ -16,8 +16,3 @@ services:
     volumes:
       - "./database/sql/:/docker-entrypoint-initdb.d/"
       - "./database/mysql:/var/lib/mysql"
-#     - "./my.cnf:/etc/mysql/conf.d/config-file.cnf"
-  admin:
-    image: adminer
-    ports:
-      - "8081:8081"
