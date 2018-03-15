@@ -253,36 +253,42 @@ word-wrap:break-word;}
 }
 @media screen and (max-width: 1024px) {
   .l {
-    width: 7%;
+    width: 10%;
     height: 100%;
     position: absolute;
     float: left;
     background-color: #36475c;
   }
-  .icon {
+  .icon {z-index: 101;
+    position: relative;
     margin: 1em 0em;
     width: 100%;
-    height: 6em;
+    height: 8em;
     background-color: red;
   }
-  .sideright {
+  .sideright { /*refactor this stuff*/
+    margin-left: 20%;
     display: none;
     background-color: #36475c;
-    width: 100%;
+    width: 80%;
     height: 100%;
+    float: right;
     position: fixed;
     z-index: 100;
   }
   .side {
     display: none;
+    margin-left: 20%;
+    float: right;
     background-color: #36475c;
-    width: 100%;
+    width: 80%;
     height: 100%;
     position: fixed;
     z-index: 100;
   }
   #annoucements {
-    width: 100%;
+    margin-left: 20%;
+    width: 80%;
   float: left; overflow: auto;
   }
 }

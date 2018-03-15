@@ -95,12 +95,12 @@ function add_announcement(title, text) {
   var close = document.createElement("div");
   close.classList.add("close");
 
+/*urgent flag, currently not in use*/
   if(title == "urgent") { //change
     new_announcement.classList.add("urgent");
 
   } else {
     //text_container.style.marginRight = "10px";
-
     text_container.classList.add("extra-margin");
     close.style.marginLeft = "10px";
   }
@@ -167,7 +167,9 @@ function update(e) {
 
     }
 }
-
+if (screen.width <=1024) { //condition for mobiles
+  document.getElementById("right").style.display="none";
+}
 }
 
 /*Delete announcement*/
@@ -184,9 +186,19 @@ function deleteannouncement(e) {
 /*Some responsive stuff*/
 function respModules(){
   console.log("display");
-  document.getElementById("right").style.display="block";
+  var student = document.getElementById("right")
+  if(student.style.display === 'block'){
+    student.style.display="none";
+  } else {
+  student.style.display="block";
+  }
 }
 function respStudents(){
   console.log("display");
-  document.getElementById("left").style.display="block";
+  var tab = document.getElementById("left")
+  if(tab.style.display === 'block'){
+    tab.style.display="none";
+  } else {
+  tab.style.display="block";
+}
 }
