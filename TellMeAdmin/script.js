@@ -199,6 +199,9 @@ function deleteannouncement(e) {
 function respModules(){
   console.log("display");
   var student = document.getElementById("right")
+  if(document.getElementById("left").style.display === 'block'){
+    document.getElementById("left").style.display="none";
+  }
   if(student.style.display === 'block'){
     student.style.display="none";
   } else {
@@ -208,6 +211,9 @@ function respModules(){
 function respStudents(){
   console.log("display");
   var tab = document.getElementById("left")
+  if(document.getElementById("right").style.display === 'block'){
+    document.getElementById("right").style.display="none";
+  }
   if(tab.style.display === 'block'){
     tab.style.display="none";
   } else {
