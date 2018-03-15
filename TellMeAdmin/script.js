@@ -151,17 +151,24 @@ function update(e) {
     var obj = json[i];
     if(obj.ModuleName == e.innerHTML){
       for(var j = 0; j < obj.Announcements.length; j++) {
-      add_announcement(obj.Announcements[j],obj.Announcements[j]); //change when format is decided
+      add_announcement(obj.Announcements[j],obj.Announcements[j]); //TODO change when format is decided
 }
         for(var x = 0; x < obj.students.length; x++) {
             var new_mod = document.createElement("div");
             var my_container = document.getElementById("left");
             new_mod.classList.add("students");
 
+            var close = document.createElement("div");
+            close.classList.add("close"); //TODO change to custom close element for students
             my_container.appendChild(new_mod);
             var text = document.createElement("h1");
             text.id = "student-name";
             text.innerHTML = obj.students[x];
+            new_mod.appendChild(close);
+
+            close.onclick = function() {
+              removestudent(this, e.innerHTML, text.innerHTML); return false; //TODO fix this
+            }
             new_mod.appendChild(text);
         }
 
@@ -171,16 +178,21 @@ if (screen.width <=1024) { //condition for mobiles
   document.getElementById("right").style.display="none";
 }
 }
-
+/*Remove student*/
+function removestudent(e, course, student) {
+  var answer = confirm("Remove " +  + " from " + course) //TODO fix this
+  if (answer) {
+    e.parentNode.parentNode.removeChild(e.parentNode);
+  }
+  else {  }
+}
 /*Delete announcement*/
 function deleteannouncement(e) {
   var answer = confirm("Delete this announcement?")
   if (answer) {
     e.parentNode.parentNode.removeChild(e.parentNode);
   }
-  else {
-    //some code
-  }
+  else {  }
 }
 
 /*Some responsive stuff*/
