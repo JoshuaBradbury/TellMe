@@ -18,8 +18,8 @@ class CourseAdapter(private val context : Context, val items: ArrayList<CourseIn
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val v = LayoutInflater.from(parent ?.context).inflate(R.layout.box_list, parent, false)
-        val card = v.findViewById<View>(R.id.card_view) as CardView
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.box_list, parent, false)
+        val card = v.findViewById<CardView>(R.id.card_view) as CardView
         card.maxCardElevation=2.0F
 
 

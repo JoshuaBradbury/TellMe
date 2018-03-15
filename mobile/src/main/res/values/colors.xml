@@ -6,4 +6,6 @@
     <color name="greyish">#c4c4c4</color>
     <color name="whiteish"> #f0f0f0</color>
 
+    <color name="colorKcl">#EE2D24</color>
+    <color name="black_overlay">#66000000</color>
 </resources>
