@@ -107,7 +107,19 @@ async function isUserAuthorisedForRead(user) {
 }
 
 function isString(obj) {
-	return typeof obj === 'string' || myVar instanceof String;
+	return obj && typeof obj === 'string' || myVar instanceof String;
+}
+
+function asNumber(obj) {
+    if (obj) {
+        var n = Number(obj);
+
+        if (n !== NaN) {
+            return n;
+        }
+    }
+
+    return null;
 }
 
 async function getGroupByNameOrId(gid, gname) {
@@ -254,52 +266,30 @@ router.delete("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, re
 	}
 }));
 
-router.get("/api/v1.0/announcement/:groupid", upload.array(), (req, res, next) => {
-	if (req.secure && req.accepts('application/json')) {
-		if (req.query) {
-			if (req.query.date) {
-
-			} else if (req.query.n) {
-				if (req.query.n == "all") {
-
-				} else {
-					var count = Number(req.query.n);
-					if (count) {
-
-					}
-				}
-			}
-			res.status(200).json({"announcements": {}});
-		} else {
-			res.sendStatus(400);
-		}
-	} else {
-		res.sendStatus(406);
-	}
-});
-
 router.get("/api/v1.0/announcement/:groupid", upload.array(), asyncMiddleware(async (req, res, next) => {
     if (req.secure && req.accepts('application/json')) {
             var retval;
             if (req.query) {
-                if (req.query.date) {
-                    var dayStart = req.query.date + " 00:00:00";
-                    var dayEnd = req.query.date + " 23:59:59";
-                    retval = await query("SELECT `message` FROM messages_sent WHERE `announcement_datetime` BETWEEN ? AND ?", [dayStart, dayEnd]);
+                const time = asNumber(req.query.date);
+                if (time) {
+                    retval = await query("SELECT `message` FROM messages_sent WHERE UNIX_TIMESTAMP(time_sent) BETWEEN ? AND UNIX_TIMESTAMP(NOW())", [time]);
                 } else if (req.query.n) {
                     if (req.query.n == "all") {
                         retval = await query("SELECT `message` FROM messages_sent WHERE `module_id` = ?", [req.params.groupid]);
                     } else {
                         var count = Number(req.query.n);
                         if (count) {
-                            retval = await query("SELECT `message` FROM messages_sent WHERE `module_id` = ? ORDER BY announcement_id DESC LIMIT ?", [req.params.groupid, count]);
+                            retval = await query("SELECT `message` FROM messages_sent WHERE `module_id` = ? ORDER BY `time_sent` DESC LIMIT ?", [req.params.groupid, count]);
                         }
                     }
                 }
-                retval = retval[0];
-                res.status(200).json({"announcements":{retval}});
+                if (retval) {
+                    res.status(200).json({"status": 200, "announcements": retval[0]});
+                } else {
+                    res.status(400).json({"status": 400, "message": "Bad Request: no valid parameters"});
+                }
             } else {
-                res.sendStatus(400);
+                res.status(400).json({"status": 400, "message": "Bad Request: no parameters"});
             }
     } else {
         res.sendStatus(406);
@@ -329,7 +319,7 @@ router.post("/api/v1.0/announcement/", upload.array(), asyncMiddleware(async (re
                 if (req.body.groupid && req.body.announcement && isString(req.body.announcement)) {
                         var idExists = await query("SELECT * FROM modules WHERE `module_id` = ?", [req.body.groupid]);
                         if (!idExists[0].length) {
-                                res.status(400).json({"status": 400, "message": "Bad Request: no group with that id exists."});
+                                res.status(400).json({"status": 400, "message": "Bad Request: no group with that id exists"});
                         } else {
                                 var insert = {module_id: req.body.groupid, message: req.body.announcement};
                                 const q = await query('INSERT INTO messages_sent SET ?', insert);
