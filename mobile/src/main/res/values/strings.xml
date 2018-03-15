@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">TellMe</string>
 
-    <string name="title_activity_category">CategoryActivity</string>
+    <string name="title_activity_category">HOME</string>
+
+    <string name="all_course">ALL</string>
+
+    <string name="fake_course">5CCS2SEG</string>
+    <string name="fake_course1">5CCS2FC2</string>
+    <string name="fake_course2">5CCS2PLD</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
 </resources>

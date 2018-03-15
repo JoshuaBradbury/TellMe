@@ -33,10 +33,13 @@
                     android:scheme="msalc4d8ad78-18b5-4bdd-afa2-50617a34e8cf" />
             </intent-filter>
         </activity>
-        <activity
+        <activity android:theme="@style/AppTheme.noActionBar"
             android:name=".CategoryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_category" />
+            android:label="@string/title_activity_category"
+
+
+            />
     </application>
 
 </manifest>
