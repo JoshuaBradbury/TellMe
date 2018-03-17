@@ -144,11 +144,13 @@ word-wrap:break-word;}
 
 /*main announcement input box*/
 .container{
+  position: relative;
   margin-top: 2em;
   background-color: #8a8a8a;
   border-radius: 10px;
   height: 3.15em;
   width: 34em;
+  z-index: 202;
 }
 
 /*placeholder for new announcement icon*/

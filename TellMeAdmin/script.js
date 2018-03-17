@@ -1,9 +1,8 @@
 /*titleBtn opens pop up when text field is pressed*/
 document.getElementById('titleBtn').onclick = function() {
     console.log("clicked");
-
     $('div#popcontainer').fadeIn("");
-
+    $('div#cover').fadeIn("");
     document.getElementById("announcementsBoard").style.display = "none";
     document.getElementById("postBtn").style.opacity = "0.5";
     document.getElementById("overlay").style.display = "block";
@@ -13,8 +12,10 @@ document.getElementById('postBtn').onclick = function() {
     var newA = document.getElementById('popcontainer');
     if (newA.style.display !== 'none') {
         $('div#popcontainer').fadeOut("");
+        $('div#cover').fadeOut("");
     } else {
         $('div#popcontainer').fadeIn("");
+        $('div#cover').fadeIn("");
     }
     document.getElementById("announcementsBoard").style.display = "none";
     document.getElementById("postBtn").style.opacity = "0.5";
@@ -74,7 +75,10 @@ window.addEventListener('click', function(e) { //detect outside click
     if (!document.getElementById('popcontainer').contains(e.target) &&
         !document.getElementById('titleBtn').contains(e.target) &&
         !document.getElementById('postBtn').contains(e.target)) {
-        $('div#popcontainer').fadeOut("fast");
+          if (document.getElementById('popcontainer').style.display !== 'none') {
+            $('div#cover').fadeOut("");
+            $('div#popcontainer').fadeOut("fast");
+          }
     }
 })
 
