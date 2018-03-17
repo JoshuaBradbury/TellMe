@@ -226,7 +226,7 @@ word-wrap:break-word;}
     height: 100%;
     float: right;
     position: fixed;
-    z-index: 100;
+    z-index: 300;
   }
   .side {
     display: none;
@@ -236,7 +236,7 @@ word-wrap:break-word;}
     width: 80%;
     height: 100%;
     position: fixed;
-    z-index: 100;
+    z-index: 300;
   }
   #annoucements {
     margin-left: 20%;
