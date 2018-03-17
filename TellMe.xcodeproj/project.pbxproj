@@ -15,6 +15,8 @@
 		F43A272C2050427E00C077FB /* MSALHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43A272B2050427E00C077FB /* MSALHandler.swift */; };
 		F4A323D62044B6D300362926 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D4203B994F00428779 /* Assets.xcassets */; };
 		F4A323D72044B72800362926 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D6203B994F00428779 /* LaunchScreen.storyboard */; };
+		F4A82C4E205D7AD800FE0C9F /* CustomMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A82C4C205D7AD800FE0C9F /* CustomMessageCell.swift */; };
+		F4A82C4F205D7AD800FE0C9F /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A82C4D205D7AD800FE0C9F /* MessageCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		EC49B8E4203B994F00428779 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC49B8F7203BA56C00428779 /* MSAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MSAL.framework; path = Carthage/Build/iOS/MSAL.framework; sourceTree = "<group>"; };
 		F43A272B2050427E00C077FB /* MSALHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALHandler.swift; sourceTree = "<group>"; };
+		F4A82C4C205D7AD800FE0C9F /* CustomMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomMessageCell.swift; path = "TellMe/Custom Cell/CustomMessageCell.swift"; sourceTree = SOURCE_ROOT; };
+		F4A82C4D205D7AD800FE0C9F /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MessageCell.xib; path = "TellMe/Custom Cell/MessageCell.xib"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				F4A6FB752055EF140033F2E8 /* Networking */,
+				F4C9672A205D8DF000BF9921 /* Custom Cell */,
 				EC49B8CD203B994F00428779 /* AppDelegate.swift */,
 				EC49B8CF203B994F00428779 /* ViewController.swift */,
 				EC49B8D1203B994F00428779 /* Main.storyboard */,
@@ -117,6 +122,15 @@
 				F43A272B2050427E00C077FB /* MSALHandler.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		F4C9672A205D8DF000BF9921 /* Custom Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F4A82C4C205D7AD800FE0C9F /* CustomMessageCell.swift */,
+				F4A82C4D205D7AD800FE0C9F /* MessageCell.xib */,
+			);
+			path = "Custom Cell";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +219,7 @@
 			files = (
 				F4A323D72044B72800362926 /* LaunchScreen.storyboard in Resources */,
 				F4A323D62044B6D300362926 /* Assets.xcassets in Resources */,
+				F4A82C4F205D7AD800FE0C9F /* MessageCell.xib in Resources */,
 				EC49B8D3203B994F00428779 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +257,7 @@
 			files = (
 				F43A272C2050427E00C077FB /* MSALHandler.swift in Sources */,
 				EC49B8D0203B994F00428779 /* ViewController.swift in Sources */,
+				F4A82C4E205D7AD800FE0C9F /* CustomMessageCell.swift in Sources */,
 				EC49B8CE203B994F00428779 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
