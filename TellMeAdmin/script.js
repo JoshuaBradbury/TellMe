@@ -46,7 +46,9 @@ newGroupBtn.onclick = function() {
     var newA = document.getElementById('settingscontainer');
     if (newA.style.display !== 'none') {
         $('div#settingscontainer').fadeOut("");
+        $('div#cover').fadeOut("");
     } else {
+        $('div#cover').fadeIn(""); //TODO fix
         $('div#settingscontainer').fadeIn("");
         document.getElementById("groupname").value = document.getElementById('title-text').innerHTML;
 
@@ -55,11 +57,29 @@ newGroupBtn.onclick = function() {
     document.getElementById("csvBtn").style.opacity = "0.5";
     document.getElementById("overlay").style.display = "block";
     $('body').click(function() {
-        $('div#csvcontainer').hide();
+        $('div#settingscontainer').hide();
+        $('div#cover').fadeOut("");
 
     });
 }
+
+window.addEventListener('click', function(e){ //detect outside click
+//TODO condition for multiple windows
+	if (!document.getElementById('settingscontainer').contains(e.target) && !document.getElementById('settings').contains(e.target) ){
+    $('div#settingscontainer').fadeOut("fast"); //
+    $('div#cover').hide("");  }
+  if (!document.getElementById('csvBtn').contains(e.target) && !document.getElementById('csvcontainer').contains(e.target) ){
+    $('div#csvcontainer').fadeOut("fast"); //
+    $('div#cover').hide("");  }
+    if (!document.getElementById('popcontainer').contains(e.target)
+    && !document.getElementById('titleBtn').contains(e.target)
+    && !document.getElementById('postBtn').contains(e.target) ){
+      $('div#popcontainer').fadeOut("fast"); //
+      $('div#cover').hide("");  }
+})
+
 function save() { //TODO connect backend to settings
+  //if(){} //TODO error message if new group name is not unique?
     console.log(document.getElementById("groupname").value); //backend new group name
 };
 
@@ -193,7 +213,7 @@ function removestudent(e, course, student) {
 function deleteannouncement(e) {
     var answer = confirm("Delete this announcement?")
     if (answer) {
-        e.parentNode.parentNode.removeChild(e.parentNode);
+        e.parentNode.parentNode.removeChild(e.parentNode); //backend delete announcement
     } else {}
 }
 

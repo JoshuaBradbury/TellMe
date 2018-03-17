@@ -4,6 +4,8 @@
   width: 1px;
   height: 1px;
   opacity: 0.3;
+  pointer-events: none;
+
 }
 .close:hover {
   opacity: 1;
