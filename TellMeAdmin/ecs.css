@@ -1,9 +1,10 @@
 .close {
-  margin-top: .3em;
-  position: absolute;
+  position: relative;
   width: 1px;
   height: 1px;
   opacity: 0.3;
+  float: right;
+  margin-right: -1.29em;
 }
 .close:hover {
   opacity: 1;

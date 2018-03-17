@@ -105,7 +105,10 @@ function add_announcement(title, text) {
     var new_announcement = document.createElement("div");
     var my_container = document.getElementById("announcements-container")
     var urgent_flag = document.createElement("div");
+    var del = document.createElement("div");
+    new_announcement.classList.add("del");
     new_announcement.appendChild(urgent_flag); //adds urgent flag
+    new_announcement.appendChild(del);
     my_container.appendChild(new_announcement);
     new_announcement.classList.add("post");
     var text_container = document.createElement("div");
@@ -114,7 +117,7 @@ function add_announcement(title, text) {
     close.classList.add("close");
 
     /*urgent flag, currently not in use, too lazy to change else*/
-    if (title == "aaaaaaaaaaaaaaaaaaaa") { //change
+    if (title == "aaaaaaaaaaaaaaaaaaaa") { //set subject as aaaaaaaaaaaaaaaaaaaa for urgent flag idk
         new_announcement.classList.add("urgent");
 
     } else {
@@ -131,7 +134,7 @@ function add_announcement(title, text) {
         deleteannouncement(this);
         return false;
     }
-    new_announcement.appendChild(close);
+    del.appendChild(close);
 
 }
 /*load in modules after page is opened initially*/

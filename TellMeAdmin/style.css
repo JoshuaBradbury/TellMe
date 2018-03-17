@@ -93,6 +93,9 @@ float: left; overflow: auto;
 .urgent {
   border-left: 10px solid red;
 }
+.del {
+  border-right: 30px solid #FF9999;
+}
 
 .text-container {
   position: relative;
