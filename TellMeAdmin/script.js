@@ -134,7 +134,7 @@ function add_announcement(title, text) {
         deleteannouncement(this);
         return false;
     }
-    del.appendChild(close);
+    new_announcement.appendChild(close);
 
 }
 /*load in modules after page is opened initially*/
