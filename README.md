@@ -7,3 +7,5 @@ CSV parsing not functional.
 Mobile site needs optimization.
 
 Icons need to be added.
+
+Need to fix overflow w/announcements.

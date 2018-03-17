@@ -112,8 +112,8 @@ word-wrap:break-word;}
   position: absolute;
   z-index: 1;
   width: 70%;
-  height: 100%;
-  overflow: auto;
+  height: 750%;
+  overflow-y: scroll;
 }
 .announcementsBoard {
   -webkit-box-sizing: content-box;
@@ -163,7 +163,10 @@ word-wrap:break-word;}
     background-color: red;
     vertical-align:
 }
-
+.text {
+  overflow: scroll;
+  overflow-x: hidden;
+}
 /*text input line within announcement input box*/
 .input-mysize {
   position: absolute;
