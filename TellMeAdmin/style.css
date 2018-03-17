@@ -209,7 +209,7 @@ word-wrap:break-word;}
     height: 100%;
     position: absolute;
     float: left;
-    background-color: #36475c;
+    background-color: #343c3e;
   }
   .icon {z-index: 101;
     position: relative;
@@ -221,7 +221,7 @@ word-wrap:break-word;}
   .sideright { /*refactor this stuff*/
     margin-left: 20%;
     display: none;
-    background-color: #36475c;
+    background-color: #c4c4c4;
     width: 80%;
     height: 100%;
     float: right;
@@ -232,7 +232,7 @@ word-wrap:break-word;}
     display: none;
     margin-left: 20%;
     float: right;
-    background-color: #36475c;
+    background-color: #c4c4c4;
     width: 80%;
     height: 100%;
     position: fixed;
