@@ -95,6 +95,7 @@ function submit() {
         alert("Missing text field");
     } else {
         $('.pop-container').fadeOut(); //removes dropdown on exit
+        $('div#cover').fadeOut("");
         document.getElementById('usr').value = ""; //clears text field on successful submit
         document.getElementById('text').value = ""; //@TODO doesnt work!!
         console.log(title); //backend announcement data
