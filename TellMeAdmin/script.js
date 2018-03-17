@@ -19,67 +19,67 @@ document.getElementById('postBtn').onclick = function() {
     document.getElementById("announcementsBoard").style.display = "none";
     document.getElementById("postBtn").style.opacity = "0.5";
     document.getElementById("overlay").style.display = "block";
-    $('body').click(function() {
-        $('div#popcontainer').hide();
-    });
+
 }
 /*open csv ui*/
 var newGroupBtn = document.getElementById('csvBtn');
 newGroupBtn.onclick = function() {
-    var newA = document.getElementById('csvcontainer');
-    if (newA.style.display !== 'none') {
-        $('div#csvcontainer').fadeOut("");
-    } else {
-        $('div#csvcontainer').fadeIn("");
+    if (document.getElementById("cover").style.display == "none") {
+        var newA = document.getElementById('csvcontainer');
+        if (newA.style.display !== 'none') {
+            $('div#csvcontainer').fadeOut("");
+            $('div#cover').fadeOut("");
+        } else {
+            $('div#cover').fadeIn("");
+            $('div#csvcontainer').fadeIn("");
+        }
+        document.getElementById("announcementsBoard").style.display = "none";
+        document.getElementById("csvBtn").style.opacity = "0.5";
+        document.getElementById("overlay").style.display = "block";
     }
-    document.getElementById("announcementsBoard").style.display = "none";
-    document.getElementById("csvBtn").style.opacity = "0.5";
-    document.getElementById("overlay").style.display = "block";
-    $('body').click(function() {
-        $('div#csvcontainer').hide();
-
-    });
 }
 /*open settings ui*/
 var newGroupBtn = document.getElementById('settings');
 newGroupBtn.onclick = function() {
-    var newA = document.getElementById('settingscontainer');
-    if (newA.style.display !== 'none') {
-        $('div#settingscontainer').fadeOut("");
-        $('div#cover').fadeOut("");
-    } else {
-        $('div#cover').fadeIn(""); //TODO fix
-        $('div#settingscontainer').fadeIn("");
-        document.getElementById("groupname").value = document.getElementById('title-text').innerHTML;
-
+    if (document.getElementById("csvcontainer").style.display == "none") {
+        var newA = document.getElementById('settingscontainer');
+        if (newA.style.display !== 'none') {
+            $('div#settingscontainer').fadeOut("");
+            $('div#cover').fadeOut("");
+        } else {
+            $('div#cover').fadeIn("");
+            $('div#settingscontainer').fadeIn("");
+            document.getElementById("groupname").value = document.getElementById('title-text').innerHTML;
+        }
+        document.getElementById("announcementsBoard").style.display = "none";
+        document.getElementById("csvBtn").style.opacity = "0.5";
+        document.getElementById("overlay").style.display = "block";
     }
-    document.getElementById("announcementsBoard").style.display = "none";
-    document.getElementById("csvBtn").style.opacity = "0.5";
-    document.getElementById("overlay").style.display = "block";
-    $('body').click(function() {
-        $('div#settingscontainer').hide();
-        $('div#cover').fadeOut("");
-
-    });
 }
 
-window.addEventListener('click', function(e){ //detect outside click
-//TODO condition for multiple windows
-	if (!document.getElementById('settingscontainer').contains(e.target) && !document.getElementById('settings').contains(e.target) ){
-    $('div#settingscontainer').fadeOut("fast"); //
-    $('div#cover').hide("");  }
-  if (!document.getElementById('csvBtn').contains(e.target) && !document.getElementById('csvcontainer').contains(e.target) ){
-    $('div#csvcontainer').fadeOut("fast"); //
-    $('div#cover').hide("");  }
-    if (!document.getElementById('popcontainer').contains(e.target)
-    && !document.getElementById('titleBtn').contains(e.target)
-    && !document.getElementById('postBtn').contains(e.target) ){
-      $('div#popcontainer').fadeOut("fast"); //
-      $('div#cover').hide("");  }
+window.addEventListener('click', function(e) { //detect outside click
+    //TODO condition for multiple windows
+    if (!document.getElementById('settingscontainer').contains(e.target) && !document.getElementById('settings').contains(e.target)) {
+        if (document.getElementById('settingscontainer').style.display !== 'none') {
+            $('div#settingscontainer').fadeOut("fast");
+            $('div#cover').fadeOut("");
+        }
+    }
+    if (!document.getElementById('csvBtn').contains(e.target) && !document.getElementById('csvcontainer').contains(e.target)) {
+        if (document.getElementById('csvcontainer').style.display !== 'none') {
+            $('div#csvcontainer').fadeOut("fast");
+            $('div#cover').fadeOut("");
+        }
+    }
+    if (!document.getElementById('popcontainer').contains(e.target) &&
+        !document.getElementById('titleBtn').contains(e.target) &&
+        !document.getElementById('postBtn').contains(e.target)) {
+        $('div#popcontainer').fadeOut("fast");
+    }
 })
 
 function save() { //TODO connect backend to settings
-  //if(){} //TODO error message if new group name is not unique?
+    //if(){} //TODO error message if new group name is not unique?
     console.log(document.getElementById("groupname").value); //backend new group name
 };
 
@@ -199,7 +199,7 @@ function update(e) {
 }
 /*Remove student*/
 function removestudent(e, course, student) {
-    var answer = confirm("Remove "+ student +" from " + course)
+    var answer = confirm("Remove " + student + " from " + course)
     if (answer) {
         e.parentNode.parentNode.removeChild(e.parentNode); //backend remove student
     } else {}
@@ -240,9 +240,9 @@ function respStudents() {
 }
 
 function save() {
-  //TODO
+    //TODO
 }
 
 function deleteforever() {
-  //TODO
+    //TODO
 }
