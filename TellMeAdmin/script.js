@@ -27,41 +27,38 @@ document.getElementById('postBtn').onclick = function() {
 }
 /*open csv ui*/
 var newGroupBtn = document.getElementById('csvBtn');
-
 newGroupBtn.onclick = function() {
   var newA = document.getElementById('csvcontainer');
-
   if (newA.style.display !== 'none') {
     $('div#csvcontainer').fadeOut("");
   } else {
     $('div#csvcontainer').fadeIn("");
-
   }
   document.getElementById("announcementsBoard").style.display="none";
   document.getElementById("csvBtn").style.opacity = "0.5";
   document.getElementById("overlay").style.display = "block";
-
-
   $('body').click(function () {
      $('div#csvcontainer').hide();
 
  });
 }
-/* NOT SURE WHAT THIS DOES BUT IT BREAKS THE CODE
-$(document)
-  .one('focus.autoExpand', 'textarea.autoExpand', function() {
-    var savedValue = this.value;
-    this.value = '';
-    this.baseScrollHeight = this.scrollHeight;
-    this.value = savedValue;
-  })
-  .on('input.autoExpand', 'textarea.autoExpand', function() {
-    var minRows = this.getAttribute('data-min-rows') | 0,
-      rows;
-    this.rows = minRows;
-    rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 16);
-    this.rows = minRows + rows;
-  });
+/*open settings ui*/
+var newGroupBtn = document.getElementById('settings');
+newGroupBtn.onclick = function() {
+  var newA = document.getElementById('settingscontainer');
+  if (newA.style.display !== 'none') {
+    $('div#settingscontainer').fadeOut("");
+  } else {
+    $('div#settingscontainer').fadeIn("");
+  }
+  document.getElementById("announcementsBoard").style.display="none";
+  document.getElementById("csvBtn").style.opacity = "0.5";
+  document.getElementById("overlay").style.display = "block";
+  $('body').click(function () {
+     $('div#csvcontainer').hide();
+
+ });
+}
 
 /*Write announcement*/
 function submit(){
