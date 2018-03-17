@@ -1,3 +1,5 @@
-UIDebugging for tidying up the interface.
+Current status:
 
-*Some designs and/or aesthetic choices are subject to change. They are there either as a placeholder or waiting to undergo further changes.
+Urgent flag feature removed, type abcdefghijklmnopqrstuvwxyz123 as the subject line to preview urgent feature.
+
+CSV parsing not functional.

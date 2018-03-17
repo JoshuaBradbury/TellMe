@@ -122,7 +122,7 @@ function add_announcement(title, text) {
     close.classList.add("close");
 
     /*urgent flag, currently not in use, too lazy to change else*/
-    if (title == "aaaaaaaaaaaaaaaaaaaa") { //set subject as aaaaaaaaaaaaaaaaaaaa for urgent flag idk
+    if (title == "abcdefghijklmnopqrstuvwxyz123") { //set subject as abcdefghijklmnopqrstuvwxyz123 for urgent flag idk
         new_announcement.classList.add("urgent");
 
     } else {
