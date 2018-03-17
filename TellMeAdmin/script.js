@@ -144,6 +144,7 @@ function add_announcement(title, text) {
 }
 /*load in modules after page is opened initially*/
 $(document).ready(function() {
+  document.getElementById("cover").style.display = "none"
     if (screen.width <= 1024) { //testing for screen width
         console.log(screen.width)
     }
