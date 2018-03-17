@@ -96,7 +96,7 @@ function submit() {
         console.log(title); //backend announcement data
         console.log(text); //backend announcement data
         console.log(document.getElementById('title-text').innerHTML); // backend module code used to identify which module message belongs to
-        add_announcement(title, text); //calls add func
+        add_announcement(title, text); //calls add func, replace paramters with backend call
     }
 };
 
@@ -105,9 +105,6 @@ function add_announcement(title, text) {
     var new_announcement = document.createElement("div");
     var my_container = document.getElementById("announcements-container")
     var urgent_flag = document.createElement("div");
-
-
-
     new_announcement.appendChild(urgent_flag); //adds urgent flag
     my_container.appendChild(new_announcement);
     new_announcement.classList.add("post");
@@ -116,8 +113,8 @@ function add_announcement(title, text) {
     var close = document.createElement("div");
     close.classList.add("close");
 
-    /*urgent flag, currently not in use*/
-    if (title == "urgent") { //change
+    /*urgent flag, currently not in use, too lazy to change else*/
+    if (title == "aaaaaaaaaaaaaaaaaaaa") { //change
         new_announcement.classList.add("urgent");
 
     } else {
@@ -126,7 +123,6 @@ function add_announcement(title, text) {
         close.style.marginLeft = "10px";
     }
     new_announcement.appendChild(text_container); //adds urgent flag
-
     new_announcement.id = "announcement-module";
     text_container.innerHTML += text;
     console.log("created announcement");
@@ -147,8 +143,7 @@ $(document).ready(function() {
         var obj = json[i];
         var new_mod = document.createElement("div");
         var my_container = document.getElementById("right");
-        new_mod.classList.add("modulemodule");
-
+        new_mod.classList.add("menu-box-tab");
         my_container.appendChild(new_mod);
         var text = document.createElement("h1");
         text.id = "module-name";
@@ -169,7 +164,7 @@ function update(e) {
     document.getElementById('title-text').innerHTML = e.innerHTML;
     $('.post').remove(); //clears existing announcements
     $('.students').remove(); //clears existing students
-
+    document.getElementById("settings").style.display = 'block';
     for (var i = 0; i < json.length; i++) {
         var obj = json[i];
         if (obj.ModuleName == e.innerHTML) {
@@ -181,15 +176,15 @@ function update(e) {
                 var my_container = document.getElementById("left");
                 new_mod.classList.add("students");
 
-                var close = document.createElement("div");
-                close.classList.add("close"); //TODO change to custom close element for students
+                //var close = document.createElement("div");
+                //close.classList.add("close"); //TODO change to custom close element for students
                 my_container.appendChild(new_mod);
                 var text = document.createElement("h1");
                 text.id = "student-name";
                 text.innerHTML = obj.students[x]; //backend load students
-                new_mod.appendChild(close);
+                //new_mod.appendChild(close);
 
-                close.onclick = function() {
+                text.onclick = function() {
                     removestudent(this, e.innerHTML, text.innerHTML);
                     return false; //TODO fix this
                 }
@@ -204,7 +199,7 @@ function update(e) {
 }
 /*Remove student*/
 function removestudent(e, course, student) {
-    var answer = confirm("Remove " + +" from " + course) //TODO fix this text
+    var answer = confirm("Remove "+ student +" from " + course)
     if (answer) {
         e.parentNode.parentNode.removeChild(e.parentNode); //backend remove student
     } else {}
@@ -242,4 +237,12 @@ function respStudents() {
     } else {
         tab.style.display = "block";
     }
+}
+
+function save() {
+  //TODO
+}
+
+function deleteforever() {
+  //TODO
 }

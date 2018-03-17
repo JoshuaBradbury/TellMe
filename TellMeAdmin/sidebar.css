@@ -1,19 +1,33 @@
-.modulemodule {
-  margin-left: 10%;
-  margin-right: 10%;
-  width 80%;
-  height: 2em;
-  background-color: green;
-  border-radius: 10px;
+.menu-box-tab {
+  line-height: 60px;
+  display: block;
+  border-bottom: 1px solid white;
+  -webkit-transition: background .2s;
+  transition: background .2s;
+}
+  .menu-box-tab:hover {
+    background: #8a8a8a;
+    border-bottom: 1px solid white;
+  }
+  .menu-box-tab:hover .icon {
+    color: #fff;
+  }
+  .menu-box-tab:hover .menu-box-number {
+    background: #e64c65;
+  }
 
-}
 .students {
-  margin: 10% 10%;
-  width 80%;
-  height: 2em;
-  background-color: green;
-  border-radius: 10px;
+    line-height: 60px;
+    display: block;
+    border-bottom: 1px solid white;
+    -webkit-transition: background .2s;
+    transition: background .2s;
 }
+.students:hover {
+      background: #FF9999;
+      border-bottom: 1px solid white;
+}
+
 
 .bottom {
   width: 15%;
@@ -23,6 +37,7 @@
   background: #B2B2B2;
 }
 h1 {
+  margin: 0em;
   color: white;
   font-size: 2em;
   text-align: center;
