@@ -64,6 +64,7 @@ class AnnouncementController: UIViewController , UITableViewDelegate, UITableVie
         
         configureTableView()
         announcementTableView.separatorStyle = .none
+        announcementTableView.allowsSelection = false
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

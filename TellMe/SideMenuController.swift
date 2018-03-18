@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
     
@@ -39,6 +40,14 @@ class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDat
         
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //TODO: finish the contents of the announcementTableView
+        
+        tableView.deselectRow(at: indexPath, animated: false)
+        print(indexPath.row)
     }
 
     @IBAction func logOutPressed(_ sender: Any) {
