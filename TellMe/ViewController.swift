@@ -11,34 +11,9 @@ import UIKit
 class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var announcementTableView: UITableView!
+    
     let msalHandler = MSALHandler()
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        announcementTableView.delegate = self
-        announcementTableView.dataSource = self
-        
-        announcementTableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "customMessageCell")
-        
-        configureTableView()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        msalHandler.login()
-        
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "customMessageCell", for: indexPath) as! CustomMessageCell
-        
-        let messageArray = ["""
+    let messageArray = ["""
                 Week 8 coursework - scaling
                 by Andrew Coles - Friday, 16 March 2018, 8:50 PM
                      
@@ -75,6 +50,32 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
                 Best wishes
                 Maribel
                 """]
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        announcementTableView.delegate = self
+        announcementTableView.dataSource = self
+        
+        announcementTableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "customMessageCell")
+        
+        configureTableView()
+        announcementTableView.separatorStyle = .none
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        msalHandler.login()
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customMessageCell", for: indexPath) as! CustomMessageCell
         
         cell.messageBody.text = messageArray[indexPath.row]
         
