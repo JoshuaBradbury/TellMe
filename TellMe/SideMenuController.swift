@@ -26,7 +26,10 @@ class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDat
         sideMenuTableView.register(UINib(nibName: "SideMenuCell", bundle: nil), forCellReuseIdentifier: "sideMenuCell")
 
         sideMenuTableView.separatorStyle = .none
+        
     }
+    
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3

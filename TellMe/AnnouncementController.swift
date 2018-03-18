@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SideMenu
 
 class AnnouncementController: UIViewController , UITableViewDelegate, UITableViewDataSource {
 
@@ -65,7 +65,20 @@ class AnnouncementController: UIViewController , UITableViewDelegate, UITableVie
         configureTableView()
         announcementTableView.separatorStyle = .none
         announcementTableView.allowsSelection = false
+        setupSideMenu()
     }
+
+    fileprivate func setupSideMenu() {
+        // Define the menus
+        SideMenuManager.default.menuLeftNavigationController = storyboard!.instantiateViewController(withIdentifier: "LeftMenuNavigationController") as? UISideMenuNavigationController
+        
+        // Enable gestures. The left and/or right menus must be set up above for these to work.
+        // Note that these continue to work on the Navigation Controller independent of the View Controller it displays!
+        SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
+        SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
+        
+    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
