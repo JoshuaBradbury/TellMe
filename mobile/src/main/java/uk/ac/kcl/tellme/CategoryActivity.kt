@@ -1,6 +1,8 @@
 package uk.ac.kcl.tellme
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -11,10 +13,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.*
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import kotlinx.android.synthetic.main.activity_category.*
-
+import uk.ac.kcl.tellme.api.getAllGroups
 
 class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -42,8 +42,18 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu)
 
+        val task = @SuppressLint("StaticFieldLeak")
+        object : AsyncTask<Void, Void, Unit>() {
+            override fun doInBackground(vararg params: Void?) {
+                var str = userName
+                for (group in getAllGroups()) {
+                    str += "\n ${group.groupId} ${group.groupName}"
+                }
 
-        val courses : ArrayList<CourseInfo> = ArrayList<CourseInfo>()
+            }
+        }
+        task.execute()
+        val courses : ArrayList<CourseInfo> = ArrayList()
         courses.add(CourseInfo("5CCS2EG", "@Dr Jeroen Keppens ", "Tuesday,Jan 2", "Major Project List has just been published. Click below to view kaats"))
         courses.add(CourseInfo("5CCS2EG", "@Dr Jeroen Keppens ", "Tuesday,Jan 2", "Major Project List has just been published. Click below to view kaats"))
         courses.add(CourseInfo("5CCS2OCS", "@Dr Amanda COles", "Monday, Jan 1", "Online quiz has been extended for 24 hours due to technical problems. New due date is Jan 13th"))
@@ -67,7 +77,7 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
 
-            AlertDialog.Builder(this)
+            AlertDialog.Builder(this, R.style.ActionMenu)
                     .setMessage("Are you sure you want to exit?")
                     .setCancelable(false)
                     .setPositiveButton("Yes", { _, _ -> exit() })
@@ -94,10 +104,16 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         startActivity(intent)
     }
 
-
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.logout -> {
+                AlertDialog.Builder(this, R.style.ActionMenu)
+                           .setMessage("Are you sure you want to log out?")
+                           .setCancelable(false)
+                           .setPositiveButton("Yes", { _, _ -> logout() })
+                           .setNegativeButton("Cancel", null)
+                           .show()
+            }
             R.id.all_courses -> {
 
             }
@@ -115,14 +131,7 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         }
 
-
-
-
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
-
-
-
-
 }
