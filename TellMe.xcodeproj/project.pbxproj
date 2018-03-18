@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BB2C15F0D9E7CD0C6748A54 /* Pods_TellMeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CF5C6AD265527CED55FC9E /* Pods_TellMeUITests.framework */; };
+		67B85BF911311F9308870436 /* Pods_TellMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335F50FEF8E7FF228752DF9B /* Pods_TellMe.framework */; };
 		A1988B06205846A400099A23 /* NetworkingErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1988B05205846A400099A23 /* NetworkingErrors.swift */; };
 		EC49B8CE203B994F00428779 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC49B8CD203B994F00428779 /* AppDelegate.swift */; };
-		EC49B8D0203B994F00428779 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC49B8CF203B994F00428779 /* ViewController.swift */; };
+		EC49B8D0203B994F00428779 /* AnnouncementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC49B8CF203B994F00428779 /* AnnouncementController.swift */; };
 		EC49B8D3203B994F00428779 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D1203B994F00428779 /* Main.storyboard */; };
 		EC49B8E3203B994F00428779 /* TellMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC49B8E2203B994F00428779 /* TellMeUITests.swift */; };
 		EC49B8F8203BA56C00428779 /* MSAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC49B8F7203BA56C00428779 /* MSAL.framework */; };
+		F40D711D205EED1B0043FE10 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40D711C205EED1B0043FE10 /* SideMenuController.swift */; };
+		F40D711F205EEEC70043FE10 /* MSALViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40D711E205EEEC70043FE10 /* MSALViewController.swift */; };
+		F40D7122205EF6170043FE10 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40D7120205EF6170043FE10 /* SideMenuCell.swift */; };
+		F40D7123205EF6170043FE10 /* SideMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F40D7121205EF6170043FE10 /* SideMenuCell.xib */; };
 		F43A272C2050427E00C077FB /* MSALHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43A272B2050427E00C077FB /* MSALHandler.swift */; };
 		F4A323D62044B6D300362926 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D4203B994F00428779 /* Assets.xcassets */; };
 		F4A323D72044B72800362926 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D6203B994F00428779 /* LaunchScreen.storyboard */; };
@@ -31,10 +37,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		335F50FEF8E7FF228752DF9B /* Pods_TellMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TellMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		57EA877F388E247E286A712A /* Pods-TellMeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TellMeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TellMeUITests/Pods-TellMeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		77CF5C6AD265527CED55FC9E /* Pods_TellMeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TellMeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		861CE69547A532BF6C9065C1 /* Pods-TellMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TellMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-TellMe/Pods-TellMe.release.xcconfig"; sourceTree = "<group>"; };
 		A1988B05205846A400099A23 /* NetworkingErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingErrors.swift; sourceTree = "<group>"; };
+		CB9559A5C1FC279561CDD549 /* Pods-TellMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TellMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TellMe/Pods-TellMe.debug.xcconfig"; sourceTree = "<group>"; };
+		E7A569FC1FE50C1D88F3AEEC /* Pods-TellMeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TellMeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TellMeUITests/Pods-TellMeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EC49B8CA203B994F00428779 /* TellMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TellMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC49B8CD203B994F00428779 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EC49B8CF203B994F00428779 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EC49B8CF203B994F00428779 /* AnnouncementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementController.swift; sourceTree = "<group>"; };
 		EC49B8D2203B994F00428779 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EC49B8D4203B994F00428779 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC49B8D7203B994F00428779 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -43,6 +55,10 @@
 		EC49B8E2203B994F00428779 /* TellMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TellMeUITests.swift; sourceTree = "<group>"; };
 		EC49B8E4203B994F00428779 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC49B8F7203BA56C00428779 /* MSAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MSAL.framework; path = Carthage/Build/iOS/MSAL.framework; sourceTree = "<group>"; };
+		F40D711C205EED1B0043FE10 /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
+		F40D711E205EEEC70043FE10 /* MSALViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALViewController.swift; sourceTree = "<group>"; };
+		F40D7120205EF6170043FE10 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
+		F40D7121205EF6170043FE10 /* SideMenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuCell.xib; sourceTree = "<group>"; };
 		F43A272B2050427E00C077FB /* MSALHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALHandler.swift; sourceTree = "<group>"; };
 		F4A82C4C205D7AD800FE0C9F /* CustomMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomMessageCell.swift; path = "TellMe/Custom Cell/CustomMessageCell.swift"; sourceTree = SOURCE_ROOT; };
 		F4A82C4D205D7AD800FE0C9F /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MessageCell.xib; path = "TellMe/Custom Cell/MessageCell.xib"; sourceTree = SOURCE_ROOT; };
@@ -54,6 +70,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC49B8F8203BA56C00428779 /* MSAL.framework in Frameworks */,
+				67B85BF911311F9308870436 /* Pods_TellMe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,12 +78,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BB2C15F0D9E7CD0C6748A54 /* Pods_TellMeUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7520D31550B84288B41B0773 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CB9559A5C1FC279561CDD549 /* Pods-TellMe.debug.xcconfig */,
+				861CE69547A532BF6C9065C1 /* Pods-TellMe.release.xcconfig */,
+				E7A569FC1FE50C1D88F3AEEC /* Pods-TellMeUITests.debug.xcconfig */,
+				57EA877F388E247E286A712A /* Pods-TellMeUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EC49B8C1203B994F00428779 = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +103,7 @@
 				EC49B8E1203B994F00428779 /* TellMeUITests */,
 				EC49B8CB203B994F00428779 /* Products */,
 				EC49B8ED203B9BEB00428779 /* Frameworks */,
+				7520D31550B84288B41B0773 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,7 +122,9 @@
 				F4A6FB752055EF140033F2E8 /* Networking */,
 				F4C9672A205D8DF000BF9921 /* Custom Cell */,
 				EC49B8CD203B994F00428779 /* AppDelegate.swift */,
-				EC49B8CF203B994F00428779 /* ViewController.swift */,
+				F40D711E205EEEC70043FE10 /* MSALViewController.swift */,
+				EC49B8CF203B994F00428779 /* AnnouncementController.swift */,
+				F40D711C205EED1B0043FE10 /* SideMenuController.swift */,
 				EC49B8D1203B994F00428779 /* Main.storyboard */,
 				EC49B8D4203B994F00428779 /* Assets.xcassets */,
 				EC49B8D6203B994F00428779 /* LaunchScreen.storyboard */,
@@ -114,6 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				EC49B8F7203BA56C00428779 /* MSAL.framework */,
+				335F50FEF8E7FF228752DF9B /* Pods_TellMe.framework */,
+				77CF5C6AD265527CED55FC9E /* Pods_TellMeUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -132,6 +166,8 @@
 			children = (
 				F4A82C4C205D7AD800FE0C9F /* CustomMessageCell.swift */,
 				F4A82C4D205D7AD800FE0C9F /* MessageCell.xib */,
+				F40D7120205EF6170043FE10 /* SideMenuCell.swift */,
+				F40D7121205EF6170043FE10 /* SideMenuCell.xib */,
 			);
 			path = "Custom Cell";
 			sourceTree = "<group>";
@@ -143,10 +179,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC49B8E7203B994F00428779 /* Build configuration list for PBXNativeTarget "TellMe" */;
 			buildPhases = (
+				AD1CDF3142656704C1667D47 /* [CP] Check Pods Manifest.lock */,
 				EC49B8C6203B994F00428779 /* Sources */,
 				EC49B8C7203B994F00428779 /* Frameworks */,
 				EC49B8C8203B994F00428779 /* Resources */,
 				EC49B8F1203B9EB400428779 /* ShellScript */,
+				FF07E7A60F569BAA9C2E750F /* [CP] Embed Pods Frameworks */,
+				5145013B327DB517876C5B9F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -161,9 +200,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC49B8EA203B994F00428779 /* Build configuration list for PBXNativeTarget "TellMeUITests" */;
 			buildPhases = (
+				D2B45E71CFDF7E64B3DB7A13 /* [CP] Check Pods Manifest.lock */,
 				EC49B8DA203B994F00428779 /* Sources */,
 				EC49B8DB203B994F00428779 /* Frameworks */,
 				EC49B8DC203B994F00428779 /* Resources */,
+				25F5104F01D46C74CD266309 /* [CP] Embed Pods Frameworks */,
+				52879A0F905B54133FC06E91 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -223,6 +265,7 @@
 				F4A323D72044B72800362926 /* LaunchScreen.storyboard in Resources */,
 				F4A323D62044B6D300362926 /* Assets.xcassets in Resources */,
 				F4A82C4F205D7AD800FE0C9F /* MessageCell.xib in Resources */,
+				F40D7123205EF6170043FE10 /* SideMenuCell.xib in Resources */,
 				EC49B8D3203B994F00428779 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,6 +280,87 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		25F5104F01D46C74CD266309 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TellMeUITests/Pods-TellMeUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5145013B327DB517876C5B9F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TellMe/Pods-TellMe-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		52879A0F905B54133FC06E91 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TellMeUITests/Pods-TellMeUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AD1CDF3142656704C1667D47 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TellMe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2B45E71CFDF7E64B3DB7A13 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TellMeUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		EC49B8F1203B9EB400428779 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -251,6 +375,24 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
+		FF07E7A60F569BAA9C2E750F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TellMe/Pods-TellMe-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TellMe/Pods-TellMe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -259,13 +401,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F43A272C2050427E00C077FB /* MSALHandler.swift in Sources */,
-				EC49B8D0203B994F00428779 /* ViewController.swift in Sources */,
-
+				F40D711D205EED1B0043FE10 /* SideMenuController.swift in Sources */,
+				EC49B8D0203B994F00428779 /* AnnouncementController.swift in Sources */,
 				F4A82C4E205D7AD800FE0C9F /* CustomMessageCell.swift in Sources */,
-
+				F40D711F205EEEC70043FE10 /* MSALViewController.swift in Sources */,
 				A1988B06205846A400099A23 /* NetworkingErrors.swift in Sources */,
-				
 				EC49B8CE203B994F00428779 /* AppDelegate.swift in Sources */,
+				F40D7122205EF6170043FE10 /* SideMenuCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +558,7 @@
 		};
 		EC49B8E8203B994F00428779 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB9559A5C1FC279561CDD549 /* Pods-TellMe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -436,6 +579,7 @@
 		};
 		EC49B8E9203B994F00428779 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 861CE69547A532BF6C9065C1 /* Pods-TellMe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -456,6 +600,7 @@
 		};
 		EC49B8EB203B994F00428779 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7A569FC1FE50C1D88F3AEEC /* Pods-TellMeUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -472,6 +617,7 @@
 		};
 		EC49B8EC203B994F00428779 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57EA877F388E247E286A712A /* Pods-TellMeUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

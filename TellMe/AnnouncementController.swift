@@ -9,11 +9,10 @@
 import UIKit
 
 
-class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
+class AnnouncementController: UIViewController , UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var announcementTableView: UITableView!
     
-    let msalHandler = MSALHandler()
     let messageArray = ["""
                 Week 8 coursework - scaling
                 by Andrew Coles - Friday, 16 March 2018, 8:50 PM
@@ -54,7 +53,10 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
         announcementTableView.delegate = self
         announcementTableView.dataSource = self
         
@@ -80,6 +82,6 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
     func configureTableView() {
         
         announcementTableView.rowHeight = UITableViewAutomaticDimension
-        announcementTableView.estimatedRowHeight = 1200.0
+        announcementTableView.estimatedRowHeight = 120.0
     }
 }
