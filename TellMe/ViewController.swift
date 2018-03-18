@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var announcementTableView: UITableView!
@@ -61,12 +62,6 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
         
         configureTableView()
         announcementTableView.separatorStyle = .none
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        msalHandler.login()
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -83,19 +78,8 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
     }
     
     func configureTableView() {
+        
         announcementTableView.rowHeight = UITableViewAutomaticDimension
         announcementTableView.estimatedRowHeight = 1200.0
-        
-        print("YES")
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-
-        
     }
 }
