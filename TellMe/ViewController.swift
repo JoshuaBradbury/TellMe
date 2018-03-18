@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet var announcementTableView: UITableView!
+    @IBOutlet weak var announcementTableView: UITableView!
     let msalHandler = MSALHandler()
     
     
@@ -21,7 +21,7 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
         
         announcementTableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "customMessageCell")
         
-//        configureTableView()
+        configureTableView()
         
     }
     
@@ -39,28 +39,42 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier: "customMessageCell", for: indexPath) as! CustomMessageCell
         
         let messageArray = ["""
-            
-                Tavalodet mobarak fereshteye fingiliye man.
-                ❤️❤️❤️🙈🙈🙈😘😘😘
+                Week 8 coursework - scaling
+                by Andrew Coles - Friday, 16 March 2018, 8:50 PM
+                     
+                Hi all,
 
-                25 sale pish hamin moghe khoda toro be man dad, albate man unmoghe hanuz tu shimake mamanim budam, dashtam warje wurje mikardam ke toam bade chand mah Sabret saru umado umadi zadi zire kase kuzamo gofti, jam boton tase tuzato, pasho biya biyun bibinaaaam.
-                🙊🙊🙊🙊
+                I've been asked to pass on to you that the marks for the remaining coursework will be scaled to cover the week 8 coursework, in addition to being scaled to cover the week 7 coursework.
 
-                20 sal tu in donya tanha budimo charkhidim bara khodemun, ta belakhare khoda maro dobare sare rahe hame Gharar dad.
+                If you have any questions about this, please follow-up with the assessment sub-board by emailing ug-informatics@kcl.ac.uk .
 
-                Khodaya shokret ke hamchin nemati be man dadi, to kheyli jaha sange sabure man budi, kheyli jaha tu naomidi behem omid dadi, wa agar emrooz baraye khodam mardi shodam, hamash bekhatere dashtane to poshtam bude.
-                🤘🏽🤘🏽🤘🏽💪🏼💪🏼💪🏼
+                All the best,
 
-                Kalamat vaghean nemitunan hese mano enteghal bedan be to, nemitunan andazeye ghadr danie mano nesbat be to bayan konan, pas hamin kalamate sadaro az mane savad dar hade 2vom rahnamai bepazir waghti migam behet, kheyli nokaretam, kheyli mokhlesetam, vaghean asheghetamo khake patam.
-                🙏🏼🙏🏼🙏🏼🙏🏼🙏🏼
+                Andrew
+                ""","""
+                Next advisory meetings
+                by Jeroen Keppens - Friday, 16 March 2018, 4:02 PM
+                     
+                Dear all,
 
-                MerC abate 4sal….
-                🙏🏼🙏🏼🙏🏼🙏🏼🙏🏼
+                As the end of the major project is approaching and most teams have developed effective approaches to manage the project and team, the advisory meetings in the next weeks are no longer mandatory.
 
-                pish be suye abad.
+                If you would find it helpful to have a meeting with your academic advisor to discuss any aspect of the project or team management, please send a brief agenda or some discussion points to your academic advisor or bring them with your to the meeting.  If you do not have any issues that you would like to discuss, it would be helpful if you could email your academic advisor asking for the meeting to be cancelled.
 
-                💋💄💍❤️😘👅💦💦💦
-            ""","Second Message asdasdasdasd asdasdasdasdas asdasdasdasdasd asdasdasdasdasd asdasdasdasdasda","Third Message"]
+                Best wishes,
+
+                Jeroen
+                ""","""
+                Change in office hours
+                by Maria Isabel Fernandez - Friday, 16 March 2018, 5:08 PM
+                     
+                Dear PLD Students
+                there will be no office hours on Wednesday 21 March.
+                Instead, the office hours will be on Monday 26th 12.00-14.00
+                (as well as Wednesday 28th 10.30-12.30).
+                Best wishes
+                Maribel
+                """]
         
         cell.messageBody.text = messageArray[indexPath.row]
         
@@ -69,7 +83,7 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
     
     func configureTableView() {
         announcementTableView.rowHeight = UITableViewAutomaticDimension
-        announcementTableView.estimatedRowHeight = 120.0
+        announcementTableView.estimatedRowHeight = 1200.0
         
         print("YES")
     }
