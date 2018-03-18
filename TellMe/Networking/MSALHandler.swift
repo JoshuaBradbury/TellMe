@@ -19,14 +19,14 @@ class MSALHandler {
     let kScopes: [String] = ["https://graph.microsoft.com/user.read"]
     
     var accessToken = String()
-    var applicationContext = MSALPublicClientApplication.init()
+    static var applicationContext = MSALPublicClientApplication.init()
     
     
     init() {
         
         do {
             // Initialize a MSALPublicClientApplication with a given clientID and authority
-            self.applicationContext = try MSALPublicClientApplication.init(clientId: kClientID, authority: kAuthority)
+            MSALHandler.applicationContext = try MSALPublicClientApplication.init(clientId: kClientID, authority: kAuthority)
             
         } catch {
             // self.loggingText.text = "Unable to create Application Context. Error: \(error)"
@@ -38,7 +38,7 @@ class MSALHandler {
         
         do {
             
-            if  try self.applicationContext.users().isEmpty {
+            if  try MSALHandler.applicationContext.users().isEmpty {
                 throw NSError.init(domain: "MSALErrorDomain", code: MSALErrorCode.interactionRequired.rawValue, userInfo: nil)
             } else {
                 // Acquire a token for an existing user silently
@@ -56,7 +56,7 @@ class MSALHandler {
     private func getTokenFromExistingUser(){
         do{
             
-        try self.applicationContext.acquireTokenSilent(forScopes: self.kScopes, user: applicationContext.users().first) { (result, error) in
+            try MSALHandler.applicationContext.acquireTokenSilent(forScopes: self.kScopes, user: MSALHandler.applicationContext.users().first) { (result, error) in
             if error == nil {
                 self.accessToken = (result?.accessToken)!
                 self.getContentWithToken()
@@ -73,7 +73,7 @@ class MSALHandler {
         if errorCode == MSALErrorCode.interactionRequired.rawValue {
             
             do {
-                try self.applicationContext.acquireToken(forScopes: self.kScopes, user: applicationContext.users().first, uiBehavior: .MSALForceLogin, extraQueryParameters: ["domain_hint":"kcl.ac.uk"], completionBlock:{
+                try MSALHandler.applicationContext.acquireToken(forScopes: self.kScopes, user: MSALHandler.applicationContext.users().first, uiBehavior: .MSALForceLogin, extraQueryParameters: ["domain_hint":"kcl.ac.uk"], completionBlock:{
                     (result: MSALResult?, error: Error?) in
                     if let result = result {
                         self.accessToken = (result.accessToken)!
@@ -107,4 +107,20 @@ class MSALHandler {
             }
             }.resume()
     }
+    
+    static func logOut() {
+        
+        // Still Crashes the program with error: Foundation._GenericObjCError.nilError
+        do {
+            let users = try! applicationContext.users()
+            
+            if !users.isEmpty {
+                
+                for user in users {
+                    try! applicationContext.remove(user)
+                }
+            }
+        }
+    }
+    
 }

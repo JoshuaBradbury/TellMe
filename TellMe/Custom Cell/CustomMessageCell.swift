@@ -17,10 +17,7 @@ class CustomMessageCell: UITableViewCell {
     @IBOutlet var senderUsername: UILabel!
     
     override func awakeFromNib() {
-        super.awakeFromNib()
-
-        
-        
+        super.awakeFromNib() 
     }
 
 
