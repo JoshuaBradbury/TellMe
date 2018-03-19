@@ -8,10 +8,6 @@ import uk.ac.kcl.tellme.MainActivity
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.reflect.jvm.internal.impl.renderer.ClassifierNamePolicy.SHORT
-
-
 
 var groups = mutableListOf<Group>()
 
@@ -44,6 +40,7 @@ fun getAnnouncements(groupId: Int, n: Int): List<Announcement> {
 }
 
 fun getAllGroups() {
+    groups = mutableListOf()
     val response = JSONObject(get("https://tellme.newagedev.co.uk/api/v1.0/group"))
     Log.d(MainActivity::class.simpleName, response.toString())
     if (response.getInt("status") == 200) {
@@ -52,7 +49,5 @@ fun getAllGroups() {
             val obj = jsonGroups.getJSONObject(i)
             groups.add(Group(obj.getInt("groupId"), obj.getString("groupName")))
         }
-    } else {
-        groups = mutableListOf()
     }
 }
