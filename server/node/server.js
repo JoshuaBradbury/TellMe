@@ -6,13 +6,19 @@ var https = require("https");
 var http = require("http");
 var fs = require("fs");
 var mysql = require("mysql2/promise");
+var admin = require("firebase-admin");
+var serviceAccount = require("./serviceAccountKey.json");
 
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://tellme-65b91.firebaseio.com"
+});
 
 var pool = mysql.createPool({
-  host            : "mysql-dev",
-  user            : "root",
-  password        : "seggroupproj",
-  database        : "database_mysql"
+    host            : "mysql-dev",
+    user            : "root",
+    password        : "seggroupproj",
+    database        : "database_mysql"
 });
 
 var upload = multer();
@@ -184,6 +190,7 @@ router.get("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, 
 router.post("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, next) => {
 	if (req.secure && req.accepts('application/json')) {
 		if (req.body.groupName && isString(req.body.groupName)) {
+            console.log("SELECT * FROM modules WHERE `module_name` = " + req.body.groupName);
 			const existing = await query("SELECT * FROM modules WHERE `module_name` = ?", [req.body.groupName]);
 			if (existing[0].length == 0) {
 				var group = { module_name: req.body.groupName };
@@ -253,9 +260,10 @@ router.put("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, 
 
 router.delete("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, next) => {
 	if (req.secure && req.accepts('application/json')) {
-        var groupq = getGroupByNameOrId(req.body.groupId, req.body.groupName);
+        var groupq = await getGroupByNameOrId(req.body.groupId, req.body.groupName);
         if (groupq.length > 0) {
-			const q = await query("DELETE FROM modules WHERE `module_name` = ?", [req.body.name]);
+            var groupid = groupq[0][0].module_id;
+			const q = await query("DELETE FROM modules WHERE `module_id` = ?", [groupid]);
 
 			res.status(200).json({"status": 200, "message": "Ok: " + q[0].affectedRows + " group(s) deleted"});
 		} else {
@@ -272,14 +280,14 @@ router.get("/api/v1.0/announcement/:groupid", upload.array(), asyncMiddleware(as
             if (req.query) {
                 const time = asNumber(req.query.date);
                 if (time) {
-                    retval = await query("SELECT `message` FROM messages_sent WHERE UNIX_TIMESTAMP(time_sent) BETWEEN ? AND UNIX_TIMESTAMP(NOW())", [time]);
+                    retval = await query("SELECT * FROM messages_sent WHERE UNIX_TIMESTAMP(time_sent) BETWEEN ? AND UNIX_TIMESTAMP(NOW())", [time]);
                 } else if (req.query.n) {
                     if (req.query.n == "all") {
-                        retval = await query("SELECT `message` FROM messages_sent WHERE `module_id` = ?", [req.params.groupid]);
+                        retval = await query("SELECT * FROM messages_sent WHERE `module_id` = ?", [req.params.groupid]);
                     } else {
                         var count = Number(req.query.n);
                         if (count) {
-                            retval = await query("SELECT `message` FROM messages_sent WHERE `module_id` = ? ORDER BY `time_sent` DESC LIMIT ?", [req.params.groupid, count]);
+                            retval = await query("SELECT * FROM messages_sent WHERE `module_id` = ? ORDER BY `time_sent` DESC LIMIT ?", [req.params.groupid, count]);
                         }
                     }
                 }
@@ -315,22 +323,32 @@ router.delete("/api/v1.0/announcement/", upload.array(), asyncMiddleware(async (
 }));
 
 router.post("/api/v1.0/announcement/", upload.array(), asyncMiddleware(async (req, res, next) => {
-        if (req.secure && req.accepts('application/json')) {
-                if (req.body.groupid && req.body.announcement && isString(req.body.announcement)) {
-                        var idExists = await query("SELECT * FROM modules WHERE `module_id` = ?", [req.body.groupid]);
-                        if (!idExists[0].length) {
-                                res.status(400).json({"status": 400, "message": "Bad Request: no group with that id exists"});
-                        } else {
-                                var insert = {module_id: req.body.groupid, message: req.body.announcement};
-                                const q = await query('INSERT INTO messages_sent SET ?', insert);
-                                res.status(202).json({"status": 202, "message": "Successfully sent new announcement"});
-                        }
-                     } else {
-                        res.status(400).json({"status": 400, "message": "Bad Request: module name and announcement text parameters must be specified in the body"});
-                }
+    if (req.secure && req.accepts('application/json')) {
+        var groupq = await getGroupByNameOrId(req.body.groupId, req.body.groupName);
+        if (groupq.length > 0 && isString(req.body.announcement) && isString(req.body.subject)) {
+            var groupid = groupq[0][0].module_id;
+            var insert = {module_id: groupid, message: req.body.announcement, subject: req.body.subject};
+            const q = await query('INSERT INTO messages_sent SET ?', insert);
+            var message = {
+                data: {
+                    subject: req.body.subject,
+                    message: req.body.announcement,
+                    group: groupid.toString()
+                },
+                condition: "'announcements' in topics"
+            };
+
+            admin.messaging().send(message).then((response) => {
+                res.status(201).json({"status": 201, "message": "Created: successfully sent new announcement", "response": response});
+            }).catch((error) => {
+                console.log('Error sending message:', error);
+            });
         } else {
-                res.sendStatus(406);
+            res.status(400).json({"status": 400, "message": "Bad Request: groupName or groupId, announcement and subject parameters must be specified in the body"});
         }
+    } else {
+        res.sendStatus(406);
+    }
 }));
 
 app.use(router);
