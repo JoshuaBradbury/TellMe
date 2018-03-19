@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<android.support.v4.widget.DrawerLayout android:id="@+id/drawer_layout"
-
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -14,38 +13,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
    <LinearLayout
-
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       android:id="@+id/linLayout"
+        android:id="@+id/linLayout">
 
-        >
        <android.support.v7.widget.Toolbar
            android:id="@+id/toolbar"
            android:layout_width="match_parent"
            android:layout_height="?attr/actionBarSize"
            android:background="?attr/colorPrimary"
            android:theme="@style/AppTheme.noActionBar"
-           xmlns:android="http://schemas.android.com/apk/res/android"
-           app:titleTextAppearance="@color/whiteish"
-           />
+           xmlns:android="http://schemas.android.com/apk/res/android">
 
-           <!--<TextView-->
-           <!--android:id="@+id/user_name"-->
-           <!--android:layout_width="match_parent"-->
-           <!--android:layout_height="wrap_content"-->
-           <!--android:text="@string/all_course" />-->
+           <TextView
+               android:id="@+id/toolbar_title"
+               android:layout_width="match_parent"
+               android:gravity="center"
+               android:layout_height="match_parent"
+               android:textSize="20sp"
+               android:textColor="@color/silver"
+               android:layout_marginEnd="?attr/actionBarSize" />
 
+       </android.support.v7.widget.Toolbar>
 
       <android.support.v7.widget.RecyclerView
            android:id="@+id/rv1"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-
-       android:theme="@style/AppTheme.noActionBar">
-       </android.support.v7.widget.RecyclerView>
-
+           android:theme="@style/AppTheme.noActionBar" />
 
    </LinearLayout>
 
@@ -54,11 +50,30 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/navBackground"
         android:keepScreenOn="true"
-        app:itemTextColor="@color/whiteish"
-        app:menu="@menu/drawer_view"
-        app:itemTextAppearance="@style/MenuText"/>
+        app:itemTextAppearance="@style/MenuText"
+        app:itemTextColor="@color/silver">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
 
-    </android.support.v4.widget.DrawerLayout>
+            <Button
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/navBackground"
+                android:gravity="center"
+                android:onClick="promptLogOut"
+                android:text="@string/logout"
+                android:textAllCaps="false"
+                android:textColor="@color/silver" />
+
+        </LinearLayout>
+
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>

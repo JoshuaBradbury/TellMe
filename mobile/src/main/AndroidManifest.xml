@@ -15,14 +15,15 @@
         android:theme="@style/AppTheme">
         <activity android:name="uk.ac.kcl.tellme.MainActivity"
                   android:screenOrientation="portrait"
-                  android:theme="@style/Theme.AppCompat.NoActionBar">
+                  android:theme="@style/AppTheme.noActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
+        <activity android:name="com.microsoft.identity.client.BrowserTabActivity"
+                  android:theme="@style/AppTheme.noActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -37,9 +38,6 @@
         <activity android:theme="@style/AppTheme.noActionBar"
             android:name=".CategoryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_category"
-
-
-            />
+            android:label="" />
     </application>
 </manifest>

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
-    <color name="colorPrimaryDark">#8a8a8a</color>
-    <color name="colorPrimary">#ee2d24</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="greyish">#c4c4c4</color>
-    <color name="whiteish"> #f0f0f0</color>
 
     <color name="colorKcl">#EE2D24</color>
+    <color name="colorPrimaryDark">@color/colorKcl</color>
+    <color name="colorPrimary">@color/colorKcl</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="silver">#EBEBEB</color>
+    <color name="cardBackground">#C4C4C4</color>
+    <color name="mainBackground">#F0F0F0</color>
+    <color name="announcementText">#343C3E</color>
+    <color name="navBackground">#8A8A8A</color>
     <color name="black_overlay">#66000000</color>
+
 </resources>
