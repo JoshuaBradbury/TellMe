@@ -4,9 +4,10 @@ CREATE TABLE modules (module_id INT NOT NULL AUTO_INCREMENT,
 
 CREATE TABLE messages_sent (announcement_id INT NOT NULL AUTO_INCREMENT,
                             module_id INT NOT NULL,
+                            subject VARCHAR(100),
                             message TEXT,
                             time_sent TIMESTAMP DEFAULT NOW(),
-                            PRIMARY KEY (announcement_id)
+                            PRIMARY KEY (announcement_id),
                             FOREIGN KEY (module_id)
                             REFERENCES modules(module_id)
                             ON DELETE CASCADE);
