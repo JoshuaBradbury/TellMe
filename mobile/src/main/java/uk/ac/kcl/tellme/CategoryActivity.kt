@@ -3,26 +3,27 @@ package uk.ac.kcl.tellme
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.AsyncTask
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.v4.app.NotificationManagerCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.text.Layout
-import android.view.*
+import android.text.SpannableString
+import android.text.style.AlignmentSpan
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_category.*
+import uk.ac.kcl.tellme.api.Announcement
+import uk.ac.kcl.tellme.api.getAllGroups
 import uk.ac.kcl.tellme.api.getAnnouncements
 import uk.ac.kcl.tellme.api.groups
-import uk.ac.kcl.tellme.api.Announcement
-import android.text.style.AlignmentSpan
-import android.text.SpannableString
-import uk.ac.kcl.tellme.api.getAllGroups
 
 
 class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {

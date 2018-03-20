@@ -9,11 +9,6 @@ import com.microsoft.identity.client.*
 import org.json.JSONObject
 import uk.ac.kcl.tellme.api.getAllGroups
 
-enum class MSALAction {
-    LOGOUT,
-    EXIT
-}
-
 class MSALHandler(context: Context, val activity: MainActivity) {
     private val SCOPES = arrayOf("https://graph.microsoft.com/User.Read")
     private val MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me"
