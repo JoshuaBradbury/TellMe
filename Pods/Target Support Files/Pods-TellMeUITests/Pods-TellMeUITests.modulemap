@@ -1,0 +1,6 @@
+framework module Pods_TellMeUITests {
+  umbrella header "Pods-TellMeUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
