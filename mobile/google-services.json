@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "980456350297",
+    "firebase_url": "https://tellme-65b91.firebaseio.com",
+    "project_id": "tellme-65b91",
+    "storage_bucket": "tellme-65b91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980456350297:android:ef6921dc0d1c7955",
+        "android_client_info": {
+          "package_name": "uk.ac.kcl.tellme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980456350297-rlhojg1jbmp4uhrcbksf4fh3fpg8cpd4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uk.ac.kcl.tellme",
+            "certificate_hash": "bb824a69aad170b342c0a9fd029fa1b27ac10a44"
+          }
+        },
+        {
+          "client_id": "980456350297-e2o0e6mvreh7n3tuj1c6e52619eje6ht.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0zrkDbD1-gqZpUVOCwSQGN65D6ViRq0I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980456350297-e2o0e6mvreh7n3tuj1c6e52619eje6ht.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

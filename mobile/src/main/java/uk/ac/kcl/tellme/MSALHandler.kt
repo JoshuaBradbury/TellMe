@@ -9,11 +9,6 @@ import com.microsoft.identity.client.*
 import org.json.JSONObject
 import uk.ac.kcl.tellme.api.getAllGroups
 
-enum class MSALAction {
-    LOGOUT,
-    EXIT
-}
-
 class MSALHandler(context: Context, val activity: MainActivity) {
     private val SCOPES = arrayOf("https://graph.microsoft.com/User.Read")
     private val MSGRAPH_URL = "https://graph.microsoft.com/v1.0/me"
@@ -77,19 +72,11 @@ class MSALHandler(context: Context, val activity: MainActivity) {
 
                 val userName = callGraphAPI()
 
-                val task = @SuppressLint("StaticFieldLeak")
-                object : AsyncTask<Void, Void, Unit>() {
-                    override fun doInBackground(vararg params: Void?) {
-                        getAllGroups()
-
-                        val intent = Intent(activity, CategoryActivity::class.java).apply {
-                            putExtra("user", userName)
-                        }
-
-                        activity.startActivity(intent)
-                    }
+                val intent = Intent(activity, CategoryActivity::class.java).apply {
+                    putExtra("user", userName)
                 }
-                task.execute()
+
+                activity.startActivity(intent)
             }
 
             override fun onError(exception: MsalException) {

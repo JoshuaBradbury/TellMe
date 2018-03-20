@@ -13,17 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="uk.ac.kcl.tellme.MainActivity"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppTheme.noActionBar">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.noActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.microsoft.identity.client.BrowserTabActivity"
-                  android:theme="@style/AppTheme.noActionBar">
+        <activity
+            android:name="com.microsoft.identity.client.BrowserTabActivity"
+            android:theme="@style/AppTheme.noActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -35,9 +37,23 @@
                     android:scheme="msalc4d8ad78-18b5-4bdd-afa2-50617a34e8cf" />
             </intent-filter>
         </activity>
-        <activity android:theme="@style/AppTheme.noActionBar"
+        <activity
             android:name=".CategoryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="" />
+            android:label=""
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.noActionBar" />
+
+        <service android:name=".TellMeFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".NotificationService"
+            android:enabled="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true" />
     </application>
+
 </manifest>

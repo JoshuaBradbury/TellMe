@@ -29,10 +29,10 @@ class AnnouncementAdapter(private val announcements: List<Announcement>) : Recyc
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val announcement = announcements[position]
+        val announcement = announcements[announcements.size - position - 1]
 
         holder.title.text = announcement.subject
-        holder.date.text = announcement.time.toString()
+        holder.date.text = announcement.time
         holder.preview.text = announcement.content
     }
 }

@@ -3,25 +3,27 @@ package uk.ac.kcl.tellme
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.AsyncTask
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.text.Layout
-import android.view.*
+import android.text.SpannableString
+import android.text.style.AlignmentSpan
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_category.*
+import uk.ac.kcl.tellme.api.Announcement
+import uk.ac.kcl.tellme.api.getAllGroups
 import uk.ac.kcl.tellme.api.getAnnouncements
 import uk.ac.kcl.tellme.api.groups
-import uk.ac.kcl.tellme.api.Announcement
-import android.text.style.AlignmentSpan
-import android.text.SpannableString
-
 
 
 class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -52,17 +54,44 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view) as NavigationView
 
-        for (group in 0 until groups.size) {
-            navigationView.menu.add(Menu.NONE, group, Menu.NONE, "")
-            val item = navigationView.menu.getItem(group)
-            val s = SpannableString(groups[group].name)
+        updateGroups {
+            val groupId = intent.getIntExtra("groupId", -1)
+            for (group in 0 until groups.size) {
+                navigationView.menu.add(Menu.NONE, group, Menu.NONE, "")
+                val item = navigationView.menu.getItem(group)
+                val s = SpannableString(groups[group].name)
 
-            s.setSpan(AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, s.length, 0)
+                s.setSpan(AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, s.length, 0)
 
-            item.title = s
+                item.title = s
+
+                if (groupId >= 0) {
+                    for (id in 0 until groups.size) {
+                        if (groups[id].id == groupId) {
+                            navigationView.menu.performIdentifierAction(id, 0)
+                            break
+                        }
+                    }
+                } else {
+                    navigationView.menu.performIdentifierAction(0, 0)
+                }
+            }
         }
+    }
 
-        navigationView.menu.performIdentifierAction(0, 0)
+    fun updateGroups(func: () -> Unit) {
+        val task = @SuppressLint("StaticFieldLeak")
+        object : AsyncTask<Void, Void, Unit>() {
+            override fun doInBackground(vararg params: Void?) {
+                getAllGroups()
+            }
+
+            override fun onPostExecute(result: Unit?) {
+                super.onPostExecute(result)
+                func()
+            }
+        }
+        task.execute()
     }
 
     override fun onBackPressed() {
