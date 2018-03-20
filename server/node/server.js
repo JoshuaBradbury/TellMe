@@ -330,6 +330,9 @@ router.post("/api/v1.0/announcement/", upload.array(), asyncMiddleware(async (re
             var insert = {module_id: groupid, message: req.body.announcement, subject: req.body.subject};
             const q = await query('INSERT INTO messages_sent SET ?', insert);
             var message = {
+                android: {
+                    priority: "high"
+                },
                 data: {
                     subject: req.body.subject,
                     message: req.body.announcement,
