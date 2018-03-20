@@ -7,6 +7,7 @@ import android.os.AsyncTask
 import android.util.Log
 import com.microsoft.identity.client.*
 import org.json.JSONObject
+import uk.ac.kcl.tellme.api.getAllGroups
 
 enum class MSALAction {
     LOGOUT,
@@ -40,7 +41,7 @@ class MSALHandler(context: Context, val activity: MainActivity) {
         val app = sampleApp!!
         if (app.users.isNotEmpty())
             for (user in app.users)
-            app.remove(user)
+                app.remove(user)
     }
 
     private fun callGraphAPI(): String {
@@ -50,7 +51,9 @@ class MSALHandler(context: Context, val activity: MainActivity) {
         val task = @SuppressLint("StaticFieldLeak")
         object : AsyncTask<Void, Void, String>() {
             override fun doInBackground(vararg params: Void?): String {
-                return get(MSGRAPH_URL, mapOf("Authorization" to "Bearer " + authResult!!.accessToken))
+                val res = get(MSGRAPH_URL, mapOf("Authorization" to "Bearer " + authResult!!.accessToken))
+                Log.d(MainActivity::class.simpleName, res)
+                return res
             }
         }
         task.execute()
@@ -74,11 +77,19 @@ class MSALHandler(context: Context, val activity: MainActivity) {
 
                 val userName = callGraphAPI()
 
-                val intent = Intent(activity, CategoryActivity::class.java).apply {
-                    putExtra("user", userName)
-                }
+                val task = @SuppressLint("StaticFieldLeak")
+                object : AsyncTask<Void, Void, Unit>() {
+                    override fun doInBackground(vararg params: Void?) {
+                        getAllGroups()
 
-                activity.startActivity(intent)
+                        val intent = Intent(activity, CategoryActivity::class.java).apply {
+                            putExtra("user", userName)
+                        }
+
+                        activity.startActivity(intent)
+                    }
+                }
+                task.execute()
             }
 
             override fun onError(exception: MsalException) {
@@ -103,11 +114,19 @@ class MSALHandler(context: Context, val activity: MainActivity) {
 
                 val userName = callGraphAPI()
 
-                val intent = Intent(activity, CategoryActivity::class.java).apply {
-                    putExtra("user", userName)
-                }
+                val task = @SuppressLint("StaticFieldLeak")
+                object : AsyncTask<Void, Void, Unit>() {
+                    override fun doInBackground(vararg params: Void?) {
+                        getAllGroups()
 
-                activity.startActivity(intent)
+                        val intent = Intent(activity, CategoryActivity::class.java).apply {
+                            putExtra("user", userName)
+                        }
+
+                        activity.startActivity(intent)
+                    }
+                }
+                task.execute()
             }
 
             override fun onError(exception: MsalException) {

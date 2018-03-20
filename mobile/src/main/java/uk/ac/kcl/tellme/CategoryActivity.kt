@@ -12,9 +12,17 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.text.Layout
 import android.view.*
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_category.*
-import uk.ac.kcl.tellme.api.getAllGroups
+import uk.ac.kcl.tellme.api.getAnnouncements
+import uk.ac.kcl.tellme.api.groups
+import uk.ac.kcl.tellme.api.Announcement
+import android.text.style.AlignmentSpan
+import android.text.SpannableString
+
+
 
 class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -22,67 +30,51 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
 
-
-        val mToolbar = findViewById<View>(R.id.toolbar) as Toolbar
-        setSupportActionBar(mToolbar)
-
+        val toolbar = findViewById<Toolbar>(R.id.toolbar) as Toolbar
+        toolbar.hideOverflowMenu()
+        setSupportActionBar(toolbar)
 
         val userName = intent.getStringExtra("user")
 
-//        (findViewById<TextView>(R.id.user_name) as TextView).text = userName
-
-        val toggle = ActionBarDrawerToggle(this, drawer_layout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
 
-
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu)
 
-        val task = @SuppressLint("StaticFieldLeak")
-        object : AsyncTask<Void, Void, Unit>() {
-            override fun doInBackground(vararg params: Void?) {
-                var str = userName
-                for (group in getAllGroups()) {
-                    str += "\n ${group.groupId} ${group.groupName}"
-                }
-
-            }
-        }
-        task.execute()
-        val courses : ArrayList<CourseInfo> = ArrayList()
-        courses.add(CourseInfo("5CCS2EG", "@Dr Jeroen Keppens ", "Tuesday,Jan 2", "Major Project List has just been published. Click below to view kaats"))
-        courses.add(CourseInfo("5CCS2EG", "@Dr Jeroen Keppens ", "Tuesday,Jan 2", "Major Project List has just been published. Click below to view kaats"))
-        courses.add(CourseInfo("5CCS2OCS", "@Dr Amanda COles", "Monday, Jan 1", "Online quiz has been extended for 24 hours due to technical problems. New due date is Jan 13th"))
-        courses.add(CourseInfo("5CCS2FC2", "Dr Christopher Hampson", "Thursday, Jan 4", "Your SGT has been rescheduled to this Monday, please do not attend your scheduled SGT slot" ))
-
-
         val rv1 = findViewById<View>(R.id.rv1) as RecyclerView
-
-        val adapter = CourseAdapter(this,courses)
-        rv1.adapter = adapter
 
         rv1.setHasFixedSize(true)
         rv1.layoutManager = LinearLayoutManager(this)
 
+        val navigationView = findViewById<NavigationView>(R.id.nav_view) as NavigationView
 
+        for (group in 0 until groups.size) {
+            navigationView.menu.add(Menu.NONE, group, Menu.NONE, "")
+            val item = navigationView.menu.getItem(group)
+            val s = SpannableString(groups[group].name)
+
+            s.setSpan(AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, s.length, 0)
+
+            item.title = s
+        }
+
+        navigationView.menu.performIdentifierAction(0, 0)
     }
 
     override fun onBackPressed() {
-
-        if(drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
         } else {
-
-            AlertDialog.Builder(this, R.style.ActionMenu)
-                    .setMessage("Are you sure you want to exit?")
-                    .setCancelable(false)
-                    .setPositiveButton("Yes", { _, _ -> exit() })
-                    .setNegativeButton("No", null)
-                    .show()
+            AlertDialog.Builder(this, R.style.AlertMenu)
+                       .setMessage("Are you sure you want to exit?")
+                       .setCancelable(true)
+                       .setPositiveButton("Yes", { _, _ -> exit() })
+                       .setNegativeButton("No", null)
+                       .show()
         }
     }
 
@@ -104,34 +96,33 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         startActivity(intent)
     }
 
+    fun promptLogOut(view: View) {
+        AlertDialog.Builder(this@CategoryActivity, R.style.AlertMenu)
+                   .setMessage("Are you sure you want to log out?")
+                   .setCancelable(true)
+                   .setPositiveButton("Yes", { _, _ -> logout() })
+                   .setNegativeButton("Cancel", null)
+                   .show()
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.logout -> {
-                AlertDialog.Builder(this, R.style.ActionMenu)
-                           .setMessage("Are you sure you want to log out?")
-                           .setCancelable(false)
-                           .setPositiveButton("Yes", { _, _ -> logout() })
-                           .setNegativeButton("Cancel", null)
-                           .show()
-            }
-            R.id.all_courses -> {
-
+        val task = @SuppressLint("StaticFieldLeak")
+        object : AsyncTask<Void, Void, List<Announcement>>() {
+            override fun doInBackground(vararg params: Void?): List<Announcement> {
+                return getAnnouncements(groups[item.itemId].id, -1)
             }
 
-            R.id.fakecourse -> {
+            override fun onPostExecute(result: List<Announcement>?) {
+                super.onPostExecute(result)
+                val rv1 = findViewById<View>(R.id.rv1) as RecyclerView
+                rv1.adapter = AnnouncementAdapter(result!!)
 
-
+                (findViewById<TextView>(R.id.toolbar_title) as TextView).text = groups[item.itemId].name
             }
-            R.id.fakecourse1 -> {
-
-            }
-            R.id.fakecourse2 -> {
-
-            }
-
         }
+        task.execute()
 
-        drawer_layout.closeDrawer(GravityCompat.START)
+        drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 }
