@@ -1,14 +1,17 @@
 body {
   overflow: hidden;
 }
+
 .side {
   background-color: #c4c4c4;
+  overflow-y: scroll;
   width: 15%;
   height: 100%;
   float: left;
 }
 .sideright {
   background-color: #c4c4c4;
+  overflow-y: scroll;
   width: 15%;
   height: 100%;
   float: right;
@@ -41,7 +44,8 @@ img {
 }
 
 .settings {
-  float: left;
+  margin-right: 1rem;
+  float: right;
   position: relative;
   background-color: grey;
   height: 5.3rem;
@@ -94,12 +98,13 @@ float: left; overflow: auto;
   border-left: 10px solid red;
 }
 .del {
-  border-right: 30px solid #FF9999;
+  border-right: 30px solid #ee2d24;
 }
 
 .text-container {
   position: relative;
   width: 100%;
+  word-wrap: break-word;
 }
 
 .extra-margin {
@@ -112,7 +117,10 @@ word-wrap:break-word;}
   position: absolute;
   z-index: 1;
   width: 70%;
-  height: 750%;
+  height: 75%;
+  overflow-y: hidden;
+}
+.annoucement-posts:hover{
   overflow-y: scroll;
 }
 .announcementsBoard {
