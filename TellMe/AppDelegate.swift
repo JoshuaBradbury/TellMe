@@ -12,6 +12,7 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+ 
 
     var window: UIWindow?
 
@@ -24,9 +25,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
         print("Received callback!")
-        
         MSALPublicClientApplication.handleMSALResponse(url)
-        
+
+//        do {
+//            
+//            if  try MSALHandler.applicationContext.users().isEmpty {
+//                throw NSError.init(domain: "MSALErrorDomain", code: MSALErrorCode.interactionRequired.rawValue, userInfo: nil)
+//            } else {
+//               
+//                notify()
+//            }
+//        }  catch _ as NSError {
+//            print("ask the user to sign in again")
+//            
+//        }
+
         return true
     }
     

@@ -13,6 +13,9 @@ class AnnouncementController: UIViewController , UITableViewDelegate, UITableVie
 
     @IBOutlet weak var announcementTableView: UITableView!
     
+   
+    
+    
     let messageArray = ["""
                 Week 8 coursework - scaling
                 by Andrew Coles - Friday, 16 March 2018, 8:50 PM
@@ -51,11 +54,9 @@ class AnnouncementController: UIViewController , UITableViewDelegate, UITableVie
                 Maribel
                 """]
     
-    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
+        print("I am in announcementController")
         navigationController?.setNavigationBarHidden(true, animated: true)
         announcementTableView.delegate = self
         announcementTableView.dataSource = self

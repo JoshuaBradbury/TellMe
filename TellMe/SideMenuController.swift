@@ -10,14 +10,13 @@ import UIKit
 import SideMenu
 
 class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
-    
 
     @IBOutlet weak var sideMenuTableView: UITableView!
     let groupNames = ["5CCS2OSC", "5CCS2SEG", "5CCS2PLD"]
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        print("I am in sideMenuController")
         navigationController?.setNavigationBarHidden(true, animated: true)
         
         sideMenuTableView.delegate = self
@@ -53,8 +52,41 @@ class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDat
         print(indexPath.row)
     }
 
-    @IBAction func logOutPressed(_ sender: Any) {
+    @IBAction func logOutPressed(_ sender: UIButton) {
         
-        MSALHandler.logOut()
+        print ("the button was pressed")
+       // MSALHandler.shared.signoutButton(sender)
+        
+        do {
+            
+            // Removes all tokens from the cache for this application for the provided user
+            // first parameter:   The user to remove from the cache
+           // try print (MSALHandler.applicationContext.users())
+            try MSALHandler.applicationContext.remove(MSALHandler.applicationContext.users().first)
+            sender.isEnabled = false;
+            
+            
+           // try print (MSALHandler.applicationContext.users())
+            
+        } catch _ {
+            print("I am getting an error when I log out")
+        }
+        self.performSegue(withIdentifier: "loginV", sender: self)
+        self.dismiss(animated: false, completion: nil)
+        
+        
+//        let storyboard = UIStoryboard(name: "LaunchScreen", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "Launch") as UIViewController
+//        present(vc, animated: true, completion: nil)
+ 
+//        let rootController = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main).instantiateViewController(withIdentifier: "WelcomeNavigation")
+//        self.window?.rootViewController = rootController
+        
     }
+
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let launchVC = segue.destination as? LaunchViewController {
+//            launchVC.msalHandler = self.msalHandler
+//        }
+//    }
 }
