@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14087.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="tC0-q5-6hT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="tC0-q5-6hT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14075.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Launch View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MSALViewController" customModule="TellMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="logIn" id="BYZ-38-t0r" customClass="LaunchViewController" customModule="TellMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -34,15 +34,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bU6-C6-vVm"/>
+                    <connections>
+                        <segue destination="LUi-hO-JiB" kind="push" identifier="login" id="nLo-Hs-rZY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-53" y="-271"/>
+            <point key="canvasLocation" x="326" y="1768"/>
         </scene>
         <!--Announcement Controller-->
         <scene sceneID="bL3-Aj-ekp">
             <objects>
-                <viewController id="LUi-hO-JiB" customClass="AnnouncementController" customModule="TellMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="announce" id="LUi-hO-JiB" customClass="AnnouncementController" customModule="TellMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PiB-08-ZRE"/>
                         <viewControllerLayoutGuide type="bottom" id="mKb-HW-fJp"/>
@@ -52,7 +55,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JQI-N2-sOV" userLabel="top view">
-                                <rect key="frame" x="0.0" y="88" width="375" height="31"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQF-m8-tI1">
                                         <rect key="frame" x="48" y="0.0" width="327" height="31"/>
@@ -86,7 +89,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bho-oT-bDr">
-                                <rect key="frame" x="0.0" y="127" width="375" height="540"/>
+                                <rect key="frame" x="0.0" y="83" width="375" height="584"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MessageCell" id="0U9-yc-Jd1">
@@ -114,11 +117,12 @@
                     <navigationItem key="navigationItem" id="w88-Rs-whg"/>
                     <connections>
                         <outlet property="announcementTableView" destination="Bho-oT-bDr" id="xcV-1s-K6F"/>
+                        <segue destination="BYZ-38-t0r" kind="push" id="Se1-aG-O2f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xtQ-V8-Tu8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="890.5" y="305.5"/>
+            <point key="canvasLocation" x="858" y="457"/>
         </scene>
         <!--Side Menu Controller-->
         <scene sceneID="9iN-Ne-amG">
@@ -175,6 +179,7 @@
                     <navigationItem key="navigationItem" id="hp6-rZ-tgJ"/>
                     <connections>
                         <outlet property="sideMenuTableView" destination="zhO-7p-YRm" id="slJ-0F-41F"/>
+                        <segue destination="BYZ-38-t0r" kind="push" identifier="loginV" id="sgM-pQ-UjY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDb-Zg-5nd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -185,17 +190,18 @@
         <scene sceneID="NFz-lM-fSJ">
             <objects>
                 <navigationController id="tC0-q5-6hT" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="yAl-ce-i4i"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qyx-2o-JJa">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="LUi-hO-JiB" kind="relationship" relationship="rootViewController" id="srH-fD-lsg"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="HCJ-fI-318"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TFt-8H-y9x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="242" y="598"/>
+            <point key="canvasLocation" x="-311" y="457"/>
         </scene>
         <!--Side Menu Navigation Controller-->
         <scene sceneID="1lM-ho-RWe">
@@ -222,4 +228,8 @@
         <image name="KingImage" width="894" height="681"/>
         <image name="hamburger" width="110" height="110"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="nLo-Hs-rZY"/>
+        <segue reference="sgM-pQ-UjY"/>
+    </inferredMetricsTieBreakers>
 </document>

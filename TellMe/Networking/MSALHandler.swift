@@ -9,8 +9,18 @@
 import Foundation
 import MSAL
 
+protocol MSALHandlerDelegate: class {
+    func update()
+}
+
 class MSALHandler {
     
+    weak var delegate: MSALHandlerDelegate?
+    
+    private func notify(){
+        
+        delegate?.update()
+    }
 
     let kClientID = "e1d4c8a0-0063-44ea-baaf-496d6843fed2"
     let kAuthority = "https://login.microsoftonline.com/organizations/v2.0"
@@ -19,10 +29,13 @@ class MSALHandler {
     let kScopes: [String] = ["https://graph.microsoft.com/user.read"]
     
     var accessToken = String()
+    
+    static var shared = MSALHandler()
+    
     static var applicationContext = MSALPublicClientApplication.init()
     
     
-    init() {
+    private init() {
         
         do {
             // Initialize a MSALPublicClientApplication with a given clientID and authority
@@ -35,7 +48,7 @@ class MSALHandler {
     
     
     func login() {
-        
+        print("I am in login ")
         do {
             
             if  try MSALHandler.applicationContext.users().isEmpty {
@@ -47,6 +60,7 @@ class MSALHandler {
             }
         }  catch let error as NSError {
             // interactionRequired means we need to ask the user to sign-in.
+            print("asktheusertosign")
             askUserToSignIn(errorCode: error.code)
             
         }
@@ -60,6 +74,7 @@ class MSALHandler {
             if error == nil {
                 self.accessToken = (result?.accessToken)!
                 self.getContentWithToken()
+                self.notify()
             }
         }
         }catch{
@@ -78,7 +93,7 @@ class MSALHandler {
                     if let result = result {
                         self.accessToken = (result.accessToken)!
                         self.getContentWithToken()
-                        
+                        self.notify()
                     }
                 })
             } catch _ {
@@ -91,7 +106,7 @@ class MSALHandler {
     private func getContentWithToken() {
         
         let sessionConfig = URLSessionConfiguration.default
-        
+        print("get the content with token")
         // Specify the Graph API endpoint
         let url = URL(string: kGraphURI)
         var request = URLRequest(url: url!)
@@ -106,20 +121,40 @@ class MSALHandler {
                 
             }
             }.resume()
+        
+        
     }
     
-    static func logOut() {
+//    static func logOut() {
+//
+//        // Still Crashes the program with error: Foundation._GenericObjCError.nilError
+//        do {
+//            let users = try! applicationContext.users()
+//
+//            if !users.isEmpty {
+//
+//                for user in users {
+//                    try! applicationContext.remove(user)
+//                }
+//            }
+//        }
+//    }
+    
+    func signoutButton(_ sender: UIButton) {
         
-        // Still Crashes the program with error: Foundation._GenericObjCError.nilError
         do {
-            let users = try! applicationContext.users()
             
-            if !users.isEmpty {
-                
-                for user in users {
-                    try! applicationContext.remove(user)
-                }
-            }
+            // Removes all tokens from the cache for this application for the provided user
+            // first parameter:   The user to remove from the cache
+            try print (MSALHandler.applicationContext.users())
+            try MSALHandler.applicationContext.remove(MSALHandler.applicationContext.users().first)
+            sender.isEnabled = false;
+            
+        
+            try print (MSALHandler.applicationContext.users())
+            
+        } catch _ {
+            print("I am getting an error when I log out")
         }
     }
     
