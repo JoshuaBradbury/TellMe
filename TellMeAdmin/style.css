@@ -117,14 +117,15 @@ word-wrap:break-word;}
 .annoucement-posts {
   position: absolute;
   z-index: 1;
+  margin-top: 1%;
   width: 70%;
-  height: 84%;
+  height: 84.3%;
   overflow-y: hidden;
   padding-right: 10px;
 }
 .annoucement-posts:hover{
   padding-right: 0px;
-  overflow: visible;
+  overflow: scroll;
 }
 .announcementsBoard {
   -webkit-box-sizing: content-box;

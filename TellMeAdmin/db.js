@@ -11,7 +11,7 @@ var json = [{
 {
     "ModuleName" : "5AAdH2003",
     "Announcements"   : ["Nunc vestibulum placerat lectus in vulputate. Duis sagittis orci sit amet neque tincidunt feugiat. Maecenas iaculis sit amet libero ut tempor. Aenean dolor metus, facilisis eu eleifend in, ultricies et mi."]
-    ,"students"  : ["Chazzri", "Tam", "Aleksander", "anihortes", "asdfgh", "daf-kun"]
+    ,"students"  : ["Chazzri", "Tam", "Aleksander", "anihortes", "asdfgh", "daf-kun","Chazzri", "Tam", "Aleksander", "anihortes", "asdfgh", "daf-kun","Chazzri", "Tam", "Aleksander", "anihortes", "asdfgh", "daf-kun","Chazzri", "Tam", "Aleksander", "anihortes", "asdfgh", "daf-kun","Chazzri", "Tam", "Aleksander", "anihortes", "asdfgh", "daf-kun","Chazzri", "Tam", "Aleksander", "anihortes", "asdfgh", "daf-kun","Chazzri", "Tam", "Aleksander", "anihortes", "asdfgh", "daf-kun"]
 },
 {
     "ModuleName" : "5AAH2f005",
