@@ -22,8 +22,15 @@ body {
   padding:1em 1em 1em 1em;
 }
 
-.logout {
+#login {
   background-color: red;
+  float: right;
+  height: 5.3rem;
+  width: 5.3rem;
+}
+
+#login .loggedin {
+  background-color: blue;
   float: right;
   height: 5.3rem;
   width: 5.3rem;
