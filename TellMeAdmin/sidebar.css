@@ -19,6 +19,8 @@
 
 .students {
     line-height: 60px;
+    padding:.5rem 0rem;
+
     display: block;
     border-bottom: 1px solid white;
     -webkit-transition: background .2s;

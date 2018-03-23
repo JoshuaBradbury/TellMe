@@ -18,7 +18,7 @@ body {
 }
 .top {
   background-color: #ee2d24;
-  height: 8rem;
+  height: 8.5%;
   border-style: solid;
   border-width: 0px 0px 7px 0px;
   border-color: #343c3e;
@@ -78,7 +78,8 @@ img {
 
 #annoucements {
   width: 70%;
-float: left; overflow: auto;
+float: left;
+overflow: auto;
 }
 
 .post {
@@ -117,11 +118,13 @@ word-wrap:break-word;}
   position: absolute;
   z-index: 1;
   width: 70%;
-  height: 75%;
+  height: 84%;
   overflow-y: hidden;
+  padding-right: 10px;
 }
 .annoucement-posts:hover{
-  overflow-y: scroll;
+  padding-right: 0px;
+  overflow: visible;
 }
 .announcementsBoard {
   -webkit-box-sizing: content-box;
@@ -156,7 +159,7 @@ word-wrap:break-word;}
   margin-top: 2em;
   background-color: #8a8a8a;
   border-radius: 10px;
-  height: 3.15em;
+  height: 4.5%;
   width: 34em;
   z-index: 102;
 }
