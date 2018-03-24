@@ -27,7 +27,7 @@ class NetworkRequestExecutor: NSObject {
         guard let url = URL(string: networkRequest.buildEndpoint()) else { return }
         
         let urlSession = URLSession(configuration: .default, delegate: nil, delegateQueue: operationQueue)
-        var urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad , timeoutInterval: 60.0)
+        var urlRequest = URLRequest(url: url, cachePolicy: .reloadRevalidatingCacheData , timeoutInterval: 60.0)
         
         urlRequest.httpMethod = networkRequest.typeBuilder().rawValue
         
@@ -37,7 +37,6 @@ class NetworkRequestExecutor: NSObject {
         
         let task = urlSession.dataTask(with: urlRequest) { (data, response, error) in
             guard let responseData = data else { return }
-            
             if let json = try? JSONSerialization.jsonObject(with: responseData, options: []) {
                 
                 handler(json)

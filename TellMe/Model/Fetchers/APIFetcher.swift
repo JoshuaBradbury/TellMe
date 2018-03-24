@@ -37,7 +37,7 @@ class APIFetcher: NSObject {
                     parsedGroups.append(groupObj)
                 }
             }
-            
+            print(parsedGroups)
             DispatchQueue.main.async {
                 handler?(parsedGroups)
             }

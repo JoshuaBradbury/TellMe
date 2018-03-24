@@ -51,7 +51,9 @@ class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDat
         tableView.deselectRow(at: indexPath, animated: false)
         APIFetcher.fetchGroups { [weak self] (groups) in
             
-            print(groups)
+            for group in groups {
+                print(group)
+            }
         }
     }
 
