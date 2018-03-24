@@ -13,8 +13,11 @@ import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
 
-    val TAG = MainActivity::class.simpleName
-    private var handler: MSALHandler? = null
+    companion object {
+        val TAG = MainActivity::class.simpleName
+        var handler: MSALHandler? = null
+            private set
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

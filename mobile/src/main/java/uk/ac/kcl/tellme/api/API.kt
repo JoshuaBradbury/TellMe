@@ -1,6 +1,7 @@
 package uk.ac.kcl.tellme.api
 
 import android.annotation.SuppressLint
+import android.util.Base64
 import android.util.Log
 import org.json.JSONObject
 import uk.ac.kcl.tellme.MainActivity
@@ -16,9 +17,9 @@ data class Announcement(val id: Int, val subject: String, val time: String, val 
 data class Group(val id: Int, val name: String)
 
 @SuppressLint("SimpleDateFormat")
-fun getAnnouncements(groupId: Int, n: Int): List<Announcement> {
+fun getAnnouncements(groupId: Int, n: Int, userName: String): List<Announcement> {
     val nParam = if (n < 0) "all" else n.toString()
-    val response = JSONObject(get("https://tellme.newagedev.co.uk/api/v1.0/announcement/$groupId?n=$nParam"))
+    val response = JSONObject(get("https://tellme.newagedev.co.uk/api/v1.0/announcement/$groupId?n=$nParam", mapOf("Authorization" to "Basic ${Base64.encodeToString(("$userName:").toByteArray(), Base64.NO_WRAP)}")))
     if (response.getInt("status") == 200) {
         val announcements = mutableListOf<Announcement>()
         val jsonAnnouncements = response.getJSONArray("announcements")
@@ -39,15 +40,17 @@ fun getAnnouncements(groupId: Int, n: Int): List<Announcement> {
     return listOf()
 }
 
-fun getAllGroups() {
+fun getAllGroups(userName: String) {
     groups = mutableListOf()
-    val response = JSONObject(get("https://tellme.newagedev.co.uk/api/v1.0/group"))
-    Log.d(MainActivity::class.simpleName, response.toString())
-    if (response.getInt("status") == 200) {
-        val jsonGroups = response.getJSONArray("groups")
-        for (i in 0 until jsonGroups.length()) {
-            val obj = jsonGroups.getJSONObject(i)
-            groups.add(Group(obj.getInt("groupId"), obj.getString("groupName")))
+    if (userName.isNotEmpty()) {
+        val response = JSONObject(get("https://tellme.newagedev.co.uk/api/v1.0/group", mapOf("Authorization" to "Basic ${Base64.encodeToString(userName.toByteArray(), Base64.DEFAULT).trim()}")))
+        Log.d(MainActivity::class.simpleName, response.toString())
+        if (response.getInt("status") == 200) {
+            val jsonGroups = response.getJSONArray("groups")
+            for (i in 0 until jsonGroups.length()) {
+                val obj = jsonGroups.getJSONObject(i)
+                groups.add(Group(obj.getInt("groupId"), obj.getString("groupName")))
+            }
         }
     }
 }
