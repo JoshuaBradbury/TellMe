@@ -16,8 +16,6 @@ class LaunchViewController: UIViewController, MSALHandlerDelegate {
         print("I am in myLaunch")
         MSALHandler.shared.delegate = self
         MSALHandler.shared.login()
-//        
-//
 
     }
 

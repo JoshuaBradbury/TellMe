@@ -16,6 +16,16 @@ protocol MSALHandlerDelegate: class {
 class MSALHandler {
     
     weak var delegate: MSALHandlerDelegate?
+    static var userName:String?
+    
+    static func getUsername() -> String {
+        
+        if let username = userName {
+            return username
+        }
+        
+        return " "
+    }
     
     private func notify(){
         
@@ -118,7 +128,11 @@ class MSALHandler {
         urlSession.dataTask(with: request) { data, response, error in
             let result = try? JSONSerialization.jsonObject(with: data!, options: [])
             if result != nil {
-                
+                if let response = result as? Dictionary<String,Any> {
+                    MSALHandler.userName = response["userPrincipalName"] as? String
+                    print(MSALHandler.userName!)
+                    
+                }
             }
             }.resume()
         

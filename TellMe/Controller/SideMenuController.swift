@@ -31,7 +31,7 @@ class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDat
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return groupNames.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,7 +49,10 @@ class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDat
         //TODO: finish the contents of the announcementTableView
         
         tableView.deselectRow(at: indexPath, animated: false)
-        print(indexPath.row)
+        APIFetcher.fetchGroups { [weak self] (groups) in
+            
+            print(groups)
+        }
     }
 
     @IBAction func logOutPressed(_ sender: UIButton) {

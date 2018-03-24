@@ -20,10 +20,16 @@
 		F40D7122205EF6170043FE10 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40D7120205EF6170043FE10 /* SideMenuCell.swift */; };
 		F40D7123205EF6170043FE10 /* SideMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F40D7121205EF6170043FE10 /* SideMenuCell.xib */; };
 		F43A272C2050427E00C077FB /* MSALHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43A272B2050427E00C077FB /* MSALHandler.swift */; };
+		F4976F4420653B0B00397EE4 /* APIFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4976F4320653B0B00397EE4 /* APIFetcher.swift */; };
+		F4976F4620653BE300397EE4 /* Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4976F4520653BE300397EE4 /* Groups.swift */; };
+		F4976F4820653C0300397EE4 /* Announcements.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4976F4720653C0300397EE4 /* Announcements.swift */; };
 		F4A323D62044B6D300362926 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D4203B994F00428779 /* Assets.xcassets */; };
 		F4A323D72044B72800362926 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D6203B994F00428779 /* LaunchScreen.storyboard */; };
-		F4A82C4E205D7AD800FE0C9F /* CustomMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A82C4C205D7AD800FE0C9F /* CustomMessageCell.swift */; };
-		F4A82C4F205D7AD800FE0C9F /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A82C4D205D7AD800FE0C9F /* MessageCell.xib */; };
+		F4A619CC206534C900EAA347 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A619CA206534C900EAA347 /* MessageCell.xib */; };
+		F4A619CD206534C900EAA347 /* CustomMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A619CB206534C900EAA347 /* CustomMessageCell.swift */; };
+		F4A619CF2065384700EAA347 /* NetworkRequestKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A619CE2065384700EAA347 /* NetworkRequestKeys.swift */; };
+		F4A619D12065387F00EAA347 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A619D02065387F00EAA347 /* NetworkRequest.swift */; };
+		F4A619D3206538AF00EAA347 /* NetworkRequestExecuter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A619D2206538AF00EAA347 /* NetworkRequestExecuter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,8 +66,14 @@
 		F40D7120205EF6170043FE10 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		F40D7121205EF6170043FE10 /* SideMenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuCell.xib; sourceTree = "<group>"; };
 		F43A272B2050427E00C077FB /* MSALHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALHandler.swift; sourceTree = "<group>"; };
-		F4A82C4C205D7AD800FE0C9F /* CustomMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomMessageCell.swift; path = "TellMe/Custom Cell/CustomMessageCell.swift"; sourceTree = SOURCE_ROOT; };
-		F4A82C4D205D7AD800FE0C9F /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MessageCell.xib; path = "TellMe/Custom Cell/MessageCell.xib"; sourceTree = SOURCE_ROOT; };
+		F4976F4320653B0B00397EE4 /* APIFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetcher.swift; sourceTree = "<group>"; };
+		F4976F4520653BE300397EE4 /* Groups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Groups.swift; sourceTree = "<group>"; };
+		F4976F4720653C0300397EE4 /* Announcements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcements.swift; sourceTree = "<group>"; };
+		F4A619CA206534C900EAA347 /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
+		F4A619CB206534C900EAA347 /* CustomMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMessageCell.swift; sourceTree = "<group>"; };
+		F4A619CE2065384700EAA347 /* NetworkRequestKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestKeys.swift; sourceTree = "<group>"; };
+		F4A619D02065387F00EAA347 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		F4A619D2206538AF00EAA347 /* NetworkRequestExecuter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestExecuter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,15 +131,10 @@
 		EC49B8CC203B994F00428779 /* TellMe */ = {
 			isa = PBXGroup;
 			children = (
-				F4A6FB752055EF140033F2E8 /* Networking */,
-				F4C9672A205D8DF000BF9921 /* Custom Cell */,
-				EC49B8CD203B994F00428779 /* AppDelegate.swift */,
-				EC49B8CF203B994F00428779 /* AnnouncementController.swift */,
-				F40D711C205EED1B0043FE10 /* SideMenuController.swift */,
-				A172C1B6206184E800E35BE1 /* LaunchViewController.swift */,
-				EC49B8D1203B994F00428779 /* Main.storyboard */,
+				F4B494262065309F00946737 /* Controller */,
+				F4B494252065308600946737 /* View */,
+				F4B494232065304900946737 /* Model */,
 				EC49B8D4203B994F00428779 /* Assets.xcassets */,
-				EC49B8D6203B994F00428779 /* LaunchScreen.storyboard */,
 				EC49B8D9203B994F00428779 /* Info.plist */,
 			);
 			path = TellMe;
@@ -152,20 +159,79 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F4A6FB752055EF140033F2E8 /* Networking */ = {
+		F4976F4120653A0C00397EE4 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				F4976F4520653BE300397EE4 /* Groups.swift */,
+				F4976F4720653C0300397EE4 /* Announcements.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		F4976F4220653A1C00397EE4 /* Fetchers */ = {
+			isa = PBXGroup;
+			children = (
+				F4976F4320653B0B00397EE4 /* APIFetcher.swift */,
+			);
+			path = Fetchers;
+			sourceTree = "<group>";
+		};
+		F4A6FB752055EF140033F2E8 /* MSAL Request */ = {
 			isa = PBXGroup;
 			children = (
 				F43A272B2050427E00C077FB /* MSALHandler.swift */,
 				A1988B05205846A400099A23 /* NetworkingErrors.swift */,
 			);
-			path = Networking;
+			path = "MSAL Request";
+			sourceTree = "<group>";
+		};
+		F4B494232065304900946737 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F4976F4220653A1C00397EE4 /* Fetchers */,
+				F4976F4120653A0C00397EE4 /* Objects */,
+				F4B494242065306A00946737 /* API Request */,
+				F4A6FB752055EF140033F2E8 /* MSAL Request */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F4B494242065306A00946737 /* API Request */ = {
+			isa = PBXGroup;
+			children = (
+				F4A619CE2065384700EAA347 /* NetworkRequestKeys.swift */,
+				F4A619D02065387F00EAA347 /* NetworkRequest.swift */,
+				F4A619D2206538AF00EAA347 /* NetworkRequestExecuter.swift */,
+			);
+			path = "API Request";
+			sourceTree = "<group>";
+		};
+		F4B494252065308600946737 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EC49B8D1203B994F00428779 /* Main.storyboard */,
+				EC49B8D6203B994F00428779 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F4B494262065309F00946737 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F4C9672A205D8DF000BF9921 /* Custom Cell */,
+				EC49B8CD203B994F00428779 /* AppDelegate.swift */,
+				EC49B8CF203B994F00428779 /* AnnouncementController.swift */,
+				F40D711C205EED1B0043FE10 /* SideMenuController.swift */,
+				A172C1B6206184E800E35BE1 /* LaunchViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		F4C9672A205D8DF000BF9921 /* Custom Cell */ = {
 			isa = PBXGroup;
 			children = (
-				F4A82C4C205D7AD800FE0C9F /* CustomMessageCell.swift */,
-				F4A82C4D205D7AD800FE0C9F /* MessageCell.xib */,
+				F4A619CB206534C900EAA347 /* CustomMessageCell.swift */,
+				F4A619CA206534C900EAA347 /* MessageCell.xib */,
 				F40D7120205EF6170043FE10 /* SideMenuCell.swift */,
 				F40D7121205EF6170043FE10 /* SideMenuCell.xib */,
 			);
@@ -262,9 +328,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4A619CC206534C900EAA347 /* MessageCell.xib in Resources */,
 				F4A323D72044B72800362926 /* LaunchScreen.storyboard in Resources */,
 				F4A323D62044B6D300362926 /* Assets.xcassets in Resources */,
-				F4A82C4F205D7AD800FE0C9F /* MessageCell.xib in Resources */,
 				F40D7123205EF6170043FE10 /* SideMenuCell.xib in Resources */,
 				EC49B8D3203B994F00428779 /* Main.storyboard in Resources */,
 			);
@@ -402,11 +468,17 @@
 			files = (
 				F43A272C2050427E00C077FB /* MSALHandler.swift in Sources */,
 				F40D711D205EED1B0043FE10 /* SideMenuController.swift in Sources */,
+				F4976F4420653B0B00397EE4 /* APIFetcher.swift in Sources */,
+				F4A619CD206534C900EAA347 /* CustomMessageCell.swift in Sources */,
+				F4976F4620653BE300397EE4 /* Groups.swift in Sources */,
 				EC49B8D0203B994F00428779 /* AnnouncementController.swift in Sources */,
-				F4A82C4E205D7AD800FE0C9F /* CustomMessageCell.swift in Sources */,
+				F4976F4820653C0300397EE4 /* Announcements.swift in Sources */,
+				F4A619D3206538AF00EAA347 /* NetworkRequestExecuter.swift in Sources */,
 				A1988B06205846A400099A23 /* NetworkingErrors.swift in Sources */,
+				F4A619CF2065384700EAA347 /* NetworkRequestKeys.swift in Sources */,
 				EC49B8CE203B994F00428779 /* AppDelegate.swift in Sources */,
 				F40D7122205EF6170043FE10 /* SideMenuCell.swift in Sources */,
+				F4A619D12065387F00EAA347 /* NetworkRequest.swift in Sources */,
 				A172C1B7206184E800E35BE1 /* LaunchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -562,7 +634,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 65UDWSH428;
+				DEVELOPMENT_TEAM = PRG23MVE5M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -583,7 +655,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 65UDWSH428;
+				DEVELOPMENT_TEAM = PRG23MVE5M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

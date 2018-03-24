@@ -138,7 +138,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zhO-7p-YRm">
                                 <rect key="frame" x="0.0" y="20" width="375" height="594"/>
-                                <color key="backgroundColor" red="0.86033195259999995" green="0.25659212469999998" blue="0.1960326731" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.54117647058823526" green="0.54117647058823526" blue="0.54117647058823526" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SideMenuCell" id="d1E-fC-EGl">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -147,7 +147,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.86033195259999995" green="0.25659212469999998" blue="0.1960326731" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -165,7 +164,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.86033195259999995" green="0.25659212469999998" blue="0.1960326731" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.54117647058823526" green="0.54117647058823526" blue="0.54117647058823526" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="y6x-wg-Ns7" firstAttribute="bottom" secondItem="z10-3F-Zbn" secondAttribute="top" id="IiH-EW-e9N"/>
                             <constraint firstItem="y6x-wg-Ns7" firstAttribute="top" secondItem="zhO-7p-YRm" secondAttribute="bottom" constant="3" id="K4p-45-SWw"/>
@@ -230,6 +229,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="nLo-Hs-rZY"/>
-        <segue reference="sgM-pQ-UjY"/>
+        <segue reference="Se1-aG-O2f"/>
     </inferredMetricsTieBreakers>
 </document>
