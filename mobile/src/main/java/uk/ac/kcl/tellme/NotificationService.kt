@@ -6,6 +6,7 @@ import android.app.job.JobParameters
 import android.app.job.JobService
 import android.content.Intent
 import android.os.AsyncTask
+import android.preference.PreferenceManager
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
 import android.support.v4.app.TaskStackBuilder
@@ -21,10 +22,11 @@ class NotificationService : JobService() {
     }
 
     override fun onStartJob(params: JobParameters?): Boolean {
+        Log.d(MainActivity::class.simpleName, "SENDING NOTIFICATION")
         val task = @SuppressLint("StaticFieldLeak")
         object : AsyncTask<Void, Void, Unit>() {
             override fun doInBackground(vararg params: Void?) {
-                getAllGroups()
+                getAllGroups(PreferenceManager.getDefaultSharedPreferences(applicationContext).getString("user", ""))
             }
 
             override fun onPostExecute(result: Unit?) {

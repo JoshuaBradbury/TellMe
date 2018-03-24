@@ -24,6 +24,10 @@ import uk.ac.kcl.tellme.api.Announcement
 import uk.ac.kcl.tellme.api.getAllGroups
 import uk.ac.kcl.tellme.api.getAnnouncements
 import uk.ac.kcl.tellme.api.groups
+import android.preference.PreferenceManager
+import android.content.SharedPreferences
+import android.R.id.edit
+import android.util.Log
 
 
 class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -35,8 +39,6 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val toolbar = findViewById<Toolbar>(R.id.toolbar) as Toolbar
         toolbar.hideOverflowMenu()
         setSupportActionBar(toolbar)
-
-        val userName = intent.getStringExtra("user")
 
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
@@ -83,7 +85,7 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val task = @SuppressLint("StaticFieldLeak")
         object : AsyncTask<Void, Void, Unit>() {
             override fun doInBackground(vararg params: Void?) {
-                getAllGroups()
+                getAllGroups(PreferenceManager.getDefaultSharedPreferences(applicationContext).getString("user", ""))
             }
 
             override fun onPostExecute(result: Unit?) {
@@ -138,7 +140,7 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val task = @SuppressLint("StaticFieldLeak")
         object : AsyncTask<Void, Void, List<Announcement>>() {
             override fun doInBackground(vararg params: Void?): List<Announcement> {
-                return getAnnouncements(groups[item.itemId].id, -1)
+                return getAnnouncements(groups[item.itemId].id, -1, PreferenceManager.getDefaultSharedPreferences(applicationContext).getString("user", ""))
             }
 
             override fun onPostExecute(result: List<Announcement>?) {

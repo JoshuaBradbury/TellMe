@@ -4,10 +4,16 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
+import android.preference.PreferenceManager
 import android.util.Log
 import com.microsoft.identity.client.*
 import org.json.JSONObject
 import uk.ac.kcl.tellme.api.getAllGroups
+
+enum class MSALAction {
+    LOGOUT,
+    EXIT
+}
 
 class MSALHandler(context: Context, val activity: MainActivity) {
     private val SCOPES = arrayOf("https://graph.microsoft.com/User.Read")
@@ -26,20 +32,20 @@ class MSALHandler(context: Context, val activity: MainActivity) {
         val users = app.users
 
         if (users.isNotEmpty())
-            app.acquireTokenSilentAsync(SCOPES, users[0], getAuthSilentCallback())
+            app.acquireTokenSilentAsync(SCOPES, users[0], getAuthCallback())
         else
             onCallGraphClicked()
     }
 
     fun logout() {
-        Log.d(activity.TAG,"LOGGING OUT")
+        Log.d(MainActivity.TAG,"LOGGING OUT")
         val app = sampleApp!!
         if (app.users.isNotEmpty())
             for (user in app.users)
                 app.remove(user)
     }
 
-    private fun callGraphAPI(): String {
+    fun callGraphAPI(): String {
         if (authResult?.accessToken == null)
             return ""
 
@@ -62,67 +68,34 @@ class MSALHandler(context: Context, val activity: MainActivity) {
     }
 
     private fun onCallGraphClicked() {
-        sampleApp?.acquireToken(activity, SCOPES, "", UiBehavior.FORCE_LOGIN, "domain_hint=kcl.ac.uk", getAuthInteractiveCallback())
+        sampleApp?.acquireToken(activity, SCOPES, "", UiBehavior.FORCE_LOGIN, "domain_hint=kcl.ac.uk", getAuthCallback())
     }
 
-    private fun getAuthSilentCallback(): AuthenticationCallback {
+    private fun getAuthCallback(): AuthenticationCallback {
         return object : AuthenticationCallback {
             override fun onSuccess(authenticationResult: AuthenticationResult) {
                 authResult = authenticationResult
 
                 val userName = callGraphAPI()
 
-                val intent = Intent(activity, CategoryActivity::class.java).apply {
-                    putExtra("user", userName)
-                }
+                val preferences = PreferenceManager.getDefaultSharedPreferences(activity.applicationContext)
+
+                val editor = preferences.edit()
+                editor.putString("user", userName)
+                editor.apply()
+
+                val intent = Intent(activity, CategoryActivity::class.java)
 
                 activity.startActivity(intent)
             }
 
             override fun onError(exception: MsalException) {
-                Log.d(activity.TAG, "Authentication failed: " + exception.toString())
+                Log.e(MainActivity.TAG, "Authentication failed: " + exception.toString())
                 activity.finish()
             }
 
             override fun onCancel() {
-                Log.d(activity.TAG, "User cancelled login.")
-                activity.finish()
-            }
-        }
-    }
-
-    private fun getAuthInteractiveCallback(): AuthenticationCallback {
-        return object : AuthenticationCallback {
-            override fun onSuccess(authenticationResult: AuthenticationResult) {
-                Log.d(activity.TAG, "Successfully authenticated")
-                Log.d(activity.TAG, "ID Token: " + authenticationResult.idToken)
-
-                authResult = authenticationResult
-
-                val userName = callGraphAPI()
-
-                val task = @SuppressLint("StaticFieldLeak")
-                object : AsyncTask<Void, Void, Unit>() {
-                    override fun doInBackground(vararg params: Void?) {
-                        getAllGroups()
-
-                        val intent = Intent(activity, CategoryActivity::class.java).apply {
-                            putExtra("user", userName)
-                        }
-
-                        activity.startActivity(intent)
-                    }
-                }
-                task.execute()
-            }
-
-            override fun onError(exception: MsalException) {
-                Log.e(activity.TAG, "Authentication failed: " + exception.toString())
-                activity.finish()
-            }
-
-            override fun onCancel() {
-                Log.d(activity.TAG, "User cancelled login.")
+                Log.d(MainActivity.TAG, "User cancelled login.")
                 activity.finish()
             }
         }
