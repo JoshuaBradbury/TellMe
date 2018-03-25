@@ -33,17 +33,22 @@
 
 
 .bottom {
-  width: 15%;
-  height: 3em;
   bottom: 0em;
-  float: left;
+  margin: 1em 1em;
   position: absolute;
-  background: #B2B2B2;
+  right: 16%;
+  z-index: 100;
 }
-
-h1 {
-  margin: 0em;
-  color: white;
-  font-size: 1.4em;
-  text-align: center;
+.circle {
+  width: 90px;
+  height:90px;
+ border-radius: 50%;
+ border: 7px solid white;
+ transition: all 1s;
+-moz-transition: all .5s; /* Firefox 4 */
+-webkit-transition: all .5s; /* Safari and Chrome */
+-o-transition: all .5s; /* Opera */
+}
+.circle:hover{
+   border-color: #8a8a8a;
 }

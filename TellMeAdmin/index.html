@@ -2,14 +2,14 @@
 
 <head>
   <title>Tell Me</title>
+  <link rel="icon" type="image/png" href="assets/logo16x16.png" sizes="32x32" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css" type="text/css">
-    <link rel="stylesheet" href="popup.css" type="text/css">
-    <link rel="stylesheet" href="scroll.css" type="text/css">
-    <link rel="stylesheet" href="ecs.css" type="text/css">
-    <link rel="stylesheet" href="sidebar.css" type="text/css">
-    <link rel="stylesheet" href="btn.css" type="text/css">
-    <link rel="stylesheet" href="tooltip.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/popup.css" type="text/css">
+    <link rel="stylesheet" href="css/scroll.css" type="text/css">
+    <link rel="stylesheet" href="css/ecs.css" type="text/css">
+    <link rel="stylesheet" href="css/sidebar.css" type="text/css">
+    <link rel="stylesheet" href="css/btn.css" type="text/css">
 
 </head>
 
@@ -21,6 +21,7 @@
     <div class="settings"></div>
     <button id="login" onclick="loginOrOut()"></button>
   </div>
+<<<<<<< fa2529b6dc428805fe53f773ea3e7920e5c4f94f
   <div class="l"> <!--for responsive window>-->
     <div class="icon" onclick="respModules()"></div>
     <div class="icon" onclick="respStudents()"></div>
@@ -59,6 +60,18 @@
   </label>
         <input type="button" class="submitBtn" id="submitBtn" onclick="submit()" value="Submit announcement" />
       </div>
+=======
+    <div class="top">
+        <div class="logo-container"><img id="KCL logo" src="assets/kcl-logo.jpg"></div>
+        <div class="title" id="title-text"></div>
+        <a href="login.html" class="logout"><img src="assets/logout.png"></a>
+        <div class="settings" id="settings"><a href="#"><img id="KCL logo" src="assets/settings.png"></div></a>
+    </div>
+    <div class="l">
+        <!--for responsive window>-->
+        <div class="icon" onclick="respModules()"></div>
+        <div class="icon" onclick="respStudents()"></div>
+>>>>>>> refactored, changed minor bugs, reformatted
     </div>
 
     <div class="side" id="left">
@@ -70,8 +83,8 @@
             <!--assign function to add icon when implemented-->
             <div class="form-group">
                 <label for="usr"></label>
-                <input type="text" class="form-control input-mysize" id="titleBtn">
-                <div class="placeholder" id="postBtn" onclick="show()"></div>
+                <input type="text" placeholder="Title" class="form-control input-mysize" id="titleBtn">
+                <div class="placeholder" id="postBtn" onclick="show()"><img id="plusBtn" src="assets/plus.png"></div>
             </div>
         </div>
 
@@ -82,11 +95,11 @@
         <div class="pop-container bubble2" id="popcontainer" style="display:none;">
             <div class="form-group bubble">
                 <label for="usr"></label>
-                <div class="text" id="text" contenteditable="true"></div>
+                <div class="text" placeholder='&nbsp;&nbsp;Body' id="text" contenteditable="true"></div>
                 <input type="button" class="textBtn" id="boldBtn" onclick="document.execCommand('bold');" value="Bold" />
                 <input type="button" class="textBtn" id="italicBtn" onclick="document.execCommand('italic');" value="Italic" />
                 <input type="button" class="textBtn" id="ulineBtn" onclick="document.execCommand('underline');" value="Underline" />
-                <br><input type="button" class="submitBtn" id="submitBtn" onclick="submit()" value="Submit announcement" />
+                <br><input type="button" class="submitBtn btn" id="submitBtn" onclick="submit()" value="Submit announcement" />
             </div>
 
         </div>
@@ -96,9 +109,11 @@
             <div class="form-group">
               <h2>Add Module</h2>
                 <label for="usr"></label>
+                <h3>Module Name</h3>
                 <input type="text" class="form-control csv-input-mysize" id="usr">
                 <br>
-                <input type="file" class="submitBtn" id="txtFileUpload" accept=".csv" value="Submit csv" />
+                <h3>Upload Students</h3>
+                <input type="file" class="form-control csv-input-mysize" id="txtFileUpload" accept=".csv" value="Submit csv" />
                 <br><center>
                 <input type="button" class="btn" onclick="save()" value="Create Module" />
               </center>
@@ -109,9 +124,11 @@
         <div class="csv-container" id="settingscontainer" style="display:none;">
             <div class="form-group">
               <h2>Settings</h2>
+              <h3>Module Name</h3>
                 <input type="text" class="form-control csv-input-mysize" id="groupname">
                 <br>
-                <input type="file" class="submitBtn" id="txtFileUpload" accept=".csv" value="Submit csv" />
+                <h3>Add Students</h3>
+                <input type="file" class="form-control csv-input-mysize" id="txtFileUpload" accept=".csv" value="Submit csv" />
                 <br>
                 <center>
                 <input type="button" class="btn" onclick="save()" value="Save settings" />
@@ -129,13 +146,14 @@
         <div class="modulemodule"><h1 id="module-name" onclick="update(this); return false;">Module5</h1></div>
 -->
         <a href="#">
-            <div class="bottom" id="csvBtn">ADD</div>
+            <div class="bottom"id="csvBtn"><img class="circle" id="plusBtn" src="assets/plus.png"></div>
         </a>
     </div>
 
     </div>
     </div>
 
+<<<<<<< fa2529b6dc428805fe53f773ea3e7920e5c4f94f
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
   <script type="text/javascript" src="db.js"></script>
@@ -143,6 +161,12 @@
   <script type="text/javascript" src="msal.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
+=======
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/db.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+>>>>>>> refactored, changed minor bugs, reformatted
 
 </body>
 
