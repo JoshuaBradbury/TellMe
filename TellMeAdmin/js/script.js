@@ -229,11 +229,12 @@ function deleteannouncement(e) {
 function create() { //create group
   //document.getElementById("groupname")
   //TODO backend
-  if(saved != "" && document.getElementById("usr").value != ""){
+  if(saved == "" && document.getElementById("usr").value == ""){
     console.log(saved); //backend var for csv
     console.log(document.getElementById("usr").value); //backend var for name
   } else {
     alert("Missing field");
+    break;
   }
   document.getElementById('filename').value= null;
   document.getElementById('usr').value= null;
