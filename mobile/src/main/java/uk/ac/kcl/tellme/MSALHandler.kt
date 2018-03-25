@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.preference.PreferenceManager
+import android.support.v7.app.AlertDialog
 import android.util.Log
 import com.microsoft.identity.client.*
 import org.json.JSONObject
-import uk.ac.kcl.tellme.api.getAllGroups
 
 enum class MSALAction {
     LOGOUT,
@@ -38,7 +38,6 @@ class MSALHandler(context: Context, val activity: MainActivity) {
     }
 
     fun logout() {
-        Log.d(MainActivity.TAG,"LOGGING OUT")
         val app = sampleApp!!
         if (app.users.isNotEmpty())
             for (user in app.users)
@@ -52,9 +51,19 @@ class MSALHandler(context: Context, val activity: MainActivity) {
         val task = @SuppressLint("StaticFieldLeak")
         object : AsyncTask<Void, Void, String>() {
             override fun doInBackground(vararg params: Void?): String {
-                val res = get(MSGRAPH_URL, mapOf("Authorization" to "Bearer " + authResult!!.accessToken))
-                Log.d(MainActivity::class.simpleName, res)
-                return res
+                return get(MSGRAPH_URL, mapOf("Authorization" to "Bearer " + authResult!!.accessToken))
+            }
+
+            override fun onPostExecute(result: String?) {
+                super.onPostExecute(result)
+                if (result == "-1") {
+                    AlertDialog.Builder(activity, R.style.AlertMenu)
+                               .setMessage("Sorry we are unable to connect at this time")
+                               .setCancelable(true)
+                               .setPositiveButton("Retry", { diag, _ -> diag.cancel() })
+                               .setOnCancelListener { _ -> login() }
+                               .show()
+                }
             }
         }
         task.execute()
@@ -91,7 +100,12 @@ class MSALHandler(context: Context, val activity: MainActivity) {
 
             override fun onError(exception: MsalException) {
                 Log.e(MainActivity.TAG, "Authentication failed: " + exception.toString())
-                activity.finish()
+                AlertDialog.Builder(activity, R.style.AlertMenu)
+                        .setMessage("Sorry we are unable to connect at this time")
+                        .setCancelable(true)
+                        .setPositiveButton("Retry", { diag, _ -> diag.cancel() })
+                        .setOnCancelListener { _ -> login() }
+                        .show()
             }
 
             override fun onCancel() {

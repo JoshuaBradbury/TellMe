@@ -6,7 +6,6 @@ import java.io.IOException
 
 var client = OkHttpClient()
 
-@Throws(IOException::class)
 fun get(url: String, headers: Map<String, String> = mapOf()): String {
     val requestStart = Request.Builder().url(url)
 
@@ -15,6 +14,11 @@ fun get(url: String, headers: Map<String, String> = mapOf()): String {
     }
 
     val request = requestStart.build()
-    val response = client.newCall(request).execute()
-    return response.body()!!.string()
+
+    return try {
+        val response = client.newCall(request).execute()
+        response.body()!!.string()
+    } catch (e: IOException) {
+        "-1"
+    }
 }

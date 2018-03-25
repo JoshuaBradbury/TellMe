@@ -5,7 +5,6 @@ import android.app.job.JobScheduler
 import android.content.ComponentName
 import android.content.Context
 import android.os.PersistableBundle
-import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -14,7 +13,6 @@ class TellMeFirebaseMessagingService: FirebaseMessagingService() {
     private var jobId = 0
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        Log.d(MainActivity::class.simpleName, "RECEIVING MESSAGE")
         super.onMessageReceived(remoteMessage)
 
         val builder = JobInfo.Builder(jobId++, ComponentName(this, NotificationService::class.java))
