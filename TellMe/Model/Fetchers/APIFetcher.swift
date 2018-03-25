@@ -43,58 +43,5 @@ class APIFetcher: NSObject {
             }
         }
     }
-    
-//    class func fetchArrivalTubes(for stations: [Station], handler: TFLFetcherModelHandler? = nil) {
-//        let group = DispatchGroup()
-//        let model = DataModel(stations: stations)
-//
-//        for station in stations {
-//
-//            group.enter()
-//
-//            fetchArrivalTubes(for: station.stationNaptan , handler: { (tubes) in
-//
-//                model.addTubes(tubes, for: station.stationNaptan)
-//                group.leave()
-//            })
-//        }
-//
-//        group.notify(queue: .main) {
-//
-//            handler?(model)
-//        }
-//    }
-//
-//    class func fetchArrivalTubes(for stationId: String, handler: TFLFetcherArrivalHandler? = nil) {
-//
-//        let arrivalEndpoint: NetworkRequestEndpointBuilder = {
-//            return "\(NetworkRequestKeys.server.rawValue)\(NetworkRequestKeys.stationEndpoint.rawValue)/\(stationId)\(NetworkRequestKeys.arrivalEndpoint.rawValue)"
-//        }
-//
-//        let parameters: [NetworkRequestParameterBuilder] = [
-//        { (Keys.mode.rawValue, Keys.tube.rawValue) }
-//        ]
-//
-//        let networkRequest = NetworkRequest(endpointBuilder: arrivalEndpoint, typeBuilder: NetworkRequest.getTypeBuilder(), headerBuilder: NetworkRequest.defaultHeaderBuilder(), parameterBuilder: parameters)
-//        let executor = NetworkRequestExecutor(with: networkRequest)
-//
-//        executor.execute { (responseJSON) in
-//            guard let tubes = responseJSON as? Array<Any> else { return }
-//
-//            var parsedTubes = [Tube]()
-//            for tube in tubes {
-//
-//                if let tubeData = try? JSONSerialization.data(withJSONObject: tube, options: []), let arrivalTube = try? JSONDecoder().decode(Tube.self, from: tubeData) {
-//                    parsedTubes.append(arrivalTube)
-//                }
-//            }
-//
-//            parsedTubes.sort(by: {$0.timeToStation < $1.timeToStation})
-//
-//            DispatchQueue.main.async {
-//                handler?(parsedTubes)
-//            }
-//        }
-//    }
 }
 

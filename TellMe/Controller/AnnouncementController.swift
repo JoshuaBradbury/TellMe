@@ -57,6 +57,7 @@ class AnnouncementController: UIViewController , UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         print("I am in announcementController")
+        
         navigationController?.setNavigationBarHidden(true, animated: true)
         announcementTableView.delegate = self
         announcementTableView.dataSource = self

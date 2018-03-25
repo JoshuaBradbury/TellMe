@@ -12,11 +12,14 @@ import SideMenu
 class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var sideMenuTableView: UITableView!
-    let groupNames = ["5CCS2OSC", "5CCS2SEG", "5CCS2PLD"]
+    static var groupList:Array<Group>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("I am in sideMenuController")
+        
+//        self.fetchGroups()
+        
         navigationController?.setNavigationBarHidden(true, animated: true)
         
         sideMenuTableView.delegate = self
@@ -25,20 +28,28 @@ class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDat
         sideMenuTableView.register(UINib(nibName: "SideMenuCell", bundle: nil), forCellReuseIdentifier: "sideMenuCell")
 
         sideMenuTableView.separatorStyle = .none
+        print(SideMenuController.groupList)
         
     }
     
-
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupNames.count
+        
+        if let group = SideMenuController.groupList {
+            print(group.count)
+            return group.count
+        }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "sideMenuCell", for: indexPath) as! SideMenuCell
         
-        cell.messageBody.text = groupNames[indexPath.row]
+        if let group = SideMenuController.groupList {
+            cell.messageBody.text = group[indexPath.row].groupName
+        } else {
+            cell.messageBody.text = MSALHandler.userName!
+        }
         
         return cell
         
@@ -49,11 +60,13 @@ class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDat
         //TODO: finish the contents of the announcementTableView
         
         tableView.deselectRow(at: indexPath, animated: false)
-        APIFetcher.fetchGroups { [weak self] (groups) in
+    }
+    
+    static func fetchGroups() {
+        
+        APIFetcher.fetchGroups { (groups) in
             
-            for group in groups {
-                print(group)
-            }
+            SideMenuController.groupList = groups
         }
     }
 

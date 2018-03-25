@@ -132,6 +132,8 @@ class MSALHandler {
                     MSALHandler.userName = response["userPrincipalName"] as? String
                     print(MSALHandler.userName!)
                     
+                    SideMenuController.fetchGroups()
+                    
                 }
             }
             }.resume()
