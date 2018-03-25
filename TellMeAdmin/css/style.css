@@ -30,7 +30,6 @@ img {
 
 }
 .logout {
-  background-color: grey;
   float: right;
   height: 5.3rem;
   width: 5.3rem;
@@ -47,7 +46,6 @@ img {
   margin-right: 1rem;
   float: right;
   position: relative;
-  background-color: grey;
   height: 5.3rem;
   width: 5.3rem;
   display: none;
