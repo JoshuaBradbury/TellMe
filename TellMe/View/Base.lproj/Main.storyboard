@@ -228,11 +228,8 @@
         <image name="hamburger" width="110" height="110"/>
     </resources>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD:TellMe/View/Base.lproj/Main.storyboard
         <segue reference="nLo-Hs-rZY"/>
         <segue reference="Se1-aG-O2f"/>
-=======
         <segue reference="fqp-l5-4La"/>
->>>>>>> iOS:TellMe/Base.lproj/Main.storyboard
     </inferredMetricsTieBreakers>
 </document>
