@@ -13,38 +13,32 @@
 
 </head>
 
-<body class=" ">
+<body  class ="" >
   <div id="cover" onclick="fadeOut()">
   </div>
     <div class="top">
-        <div class="logo-container"><img id="KCL logo" src="assets/kcl-logo.jpg"></div>
-        <div class="title" id="title-text"></div>
-        <a href="login.html" class="logout"><img src="assets/logout.png"></a>
-        <div class="settings" id="settings"><a href="#"><img id="KCL logo" src="assets/settings.png"></div></a>
-    </div>
-    <div class="l">
-        <!--for responsive window>-->
-        <div class="icon" onclick="respModules()"></div>
-        <div class="icon" onclick="respStudents()"></div>
-    </div>
+    <div class="logo-container"><img id="KCL logo" src="assets/kcl-logo.jpg"></div>
+    <div class="title" id="title-text"></div>
+    <div class="settings" id="settings"><a href="#"><img id="KCL logo" src="assets/settings.png"></div></a>
+    <button id="login" class="logout" onclick="loginOrOut()"></button>
+  </div>
 
-    <div class="side" id="left">
+  <div class="side" id="left">
 
-    </div>
+  </div>
 
-    <div id="annoucements">
-        <div class="container">
-            <!--assign function to add icon when implemented-->
-            <div class="form-group">
-                <label for="usr"></label>
-                <input type="text" placeholder="Title" class="form-control input-mysize" id="titleBtn">
-                <div class="placeholder" id="postBtn" onclick="show()"><img id="plusBtn" src="assets/plus.png"></div>
-            </div>
-        </div>
+  <div id="annoucements">
+      <div class="container">
+          <div class="form-group">
+              <label for="usr"></label>
+              <input type="text" placeholder="Title" class="form-control input-mysize" id="titleBtn">
+              <div class="placeholder" id="postBtn" onclick="show()"><img id="plusBtn" src="assets/plus.png"></div>
+          </div>
+      </div>
 
-        <div class="annoucement-posts" id="announcements-container">
+<div class="annoucement-posts" id="announcements-container">
 
-        </div>
+</div>
 
         <div class="pop-container bubble2" id="popcontainer" style="display:none;">
             <div class="form-group bubble">
@@ -72,7 +66,6 @@
               </center>
             </div>
         </div>
-
         <!--settings popup-->
         <div class="csv-container" id="settingscontainer" style="display:none;">
             <div class="form-group">
@@ -91,21 +84,15 @@
         </div>
     </div>
 
-    <div class="sideright" id="right">
-        <!--<div class="modulemodule"><h1 id="module-name" onclick="update(this); return false;">Module1</h1></div>
-        <div class="modulemodule"><h1 id="module-name" onclick="update(this); return false;">Module2</h1></div>
-        <div class="modulemodule"><h1 id="module-name" onclick="update(this); return false;">Module3</h1></div>
-        <div class="modulemodule"><h1 id="module-name" onclick="update(this); return false;">Module4</h1></div>
-        <div class="modulemodule"><h1 id="module-name" onclick="update(this); return false;">Module5</h1></div>
--->
+        <div class="sideright" id="right">
+
         <a href="#">
-            <div class="bottom"id="csvBtn"><img class="circle" id="plusBtn" src="assets/plus.png"></div>
+          <div class="bottom"id="csvBtn"><img class="circle" id="plusBtn" src="assets/plus.png"></div>
         </a>
-    </div>
+        </div>
 
-    </div>
-    </div>
-
+        </div>
+        </div>
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
   <script type="text/javascript" src="db.js"></script>
