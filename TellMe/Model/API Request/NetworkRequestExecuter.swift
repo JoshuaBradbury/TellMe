@@ -23,8 +23,10 @@ class NetworkRequestExecutor: NSObject {
     }
     
     func execute(handler: @escaping NetworkRequestExecutorHandler) {
-
+        
         guard let url = URL(string: networkRequest.buildEndpoint()) else { return }
+        print(url)
+        
         
         let urlSession = URLSession(configuration: .default, delegate: nil, delegateQueue: operationQueue)
         var urlRequest = URLRequest(url: url, cachePolicy: .reloadRevalidatingCacheData , timeoutInterval: 60.0)

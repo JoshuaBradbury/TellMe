@@ -132,9 +132,10 @@ class MSALHandler {
             if result != nil {
                 if let response = result as? Dictionary<String,Any> {
                     MSALHandler.userName = response["userPrincipalName"] as? String
-                    print(MSALHandler.userName!)
+//                    print(MSALHandler.userName!)
                     
-                    SideMenuController.fetchGroups()
+                    SideMenuController.fetchGroups(selectedgroupId: 1)
+                    
                     
                 }
             }

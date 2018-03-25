@@ -37,9 +37,40 @@ class APIFetcher: NSObject {
                     parsedGroups.append(groupObj)
                 }
             }
-            print(parsedGroups)
+
             DispatchQueue.main.async {
                 handler?(parsedGroups)
+            }
+        }
+    }
+    
+    class func fetchAnnouncements(groupId: Int, handler: APIFetcherAnnouncementsHandler? = nil) {
+        
+        print(groupId)
+        let groupEndpoint: NetworkRequestEndpointBuilder = {
+            print("\(NetworkRequestKeys.server.rawValue)\(NetworkRequestKeys.announcementEndpoint.rawValue)/\(groupId)")
+            return "\(NetworkRequestKeys.server.rawValue)\(NetworkRequestKeys.announcementEndpoint.rawValue)/\(groupId)"
+        }
+        
+        let parameters: [NetworkRequestParameterBuilder] = [{("n","all")}]
+        
+        let networkRequest = NetworkRequest(endpointBuilder: groupEndpoint, typeBuilder: NetworkRequest.getTypeBuilder(), headerBuilder: NetworkRequest.defaultHeaderBuilder(username: MSALHandler.getUsername()), parameterBuilder: parameters)
+        let executor = NetworkRequestExecutor(with: networkRequest)
+        
+        executor.execute { (responseJSON) in
+            
+            guard let response = responseJSON as? Dictionary<String,Any> else {return}
+            guard let groups = response["announcements"] as? Array<Any> else { return }
+            
+            var parsedAnnouncements = [Announcements]()
+            for group in groups {
+                if let groupData = try? JSONSerialization.data(withJSONObject: group, options: []), let groupObj = try? JSONDecoder().decode(Announcements.self, from: groupData) {
+                    parsedAnnouncements.append(groupObj)
+                }
+            }
+            
+            DispatchQueue.main.async {
+                handler?(parsedAnnouncements)
             }
         }
     }

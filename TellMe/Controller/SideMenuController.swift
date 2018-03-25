@@ -11,15 +11,16 @@ import SideMenu
 
 protocol SideMenuHandlerDelegate: class {
     func change()
+    func update()
 }
 
 class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
     
-    weak var delegate: SideMenuHandlerDelegate?
+    static weak var delegate: SideMenuHandlerDelegate?
     
     private func notify(){
         
-        delegate?.change()
+        SideMenuController.delegate?.change()
     }
    
     
@@ -30,8 +31,6 @@ class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         print("I am in sideMenuController")
         
-//        self.fetchGroups()
-        
         navigationController?.setNavigationBarHidden(true, animated: true)
         
         sideMenuTableView.delegate = self
@@ -40,14 +39,14 @@ class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDat
         sideMenuTableView.register(UINib(nibName: "SideMenuCell", bundle: nil), forCellReuseIdentifier: "sideMenuCell")
 
         sideMenuTableView.separatorStyle = .none
-        print(SideMenuController.groupList)
+//        print(SideMenuController.groupList)
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let group = SideMenuController.groupList {
-            print(group.count)
+            
             return group.count
         }
         return 1
@@ -72,13 +71,30 @@ class SideMenuController: UIViewController,  UITableViewDelegate, UITableViewDat
         //TODO: finish the contents of the announcementTableView
         
         tableView.deselectRow(at: indexPath, animated: false)
+
+        APIFetcher.fetchAnnouncements(groupId: indexPath.row + 1) { (announcements) in
+            
+            DispatchQueue.main.async {
+                AnnouncementController.messageArray = announcements
+                SideMenuController.delegate?.update()
+            }
+            
+        }
     }
     
-    static func fetchGroups() {
+    static func fetchGroups(selectedgroupId: Int) {
         
         APIFetcher.fetchGroups { (groups) in
             
             SideMenuController.groupList = groups
+            APIFetcher.fetchAnnouncements(groupId: selectedgroupId) { (announcements) in
+                
+                DispatchQueue.main.async {
+                    AnnouncementController.messageArray = announcements
+                    SideMenuController.delegate?.update()
+                }
+                
+            }
         }
     }
 
