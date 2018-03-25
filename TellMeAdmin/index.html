@@ -108,14 +108,13 @@
         <div class="csv-container" id="csvcontainer" style="display:none;">
             <div class="form-group">
               <h2>Add Module</h2>
-                <label for="usr"></label>
                 <h3>Module Name</h3>
                 <input type="text" class="form-control csv-input-mysize" id="usr">
                 <br>
                 <h3>Upload Students</h3>
-                <input type="file" class="form-control csv-input-mysize" id="txtFileUpload" accept=".csv" value="Submit csv" />
+                <input type="file" name="filename"  class="form-control csv-input-mysize" id="filename">
                 <br><center>
-                <input type="button" class="btn" onclick="save()" value="Create Module" />
+                <input type="button" class="btn" onclick="create()" value="Create Module" />
               </center>
             </div>
         </div>
@@ -128,7 +127,7 @@
                 <input type="text" class="form-control csv-input-mysize" id="groupname">
                 <br>
                 <h3>Add Students</h3>
-                <input type="file" class="form-control csv-input-mysize" id="txtFileUpload" accept=".csv" value="Submit csv" />
+                <input type="file" name="filename"  class="form-control csv-input-mysize" id="filename">
                 <br>
                 <center>
                 <input type="button" class="btn" onclick="save()" value="Save settings" />
