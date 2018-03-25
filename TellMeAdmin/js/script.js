@@ -1,21 +1,24 @@
 /*titleBtn opens pop up when text field is pressed*/
 document.getElementById('titleBtn').onclick = function() {
-    console.log("clicked");
     $('div#popcontainer').fadeIn("");
     $('div#cover').fadeIn("");
+    $("#plusBtn").css('transform','rotate(' + 45 + 'deg)');
     document.getElementById("announcementsBoard").style.display = "none";
     document.getElementById("postBtn").style.opacity = "0.5";
     document.getElementById("overlay").style.display = "block";
 }
 document.getElementById('postBtn').onclick = function() {
-    console.log("clicked");
     var newA = document.getElementById('popcontainer');
     if (newA.style.display !== 'none') {
         $('div#popcontainer').fadeOut("");
         $('div#cover').fadeOut("");
+        $("#plusBtn").css('transform','rotate(' + 0 + 'deg)');
+
     } else {
         $('div#popcontainer').fadeIn("");
         $('div#cover').fadeIn("");
+        $("#plusBtn").css('transform','rotate(' + 45 + 'deg)');
+
     }
     document.getElementById("announcementsBoard").style.display = "none";
     document.getElementById("postBtn").style.opacity = "0.5";
@@ -78,13 +81,14 @@ window.addEventListener('click', function(e) { //detect outside click
           if (document.getElementById('popcontainer').style.display !== 'none') {
             $('div#cover').fadeOut("");
             $('div#popcontainer').fadeOut("fast");
+            $("#plusBtn").css('transform','rotate(' + 0 + 'deg)');
           }
     }
 })
 
 function save() { //TODO connect backend to settings
     //if(){} //TODO error message if new group name is not unique?
-    console.log(document.getElementById("groupname").value); //backend new group name
+    console.log(document.getElementById("groupname").value); //backend var for new group name
 };
 
 /*Write announcement*/
@@ -96,17 +100,17 @@ function submit() {
     } else {
         $('.pop-container').fadeOut(); //removes dropdown on exit
         $('div#cover').fadeOut("");
-        document.getElementById('usr').value = ""; //clears text field on successful submit
+        document.getElementById('titleBtn').value = ""; //clears text field on successful submit
         document.getElementById('text').value = ""; //@TODO doesnt work!!
-        console.log(title); //backend announcement data
-        console.log(text); //backend announcement data
+        console.log(title); //backend var for announcement data
+        console.log(text); //backend var for announcement data
         console.log(document.getElementById('title-text').innerHTML); // backend module code used to identify which module message belongs to
         add_announcement(title, text); //calls add func, replace paramters with backend call
     }
 };
 
 /*Add announcement*/
-function add_announcement(title, text) {
+function add_announcement(title, text) { //backend @TODO format the announcement
     var new_announcement = document.createElement("div");
     var my_container = document.getElementById("announcements-container")
     var urgent_flag = document.createElement("div");
@@ -114,7 +118,7 @@ function add_announcement(title, text) {
     new_announcement.classList.add("del");
     new_announcement.appendChild(urgent_flag); //adds urgent flag
     new_announcement.appendChild(del);
-    my_container.appendChild(new_announcement);
+    my_container.prepend(new_announcement);
     new_announcement.classList.add("post");
     var text_container = document.createElement("div");
     text_container.classList.add("text-container");
@@ -133,8 +137,6 @@ function add_announcement(title, text) {
     new_announcement.appendChild(text_container); //adds urgent flag
     new_announcement.id = "announcement-module";
     text_container.innerHTML += text;
-    console.log("created announcement");
-
     close.onclick = function() {
         deleteannouncement(this);
         return false;
@@ -145,11 +147,8 @@ function add_announcement(title, text) {
 /*load in modules after page is opened initially*/
 $(document).ready(function() {
   document.getElementById("cover").style.display = "none"
-    if (screen.width <= 1024) { //testing for screen width
-        console.log(screen.width)
-    }
     for (var i = 0; i < json.length; i++) { //backend loops through list of modules
-        var obj = json[i];
+        var obj = json[i]; //backend loop
         var new_mod = document.createElement("div");
         var my_container = document.getElementById("right");
         new_mod.classList.add("menu-box-tab");
@@ -163,6 +162,7 @@ $(document).ready(function() {
         }
         new_mod.appendChild(text);
     }
+    update(json[0].ModuleName);
 });
 /*
  * update() changes divs/text to match selected module
@@ -170,13 +170,17 @@ $(document).ready(function() {
  * id title-text : top title text
  */
 function update(e) {
-    document.getElementById('title-text').innerHTML = e.innerHTML;
+  if(typeof e === 'string' || e instanceof String){
+    document.getElementById('title-text').innerHTML = e;
+  } else {
+  document.getElementById('title-text').innerHTML = e.innerHTML;
+}
     $('.post').remove(); //clears existing announcements
     $('.students').remove(); //clears existing students
     document.getElementById("settings").style.display = 'block';
-    for (var i = 0; i < json.length; i++) {
-        var obj = json[i];
-        if (obj.ModuleName == e.innerHTML) {
+    for (var i = 0; i < json.length; i++) { //backend loop
+        var obj = json[i]; //backend loop
+        if (obj.ModuleName == e || obj.ModuleName == e.innerHTML) {
             for (var j = 0; j < obj.Announcements.length; j++) {
                 add_announcement(obj.Announcements[j], obj.Announcements[j]); //TODO change when format is decided
             }
@@ -202,8 +206,10 @@ function update(e) {
 
         }
     }
-    if (screen.width <= 1024) { //condition for mobiles
-        document.getElementById("right").style.display = "none";
+
+    if (screen.width <= 750) { //condition for mobiles
+      document.getElementById("csvBtn").style.display = 'none';
+      document.getElementById("csvBtn").style.visibility = 'hidden';
     }
 }
 /*Remove student*/
@@ -220,38 +226,48 @@ function deleteannouncement(e) {
         e.parentNode.parentNode.removeChild(e.parentNode); //backend delete announcement
     } else {}
 }
-
-/*Some responsive stuff*/
-function respModules() {
-    console.log("display");
-    var student = document.getElementById("right")
-    if (document.getElementById("left").style.display === 'block') {
-        document.getElementById("left").style.display = "none";
-    }
-    if (student.style.display === 'block') {
-        student.style.display = "none";
-    } else {
-        student.style.display = "block";
-    }
+function create() { //create group
+  //document.getElementById("groupname")
+  //TODO backend
+  if(saved == "" && document.getElementById("usr").value == ""){
+    console.log(saved); //backend var for csv
+    console.log(document.getElementById("usr").value); //backend var for name
+  } else {
+    alert("Missing field");
+  }
+  document.getElementById('filename').value= null;
+  document.getElementById('usr').value= null;
+  saved = "";
+  $('div#csvcontainer').fadeOut("fast");
+  $('div#cover').fadeOut("");
+}
+function save() { //save settings
+  //TODO backend
+}
+function deleteforever() { //delete group (settings)
+  //document.getElementById("groupname")
+  //TODO backend
 }
 
-function respStudents() {
-    console.log("display");
-    var tab = document.getElementById("left")
-    if (document.getElementById("right").style.display === 'block') {
-        document.getElementById("right").style.display = "none";
-    }
-    if (tab.style.display === 'block') {
-        tab.style.display = "none";
-    } else {
-        tab.style.display = "block";
-    }
+var saved; //called upon create/save
+$("#filename").change(function(e) {
+var ext = $("input#filename").val().split(".").pop().toLowerCase();
+if (e.target.files != undefined) {
+var reader = new FileReader();
+reader.onload = function(e) {
+var csvval=e.target.result.split("\n");
+var csvvalue=csvval[0].split(",");
+var inputrad="";
+for(var i=0;i<csvvalue.length;i++)
+{
+var temp=csvvalue[i];
+var inputrad=inputrad+" "+temp;
+}
+saved = inputrad;
+};
+reader.readAsText(e.target.files.item(0));
 }
 
-function save() {
-    //TODO
-}
+return false;
 
-function deleteforever() {
-    //TODO
-}
+});
