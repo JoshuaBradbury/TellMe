@@ -12,11 +12,15 @@ class LaunchViewController: UIViewController, MSALHandlerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         print("I am in myLaunch")
+       
+    }
+
+    override func viewDidAppear(_ animated : Bool){
+        super.viewDidAppear(false)
+
         MSALHandler.shared.delegate = self
         MSALHandler.shared.login()
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,10 +31,21 @@ class LaunchViewController: UIViewController, MSALHandlerDelegate {
     }
     
     func update() {
-        
-        self.performSegue(withIdentifier: "login", sender: self)
-        // performSegue(withIdentifier: "login", sender: nil)
-        self.dismiss(animated: false, completion: nil)
+        do {
+            
+            if  try MSALHandler.applicationContext.users().isEmpty {
+                //                MSALHandler.shared.delegate = self
+                
+            } else {
+                self.performSegue(withIdentifier: "login", sender: self)
+                // performSegue(withIdentifier: "login", sender: nil)
+                self.dismiss(animated: false, completion: nil)
+                
+            }
+        }  catch _ {
+            MSALHandler.shared.login()
+            
+        }
     }
     
 

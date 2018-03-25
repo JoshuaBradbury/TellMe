@@ -9,7 +9,15 @@
 import UIKit
 import SideMenu
 
-class AnnouncementController: UIViewController , UITableViewDelegate, UITableViewDataSource {
+
+
+class AnnouncementController: UIViewController , UITableViewDelegate, UITableViewDataSource, SideMenuHandlerDelegate{
+    
+    
+    func change() {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
 
     @IBOutlet weak var announcementTableView: UITableView!
     

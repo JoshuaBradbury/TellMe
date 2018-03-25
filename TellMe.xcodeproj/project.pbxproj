@@ -21,8 +21,8 @@
 		F40D7123205EF6170043FE10 /* SideMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F40D7121205EF6170043FE10 /* SideMenuCell.xib */; };
 		F43A272C2050427E00C077FB /* MSALHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43A272B2050427E00C077FB /* MSALHandler.swift */; };
 		F4976F4420653B0B00397EE4 /* APIFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4976F4320653B0B00397EE4 /* APIFetcher.swift */; };
-		F4976F4620653BE300397EE4 /* Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4976F4520653BE300397EE4 /* Groups.swift */; };
 		F4976F4820653C0300397EE4 /* Announcements.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4976F4720653C0300397EE4 /* Announcements.swift */; };
+		F4976F4A2067E90B00397EE4 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4976F492067E90B00397EE4 /* Group.swift */; };
 		F4A323D62044B6D300362926 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D4203B994F00428779 /* Assets.xcassets */; };
 		F4A323D72044B72800362926 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC49B8D6203B994F00428779 /* LaunchScreen.storyboard */; };
 		F4A619CC206534C900EAA347 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A619CA206534C900EAA347 /* MessageCell.xib */; };
@@ -67,8 +67,8 @@
 		F40D7121205EF6170043FE10 /* SideMenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuCell.xib; sourceTree = "<group>"; };
 		F43A272B2050427E00C077FB /* MSALHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALHandler.swift; sourceTree = "<group>"; };
 		F4976F4320653B0B00397EE4 /* APIFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetcher.swift; sourceTree = "<group>"; };
-		F4976F4520653BE300397EE4 /* Groups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Groups.swift; sourceTree = "<group>"; };
 		F4976F4720653C0300397EE4 /* Announcements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcements.swift; sourceTree = "<group>"; };
+		F4976F492067E90B00397EE4 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		F4A619CA206534C900EAA347 /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		F4A619CB206534C900EAA347 /* CustomMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMessageCell.swift; sourceTree = "<group>"; };
 		F4A619CE2065384700EAA347 /* NetworkRequestKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestKeys.swift; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 		F4976F4120653A0C00397EE4 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				F4976F4520653BE300397EE4 /* Groups.swift */,
+				F4976F492067E90B00397EE4 /* Group.swift */,
 				F4976F4720653C0300397EE4 /* Announcements.swift */,
 			);
 			path = Objects;
@@ -469,8 +469,8 @@
 				F43A272C2050427E00C077FB /* MSALHandler.swift in Sources */,
 				F40D711D205EED1B0043FE10 /* SideMenuController.swift in Sources */,
 				F4976F4420653B0B00397EE4 /* APIFetcher.swift in Sources */,
+				F4976F4A2067E90B00397EE4 /* Group.swift in Sources */,
 				F4A619CD206534C900EAA347 /* CustomMessageCell.swift in Sources */,
-				F4976F4620653BE300397EE4 /* Groups.swift in Sources */,
 				EC49B8D0203B994F00428779 /* AnnouncementController.swift in Sources */,
 				F4976F4820653C0300397EE4 /* Announcements.swift in Sources */,
 				F4A619D3206538AF00EAA347 /* NetworkRequestExecuter.swift in Sources */,
@@ -614,6 +614,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -623,7 +624,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
