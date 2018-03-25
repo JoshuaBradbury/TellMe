@@ -234,7 +234,6 @@ function create() { //create group
     console.log(document.getElementById("usr").value); //backend var for name
   } else {
     alert("Missing field");
-    break;
   }
   document.getElementById('filename').value= null;
   document.getElementById('usr').value= null;
