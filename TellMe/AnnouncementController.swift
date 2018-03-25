@@ -9,7 +9,15 @@
 import UIKit
 import SideMenu
 
-class AnnouncementController: UIViewController , UITableViewDelegate, UITableViewDataSource {
+
+
+class AnnouncementController: UIViewController , UITableViewDelegate, UITableViewDataSource, SideMenuHandlerDelegate{
+    
+    
+    func change() {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
 
     @IBOutlet weak var announcementTableView: UITableView!
     
@@ -57,6 +65,7 @@ class AnnouncementController: UIViewController , UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         print("I am in announcementController")
+        
         navigationController?.setNavigationBarHidden(true, animated: true)
         announcementTableView.delegate = self
         announcementTableView.dataSource = self

@@ -94,6 +94,8 @@ class MSALHandler {
                         self.accessToken = (result.accessToken)!
                         self.getContentWithToken()
                         self.notify()
+                    }else{
+                        self.getTokenFromExistingUser()
                     }
                 })
             } catch _ {
@@ -124,21 +126,7 @@ class MSALHandler {
         
         
     }
-    
-//    static func logOut() {
-//
-//        // Still Crashes the program with error: Foundation._GenericObjCError.nilError
-//        do {
-//            let users = try! applicationContext.users()
-//
-//            if !users.isEmpty {
-//
-//                for user in users {
-//                    try! applicationContext.remove(user)
-//                }
-//            }
-//        }
-//    }
+ 
     
     func signoutButton(_ sender: UIButton) {
         
