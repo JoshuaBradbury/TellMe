@@ -25,10 +25,6 @@ import uk.ac.kcl.tellme.api.getAllGroups
 import uk.ac.kcl.tellme.api.getAnnouncements
 import uk.ac.kcl.tellme.api.groups
 import android.preference.PreferenceManager
-import android.content.SharedPreferences
-import android.R.id.edit
-import android.util.Log
-
 
 class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -36,7 +32,7 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar) as Toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         toolbar.hideOverflowMenu()
         setSupportActionBar(toolbar)
 
@@ -49,15 +45,14 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu)
 
-        val rv1 = findViewById<View>(R.id.rv1) as RecyclerView
+        val rv1 = findViewById<RecyclerView>(R.id.rv1)
 
         rv1.setHasFixedSize(true)
         rv1.layoutManager = LinearLayoutManager(this)
 
-        val navigationView = findViewById<NavigationView>(R.id.nav_view) as NavigationView
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
 
         updateGroups {
-            val groupId = intent.getIntExtra("groupId", -1)
             for (group in 0 until groups.size) {
                 navigationView.menu.add(Menu.NONE, group, Menu.NONE, "")
                 val item = navigationView.menu.getItem(group)
@@ -66,31 +61,42 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 s.setSpan(AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, s.length, 0)
 
                 item.title = s
+            }
 
-                if (groupId >= 0) {
-                    for (id in 0 until groups.size) {
-                        if (groups[id].id == groupId) {
-                            navigationView.menu.performIdentifierAction(id, 0)
-                            break
-                        }
+            val groupId = intent.getIntExtra("groupId", -1)
+
+            if (groupId >= 0) {
+                for (id in 0 until groups.size) {
+                    if (groups[id].id == groupId) {
+                        navigationView.menu.performIdentifierAction(id, 0)
+                        break
                     }
-                } else {
-                    navigationView.menu.performIdentifierAction(0, 0)
                 }
+            } else {
+                navigationView.menu.performIdentifierAction(0, 0)
             }
         }
     }
 
-    fun updateGroups(func: () -> Unit) {
+    private fun updateGroups(func: () -> Unit) {
         val task = @SuppressLint("StaticFieldLeak")
-        object : AsyncTask<Void, Void, Unit>() {
-            override fun doInBackground(vararg params: Void?) {
-                getAllGroups(PreferenceManager.getDefaultSharedPreferences(applicationContext).getString("user", ""))
+        object : AsyncTask<Void, Void, Boolean>() {
+            override fun doInBackground(vararg params: Void?): Boolean {
+                return getAllGroups(PreferenceManager.getDefaultSharedPreferences(applicationContext).getString("user", ""))
             }
 
-            override fun onPostExecute(result: Unit?) {
+            override fun onPostExecute(result: Boolean?) {
                 super.onPostExecute(result)
-                func()
+                if (!result!!) {
+                    AlertDialog.Builder(this@CategoryActivity, R.style.AlertMenu)
+                               .setMessage("Sorry we are unable to connect at this time")
+                               .setCancelable(true)
+                               .setPositiveButton("Retry", { diag, _ -> diag.cancel() })
+                               .setOnCancelListener { _ -> updateGroups(func) }
+                               .show()
+                } else {
+                    func()
+                }
             }
         }
         task.execute()
@@ -128,7 +134,7 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     }
 
     fun promptLogOut(view: View) {
-        AlertDialog.Builder(this@CategoryActivity, R.style.AlertMenu)
+        AlertDialog.Builder(view.context, R.style.AlertMenu)
                    .setMessage("Are you sure you want to log out?")
                    .setCancelable(true)
                    .setPositiveButton("Yes", { _, _ -> logout() })
@@ -145,10 +151,19 @@ class CategoryActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
             override fun onPostExecute(result: List<Announcement>?) {
                 super.onPostExecute(result)
-                val rv1 = findViewById<View>(R.id.rv1) as RecyclerView
-                rv1.adapter = AnnouncementAdapter(result!!)
+                if (result!![0].id == -1) {
+                    AlertDialog.Builder(this@CategoryActivity, R.style.AlertMenu)
+                               .setMessage("Sorry we are unable to connect at this time")
+                               .setCancelable(true)
+                               .setPositiveButton("Retry", { diag, _ -> diag.cancel() })
+                               .setOnCancelListener { _ -> onNavigationItemSelected(item) }
+                               .show()
+                } else {
+                    val rv1 = findViewById<RecyclerView>(R.id.rv1)
+                    rv1.adapter = AnnouncementAdapter(result)
 
-                (findViewById<TextView>(R.id.toolbar_title) as TextView).text = groups[item.itemId].name
+                    findViewById<TextView>(R.id.toolbar_title).text = groups[item.itemId].name
+                }
             }
         }
         task.execute()

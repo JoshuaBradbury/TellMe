@@ -11,7 +11,6 @@ import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
 import android.support.v4.app.TaskStackBuilder
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import uk.ac.kcl.tellme.api.getAllGroups
 import uk.ac.kcl.tellme.api.groups
 
@@ -22,7 +21,6 @@ class NotificationService : JobService() {
     }
 
     override fun onStartJob(params: JobParameters?): Boolean {
-        Log.d(MainActivity::class.simpleName, "SENDING NOTIFICATION")
         val task = @SuppressLint("StaticFieldLeak")
         object : AsyncTask<Void, Void, Unit>() {
             override fun doInBackground(vararg params: Void?) {
@@ -33,7 +31,6 @@ class NotificationService : JobService() {
                 super.onPostExecute(result)
 
                 for (group in groups) {
-                    Log.d(MainActivity::class.simpleName, "checking $group.id")
                     if (group.id == params!!.extras.getInt("group")) {
                         sendNotification(params.extras.getString("subject"), params.extras.getString("message"), group.id)
                         break
