@@ -1,4 +1,3 @@
-<<<<<<< fa2529b6dc428805fe53f773ea3e7920e5c4f94f:TellMeAdmin/style.css
 body {
   overflow: hidden;
 }
@@ -31,7 +30,6 @@ img {
 
 }
 .logout {
-  background-color: grey;
   float: right;
   height: 5.3rem;
   width: 5.3rem;
@@ -48,7 +46,6 @@ img {
   margin-right: 1rem;
   float: right;
   position: relative;
-  background-color: grey;
   height: 5.3rem;
   width: 5.3rem;
   display: none;
@@ -124,7 +121,6 @@ img {
   height: 5.3rem;
   width: 5.3rem;
 }
->>>>>>> refactored, changed minor bugs, reformatted:TellMeAdmin/css/style.css
 .title {
   float: left;
   margin-top: .8em;
