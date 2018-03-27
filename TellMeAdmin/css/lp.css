@@ -1,0 +1,11 @@
+.lpbot {
+  background-color: #343c3e;
+  bottom: 0;
+  height: 30%;
+  width: 100%;
+  position: absolute;
+}
+
+.lp {
+  overflow: hidden;
+}
