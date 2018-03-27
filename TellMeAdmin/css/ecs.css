@@ -1,26 +1,30 @@
 .close {
-  position: relative;
-  width: 1px;
-  height: 1px;
-  opacity: 0.3;
-  float: right;
-  margin-top: -2%;
-  margin-right: -1.29em;
+    position: relative;
+    width: 1px;
+    height: 1px;
+    opacity: 0.3;
+    float: right;
+    margin-top: -2%;
+    margin-right: -1.29em;
 }
+
 .close:hover {
-  opacity: 1;
+    opacity: 1;
 }
+
 .close:before, .close:after {
-  position: absolute;
-  left: 15px;
-  content: ' ';
-  height: 17px;
-  width: 2px;
-  background-color: #333;
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 17px;
+    width: 2px;
+    background-color: #333;
 }
+
 .close:before {
-  transform: rotate(45deg);
+    transform: rotate(45deg);
+
 }
 .close:after {
-  transform: rotate(-45deg);
+    transform: rotate(-45deg);
 }
