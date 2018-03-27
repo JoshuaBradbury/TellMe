@@ -1,25 +1,3 @@
-/*titleBtn opens pop up when text field is pressed*/
-document.getElementById("titleBtn").onclick = function() {
-    $("div#popcontainer").fadeIn("");
-    $("div#cover").fadeIn("");
-    $("#plusBtn").css("transform", "rotate(45deg)");
-}
-
-document.getElementById("postBtn").onclick = function() {
-    var newA = document.getElementById("popcontainer");
-
-    if (newA.style.display !== "none") {
-        $("div#popcontainer").fadeOut("");
-        $("div#cover").fadeOut("");
-        $("#plusBtn").css("transform", "rotate(0deg)");
-    } else {
-        $("div#popcontainer").fadeIn("");
-        $("div#cover").fadeIn("");
-        $("#plusBtn").css("transform", "rotate(45deg)");
-    }
-}
-
-/*open csv ui*/
 var newGroupBtn = document.getElementById("newGroupBtn");
 
 newGroupBtn.onclick = function() {
@@ -49,12 +27,12 @@ newGroupBtn.onclick = function() {
         } else {
             $("div#cover").fadeIn("");
             $("div#settings").fadeIn("");
-            document.getElementById("settings").value = document.getElementById("title-text").innerHTML;
+            document.getElementById("settings").value = document.getElementById("title").innerHTML;
         }
     }
 }
 
-var popupIDs = [["settings", "settingsBtn"], ["newGroup", "newGroupBtn"], ["popcontainer", "titleBtn", "postBtn"]];
+var popupIDs = [["settings", "settingsBtn"], ["newGroup", "newGroupBtn"]];
 
 window.addEventListener("click", function(e) { //detect outside click
     var outsideClick = true;
@@ -79,15 +57,14 @@ window.addEventListener("click", function(e) { //detect outside click
     if (outsideClick && displayed != "") {
         $("div#" + displayed).fadeOut("fast");
         $("div#cover").fadeOut("");
-        if (displayed == "popcontainer") {
-            $("#plusBtn").css("transform", "rotate(0deg)");
-        }
     }
+
+    $('div#collapseOne').collapse();
 });
 
 /*Write announcement*/
 function submit() {
-    var title = document.getElementById("titleBtn").value;
+    var title = document.getElementById("announcementTitle").value;
     var text = document.getElementById("text").innerHTML;
 
     if (title == "" || text == "") {
@@ -96,10 +73,10 @@ function submit() {
         $(".pop-container").fadeOut(); //removes dropdown on exit
         $("div#cover").fadeOut("");
 
-        document.getElementById("titleBtn").value = ""; //clears text field on successful submit
+        document.getElementById("announcementTitle").value = ""; //clears text field on successful submit
         document.getElementById("text").innerHTML = ""; //@TODO doesnt work!!
 
-        console.log(document.getElementById("title-text").innerHTML); // backend module code used to identify which module message belongs to
+        console.log(document.getElementById("title").innerHTML); // backend module code used to identify which module message belongs to
         add_announcement(title, text); //calls add func, replace paramters with backend call
     }
 }
@@ -107,7 +84,7 @@ function submit() {
 /*Add announcement*/
 function add_announcement(title, text) { //backend @TODO format the announcement
     var new_announcement = document.createElement("div");
-    var my_container = document.getElementById("announcements-container")
+    var my_container = document.getElementById("announcements")
     var urgent_flag = document.createElement("div");
     var del = document.createElement("div");
 
@@ -149,9 +126,10 @@ $(document).ready(function() {
 
     for (var i = 0; i < json.length; i++) { //backend loops through list of modules
         var obj = json[i]; //backend loop
-        var new_mod = document.createElement("div");
-        var my_container = document.getElementById("right");
+        var new_mod = document.createElement("li");
+        var my_container = document.getElementById("groupList");
         new_mod.classList.add("menu-box-tab");
+        new_mod.classList.add("nav-item");
         my_container.appendChild(new_mod);
 
         var text = document.createElement("h1");
@@ -176,9 +154,9 @@ $(document).ready(function() {
  */
 function update(e) {
     if(typeof e === "string" || e instanceof String) {
-        document.getElementById("title-text").innerHTML = e;
+        document.getElementById("title").innerHTML = e;
     } else {
-        document.getElementById("title-text").innerHTML = e.innerHTML;
+        document.getElementById("title").innerHTML = e.innerHTML;
     }
 
     $(".post").remove(); //clears existing announcements
