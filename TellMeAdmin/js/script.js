@@ -49,7 +49,7 @@ newGroupBtn.onclick = function() {
         } else {
             $("div#cover").fadeIn("");
             $("div#settingscontainer").fadeIn("");
-            document.getElementById("groupname").value = document.getElementById("title-text").innerHTML;
+            document.getElementById("settingsName").value = document.getElementById("title-text").innerHTML;
         }
     }
 }
@@ -239,57 +239,64 @@ function deleteannouncement(e) {
     } else {}
 }
 
-function create() { //create group
-    //document.getElementById("groupname")
-    //TODO backend
-    if(saved == "" && document.getElementById("usr").value == "") {
-        console.log(saved); //backend var for csv
-        console.log(document.getElementById("usr").value); //backend var for name
+function updateGroup() {
+    var file = document.getElementById("settingsFile").files[0];
+    var group = document.getElementById("settingsName").value;
+
+    if (createGroup(file, group)) {
+        document.getElementById("settingsFile").value = null;
+        document.getElementById("settingsName").value = null;
+
+        $("div#settingscontainer").fadeOut("fast");
+        $("div#cover").fadeOut("");
+    }
+}
+
+function createNewGroup() {
+    var file = document.getElementById("filename").files[0];
+    var group = document.getElementById("usr").value;
+
+    if (createGroup(file, group)) {
+        document.getElementById("filename").value = null;
+        document.getElementById("usr").value = null;
+
+        $("div#csvcontainer").fadeOut("fast");
+        $("div#cover").fadeOut("");
+    }
+}
+
+function createGroup(file, group) {
+    if(file && group != "") {
+        var reader = new FileReader();
+        reader.readAsText(file);
+
+        var text = reader.result;
+
+        reader.onloadend = function(e) {
+    		if (e.target.readyState == FileReader.DONE) {
+                var csvval = e.target.result.split("\n");
+
+                var users = [];
+                var userIndex = csvval[0].split(",").indexOf("Username");
+
+                for (var i = 1; i < csvval.length; i++) {
+                    var temp = csvval[i].split(",");
+                    if (temp.length > userIndex) {
+                        if (temp[userIndex] && temp[userIndex].trim()) {
+                            users.push(temp[userIndex].trim());
+                        }
+                    }
+                }
+
+                // make request here
+                console.log(users);
+            }
+        }
+
+        return true;
     } else {
         alert("Missing field");
     }
 
-    document.getElementById("filename").value = null;
-    document.getElementById("usr").value = null;
-
-    saved = "";
-
-    $("div#csvcontainer").fadeOut("fast");
-    $("div#cover").fadeOut("");
-}
-
-function save() { //save settings
-//TODO backend
-}
-
-function deleteforever() { //delete group (settings)
-//document.getElementById("groupname")
-//TODO backend
-}
-
-var saved; //called upon create/save
-
-$("#filename").change(function(e) {
-    var ext = $("input#filename").val().split(".").pop().toLowerCase();
-
-    if (e.target.files != undefined) {
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-            var csvval = e.target.result.split("\n");
-            var csvvalue = csvval[0].split(",");
-            var inputrad = "";
-
-            for (var i = 0; i < csvvalue.length; i++) {
-                var temp = csvvalue[i];
-                inputrad += " " + temp;
-            }
-
-            saved = inputrad;
-        };
-
-        reader.readAsText(e.target.files.item(0));
-    }
-
     return false;
-});
+}
