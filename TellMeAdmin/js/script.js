@@ -20,71 +20,70 @@ document.getElementById("postBtn").onclick = function() {
 }
 
 /*open csv ui*/
-var newGroupBtn = document.getElementById("csvBtn");
+var newGroupBtn = document.getElementById("newGroupBtn");
 
 newGroupBtn.onclick = function() {
     if (document.getElementById("cover").style.display == "none") {
-        var newA = document.getElementById("csvcontainer");
+        var newA = document.getElementById("newGroup");
 
         if (newA.style.display !== "none") {
-            $("div#csvcontainer").fadeOut("");
+            $("div#newGroup").fadeOut("");
             $("div#cover").fadeOut("");
         } else {
             $("div#cover").fadeIn("");
-            $("div#csvcontainer").fadeIn("");
+            $("div#newGroup").fadeIn("");
         }
     }
 }
 
 /*open settings ui*/
-var newGroupBtn = document.getElementById("settings");
+var newGroupBtn = document.getElementById("settingsBtn");
 
 newGroupBtn.onclick = function() {
-    if (document.getElementById("csvcontainer").style.display == "none") {
-        var newA = document.getElementById("settingscontainer");
+    if (document.getElementById("newGroup").style.display == "none") {
+        var newA = document.getElementById("settings");
 
         if (newA.style.display !== "none") {
-            $("div#settingscontainer").fadeOut("");
+            $("div#settings").fadeOut("");
             $("div#cover").fadeOut("");
         } else {
             $("div#cover").fadeIn("");
-            $("div#settingscontainer").fadeIn("");
-            document.getElementById("settingsName").value = document.getElementById("title-text").innerHTML;
+            $("div#settings").fadeIn("");
+            document.getElementById("settings").value = document.getElementById("title-text").innerHTML;
         }
     }
 }
 
+var popupIDs = [["settings", "settingsBtn"], ["newGroup", "newGroupBtn"], ["popcontainer", "titleBtn", "postBtn"]];
+
 window.addEventListener("click", function(e) { //detect outside click
-    //TODO condition for multiple windows
-    if (!document.getElementById("settingscontainer").contains(e.target) && !document.getElementById("settings").contains(e.target)) {
-        if (document.getElementById("settingscontainer").style.display !== "none") {
-            $("div#settingscontainer").fadeOut("fast");
-            $("div#cover").fadeOut("");
+    var outsideClick = true;
+    var displayed = "";
+
+    for (let popGroup of popupIDs) {
+        let cont = popGroup[0];
+
+        if (document.getElementById(cont).style.display !== "none") {
+            for (let popID of popGroup) {
+                if (document.getElementById(popID).contains(e.target)) {
+                    outsideClick = false;
+                    break;
+                }
+            }
+
+            displayed = cont;
+            break;
         }
     }
 
-    if (!document.getElementById("csvBtn").contains(e.target) && !document.getElementById("csvcontainer").contains(e.target)) {
-        if (document.getElementById("csvcontainer").style.display !== "none") {
-            $("div#csvcontainer").fadeOut("fast");
-            $("div#cover").fadeOut("");
-        }
-    }
-
-    if (!document.getElementById("popcontainer").contains(e.target) &&
-        !document.getElementById("titleBtn").contains(e.target) &&
-        !document.getElementById("postBtn").contains(e.target)) {
-        if (document.getElementById("popcontainer").style.display !== "none") {
-            $("div#cover").fadeOut("");
-            $("div#popcontainer").fadeOut("fast");
+    if (outsideClick && displayed != "") {
+        $("div#" + displayed).fadeOut("fast");
+        $("div#cover").fadeOut("");
+        if (displayed == "popcontainer") {
             $("#plusBtn").css("transform", "rotate(0deg)");
         }
     }
 });
-
-function save() { //TODO connect backend to settings
-    //if(){} //TODO error message if new group name is not unique?
-    console.log(document.getElementById("groupname").value); //backend var for new group name
-};
 
 /*Write announcement*/
 function submit() {
@@ -185,7 +184,7 @@ function update(e) {
     $(".post").remove(); //clears existing announcements
     $(".students").remove(); //clears existing students
 
-    document.getElementById("settings").style.display = "block";
+    document.getElementById("settingsBtn").style.display = "block";
 
     for (var i = 0; i < json.length; i++) { //backend loop
         var obj = json[i]; //backend loop
@@ -218,8 +217,8 @@ function update(e) {
     }
 
     if (screen.width <= 750) { //condition for mobiles
-        document.getElementById("csvBtn").style.display = "none";
-        document.getElementById("csvBtn").style.visibility = "hidden";
+        document.getElementById("newGroupBtn").style.display = "none";
+        document.getElementById("newGroupBtn").style.visibility = "hidden";
     }
 }
 
@@ -247,20 +246,20 @@ function updateGroup() {
         document.getElementById("settingsFile").value = null;
         document.getElementById("settingsName").value = null;
 
-        $("div#settingscontainer").fadeOut("fast");
+        $("div#settings").fadeOut("fast");
         $("div#cover").fadeOut("");
     }
 }
 
 function createNewGroup() {
-    var file = document.getElementById("filename").files[0];
-    var group = document.getElementById("usr").value;
+    var file = document.getElementById("newGroupFile").files[0];
+    var group = document.getElementById("newGroupName").value;
 
     if (createGroup(file, group)) {
-        document.getElementById("filename").value = null;
-        document.getElementById("usr").value = null;
+        document.getElementById("newGroupFile").value = null;
+        document.getElementById("newGroupName").value = null;
 
-        $("div#csvcontainer").fadeOut("fast");
+        $("div#newGroup").fadeOut("fast");
         $("div#cover").fadeOut("");
     }
 }
