@@ -3,8 +3,8 @@
 The entire backend of the TellMe application. The server runs containerised versions of MySQL 8.0.2 and Node.js 9.5.0, as well as it connects to a Firebase Cloud Messaging instance to send the push notifications.
 
 # Contents
-- [Setting up the server](https://github.com/JoshuaBradbury/TellMe/Backend/README.md#setting-up-the-server "Setting up the server")
-- [Running the server](https://github.com/JoshuaBradbury/TellMe/Backend/README.md#running-the-server "Running the server")
+- [Setting up the server](https://github.com/JoshuaBradbury/TellMe/tree/Backend/README.md#setting-up-the-server "Setting up the server")
+- [Running the server](https://github.com/JoshuaBradbury/TellMe/tree/Backend/README.md#running-the-server "Running the server")
 
 ## Setting up the server
 All of the below are recommendations and any deviation is taken at the users own risk. These settings were used for the testing and demo platform but might not be appropriate for your own use. If you run into trouble feel free to contact the project owners for help or guidance.
