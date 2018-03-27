@@ -1,106 +1,105 @@
 <html>
+    <head>
+        <title>Tell Me</title>
 
-<head>
-  <title>Tell Me</title>
-  <link rel="icon" type="image/png" href="assets/logo16x16.png" sizes="32x32" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/popup.css" type="text/css">
-    <link rel="stylesheet" href="css/scroll.css" type="text/css">
-    <link rel="stylesheet" href="css/ecs.css" type="text/css">
-    <link rel="stylesheet" href="css/sidebar.css" type="text/css">
-    <link rel="stylesheet" href="css/btn.css" type="text/css">
+        <link rel="icon" type="image/png" href="assets/logo16x16.png" sizes="32x32" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/popup.css" type="text/css">
+        <link rel="stylesheet" href="css/scroll.css" type="text/css">
+        <link rel="stylesheet" href="css/ecs.css" type="text/css">
+        <link rel="stylesheet" href="css/sidebar.css" type="text/css">
+        <link rel="stylesheet" href="css/btn.css" type="text/css">
+    </head>
 
-</head>
+    <body>
+        <div id="cover"></div>
 
-<body  class ="" >
-  <div id="cover" onclick="fadeOut()">
-  </div>
-    <div class="top">
-    <div class="logo-container"><img id="KCL logo" src="assets/kcl-logo.jpg"></div>
-    <div class="title" id="title-text"></div>
-    <button id="login" class="logout" onclick="loginOrOut()"></button>
-    <div class="settings" id="settings"><a href="#"><img id="KCL logo" src="assets/settings.png"></div></a>
-  </div>
-
-  <div class="side" id="left">
-
-  </div>
-
-  <div id="annoucements">
-      <div class="container">
-          <div class="form-group">
-              <label for="usr"></label>
-              <input type="text" placeholder="Title" class="form-control input-mysize" id="titleBtn">
-              <div class="placeholder" id="postBtn" onclick="show()"><img id="plusBtn" src="assets/plus.png"></div>
-          </div>
-      </div>
-
-<div class="annoucement-posts" id="announcements-container">
-
-</div>
-
-        <div class="pop-container bubble2" id="popcontainer" style="display:none;">
-            <div class="form-group bubble">
-                <label for="usr"></label>
-                <div class="text" placeholder='&nbsp;&nbsp;Body' id="text" contenteditable="true"></div>
-                <input type="button" class="textBtn" id="boldBtn" onclick="document.execCommand('bold');" value="Bold" />
-                <input type="button" class="textBtn" id="italicBtn" onclick="document.execCommand('italic');" value="Italic" />
-                <input type="button" class="textBtn" id="ulineBtn" onclick="document.execCommand('underline');" value="Underline" />
-                <br><input type="button" class="submitBtn btn" id="submitBtn" onclick="submit()" value="Submit announcement" />
+        <div class="top">
+            <div class="logo-container">
+                <img id="KCL logo" src="assets/kcl-logo.jpg" />
             </div>
-
-        </div>
-
-        <!--csv popup-->
-        <div class="csv-container" id="csvcontainer" style="display:none;">
-            <div class="form-group">
-              <h2>Add Module</h2>
-                <h3>Module Name</h3>
-                <input type="text" class="form-control csv-input-mysize" id="usr">
-                <br>
-                <h3>Upload Students</h3>
-                <input type="file" name="filename"  class="form-control csv-input-mysize" id="filename">
-                <br><center>
-                <input type="button" class="btn" onclick="create()" value="Create Module" />
-              </center>
+            <div class="title" id="title-text"></div>
+            <button id="login" class="logout" onclick="loginOrOut()"></button>
+            <div class="settings" id="settings">
+                <a href="#">
+                    <img id="KCL logo" src="assets/settings.png" />
+                </a>
             </div>
         </div>
-        <!--settings popup-->
-        <div class="csv-container" id="settingscontainer" style="display:none;">
-            <div class="form-group">
-              <h2>Settings</h2>
-              <h3>Module Name</h3>
-                <input type="text" class="form-control csv-input-mysize" id="groupname">
-                <br>
-                <h3>Add Students</h3>
-                <input type="file" name="filename"  class="form-control csv-input-mysize" id="filename">
-                <br>
-                <center>
-                <input type="button" class="btn" onclick="save()" value="Save settings" />
-                <input type="button" class="deleteBtn" onclick="deleteforever()" value="Delete group" />
-              </center>
+
+        <div class="side" id="left"></div>
+
+        <div id="announcements">
+            <div class="container">
+                <div class="form-group">
+                    <label for="usr"></label>
+                    <input type="text" placeholder="Title" class="form-control input-mysize" id="titleBtn" />
+                    <div class="placeholder" id="postBtn" onclick="show()">
+                        <img id="plusBtn" src="assets/plus.png" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="announcement-posts" id="announcements-container"></div>
+
+            <div class="pop-container bubble2" id="popcontainer" style="display:none;">
+                <div class="form-group bubble">
+                    <label for="usr"></label>
+                    <div class="text" placeholder='&nbsp;&nbsp;Body' id="text" contenteditable="true"></div>
+                    <input type="button" class="textBtn" id="boldBtn" onclick="document.execCommand('bold');" value="Bold" />
+                    <input type="button" class="textBtn" id="italicBtn" onclick="document.execCommand('italic');" value="Italic" />
+                    <input type="button" class="textBtn" id="ulineBtn" onclick="document.execCommand('underline');" value="Underline" />
+                    <br><input type="button" class="submitBtn btn" id="submitBtn" onclick="submit()" value="Submit announcement" />
+                </div>
+            </div>
+
+            <div class="csv-container" id="csvcontainer" style="display:none;">
+                <div class="form-group">
+                    <h2>Add Module</h2>
+                    <h3>Module Name</h3>
+                    <input type="text" class="form-control csv-input-mysize" id="usr" />
+                    <br>
+                    <h3>Upload Students</h3>
+                    <input type="file" name="filename" class="form-control csv-input-mysize" id="filename" />
+                    <br>
+                    <center>
+                        <input type="button" class="btn" onclick="create()" value="Create Module" />
+                    </center>
+                </div>
+            </div>
+
+            <div class="csv-container" id="settingscontainer" style="display:none;">
+                <div class="form-group">
+                    <h2>Settings</h2>
+                    <h3>Module Name</h3>
+                    <input type="text" class="form-control csv-input-mysize" id="groupname" />
+                    <br>
+                    <h3>Add Students</h3>
+                    <input type="file" name="filename" class="form-control csv-input-mysize" id="filename" />
+                    <br>
+                    <center>
+                        <input type="button" class="btn" onclick="save()" value="Save settings" />
+                        <input type="button" class="deleteBtn" onclick="deleteforever()" value="Delete group" />
+                    </center>
+                </div>
             </div>
         </div>
-    </div>
 
         <div class="sideright" id="right">
-
-        <a href="#">
-          <div class="bottom"id="csvBtn"><img class="circle" id="plusBtn" src="assets/plus.png"></div>
-        </a>
+            <a href="#">
+                <div class="bottom"id="csvBtn">
+                    <img class="circle" id="plusBtn" src="assets/plus.png" />
+                </div>
+            </a>
         </div>
 
-        </div>
-        </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/msal.js"></script>
-    <script type="text/javascript" src="js/db.js"></script>
-    <script type="text/javascript" src="js/login.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-</body>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/msal.js"></script>
+        <script type="text/javascript" src="js/db.js"></script>
+        <script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
 </html>

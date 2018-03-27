@@ -1,8 +1,8 @@
 var applicationConfig = {
-    clientID: 'c4d8ad78-18b5-4bdd-afa2-50617a34e8cf'
+    clientID: "c4d8ad78-18b5-4bdd-afa2-50617a34e8cf"
 };
 
- var _user = ""
+var _user = ""
 
 var graphApiEndpoint = "https://graph.microsoft.com/v1.0/me";
 var graphAPIScopes = ["https://graph.microsoft.com/user.read"];
@@ -17,7 +17,8 @@ window.onload = function () {
     }
 }
 
-function loginOrOut(forceLogOut = true) {
+function loginOrOut(forceLogOut) {
+    forceLogOut = typeof forceLogOut !== "undefined" ? forceLogOut : true;
     var user = userAgentApplication.getUser();
     if (!user) {
         userAgentApplication.loginRedirect(graphAPIScopes, "domain_hint=kcl.ac.uk");

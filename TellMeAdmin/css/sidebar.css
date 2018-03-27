@@ -1,54 +1,58 @@
 .menu-box-tab {
-  line-height: 60px;
-  padding:.5rem 0rem;
-  display: block;
-  border-bottom: 1px solid white;
-  -webkit-transition: background .2s;
-  transition: background .2s;
-}
-  .menu-box-tab:hover {
-    background: #8a8a8a;
-    border-bottom: 1px solid white;
-  }
-  .menu-box-tab:hover .icon {
-    color: #fff;
-  }
-  .menu-box-tab:hover .menu-box-number {
-    background: #e64c65;
-  }
-
-.students {
     line-height: 60px;
-    padding:.5rem 0rem;
-
+    padding: .5rem 0rem;
     display: block;
     border-bottom: 1px solid white;
     -webkit-transition: background .2s;
     transition: background .2s;
 }
-.students:hover {
-      background: #FF9999;
-      border-bottom: 1px solid white;
+
+.menu-box-tab:hover {
+    background: #8a8a8a;
+    border-bottom: 1px solid white;
 }
 
+.menu-box-tab:hover .icon {
+    color: #fff;
+}
+
+.menu-box-tab:hover .menu-box-number {
+    background: #e64c65;
+}
+
+.students {
+    line-height: 60px;
+    padding: .5rem 0rem;
+    display: block;
+    border-bottom: 1px solid white;
+    -webkit-transition: background .2s;
+    transition: background .2s;
+}
+
+.students:hover {
+    background: #FF9999;
+    border-bottom: 1px solid white;
+}
 
 .bottom {
-  bottom: 0em;
-  margin: 1em 1em;
-  position: absolute;
-  right: 16%;
-  z-index: 100;
+    bottom: 0em;
+    margin: 1em 1em;
+    position: absolute;
+    right: 16%;
+    z-index: 100;
 }
+
 .circle {
-  width: 90px;
-  height:90px;
- border-radius: 50%;
- border: 7px solid white;
- transition: all 1s;
--moz-transition: all .5s; /* Firefox 4 */
--webkit-transition: all .5s; /* Safari and Chrome */
--o-transition: all .5s; /* Opera */
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 7px solid white;
+    transition: all 1s;
+    -moz-transition: all .5s;
+    -webkit-transition: all .5s;
+    -o-transition: all .5s;
 }
-.circle:hover{
-   border-color: #8a8a8a;
+
+.circle:hover {
+     border-color: #8a8a8a;
 }

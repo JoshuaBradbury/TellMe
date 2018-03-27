@@ -1,54 +1,56 @@
 .btn {
-  background-color: white;
-  border-radius: 10px;
-  color: #343c3e;
-  font-size: 15px;
-  padding: 4px 20px 5px 20px;
-  border: solid #949494 1px;
-  -webkit-transition: background .2s;
-  transition: background .2s;
+    background-color: white;
+    border-radius: 10px;
+    color: #343c3e;
+    font-size: 15px;
+    padding: 4px 20px 5px 20px;
+    border: solid #949494 1px;
+    -webkit-transition: background .2s;
+    transition: background .2s;
 }
 
 .btn:hover {
-  background: #c4c4c4;
-  text-decoration: none;
+    background: #c4c4c4;
+    text-decoration: none;
 }
+
 .textBtn {
-  margin-top: 1em;
-  background-color: white;
-  border-radius: 10px;
-  color: #343c3e;
-  font-size: 15px;
-  padding: 4px 20px 5px 20px;
-  border: solid #949494 1px;
-  -webkit-transition: background .2s;
-  transition: background .2s;
+    margin-top: 1em;
+    background-color: white;
+    border-radius: 10px;
+    color: #343c3e;
+    font-size: 15px;
+    padding: 4px 20px 5px 20px;
+    border: solid #949494 1px;
+    -webkit-transition: background .2s;
+    transition: background .2s;
 }
 
 .submitBtn {
-  margin-top: 1em;
-  background-color: white;
-  border-radius: 10px;
-  color: #343c3e;
-  font-size: 15px;
-  padding: 4px 20px 5px 20px;
-  border: solid #949494 1px;
-  -webkit-transition: background .2s;
-  transition: background .2s;
+    margin-top: 1em;
+    background-color: white;
+    border-radius: 10px;
+    color: #343c3e;
+    font-size: 15px;
+    padding: 4px 20px 5px 20px;
+    border: solid #949494 1px;
+    -webkit-transition: background .2s;
+    transition: background .2s;
 }
 
 .deleteBtn {
-  margin-left: 4em;
-  background-color: white;
-  color: #343c3e;
-  font-size: 15px;
-  padding: 4px 20px 5px 20px;
-  border: solid #949494 1px;
-  border-radius: 10px;
-  -webkit-transition: background .2s;
-  transition: background .2s;
+    margin-left: 4em;
+    background-color: white;
+    color: #343c3e;
+    font-size: 15px;
+    padding: 4px 20px 5px 20px;
+    border: solid #949494 1px;
+    border-radius: 10px;
+    -webkit-transition: background .2s;
+    transition: background .2s;
 }
+
 .deleteBtn:hover {
-  background: #FF9999;
-  text-decoration: none;
+    background: #FF9999;
+    text-decoration: none;
 }
