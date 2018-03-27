@@ -13,29 +13,6 @@
     -khtml-opacity: 0.5;
 }
 
-.pop-container {
-    padding-top: -1em;
-    background-color: #8a8a8a;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    margin-right: auto;
-    margin-left: auto;
-    height: 24em;
-    width: 34em;
-    border-color: #8a8a8a;
-    padding-right: 1.1em;
-    padding-left: 1.1em;
-    position: relative;
-    z-index: 105;
-}
-
-.pop-input-mysize {
-    border-radius: 10px;
-    width: 91%;
-    margin-left: 2%;
-    margin-right: 7%;
-}
-
 .text {
     border-radius: 10px;
     vertical-align: middle;
@@ -55,11 +32,11 @@
     margin-left: 25%;
     height: 22em;
     width: 50%;
-    margin-top: -6em;
+    margin-top: 6em;
     border-color: #246691;
     padding-right: 1.1em;
     padding-left: 1.1em;
-    position: relative;
+    position: absolute;
     z-index: 105;
 }
 

@@ -2,6 +2,7 @@
     line-height: 60px;
     padding: .5rem 0rem;
     display: block;
+    width: 100%;
     border-bottom: 1px solid white;
     -webkit-transition: background .2s;
     transition: background .2s;
@@ -36,10 +37,15 @@
 
 .bottom {
     bottom: 0em;
-    margin: 1em 1em;
+    margin: 1em 1.5em;
     position: absolute;
     right: 16%;
     z-index: 100;
+}
+
+.side-col {
+    background-color: #c4c4c4;
+    overflow-y: scroll !important;
 }
 
 .circle {
