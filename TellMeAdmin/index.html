@@ -21,7 +21,7 @@
             </div>
             <div class="title" id="title-text"></div>
             <button id="login" class="logout" onclick="loginOrOut()"></button>
-            <div class="settings" id="settings">
+            <div class="settings" id="settingsBtn">
                 <a href="#">
                     <img id="KCL logo" src="assets/settings.png" />
                 </a>
@@ -54,14 +54,14 @@
                 </div>
             </div>
 
-            <div class="csv-container" id="csvcontainer" style="display:none;">
+            <div class="popup" id="newGroup" style="display:none;">
                 <div class="form-group">
                     <h2>Add Group</h2>
                     <h3>Group Name</h3>
-                    <input type="text" class="form-control csv-input-mysize" id="usr" />
+                    <input type="text" class="form-control csv-input-mysize" id="newGroupName" />
                     <br>
                     <h3>Upload Students</h3>
-                    <input type="file" name="filename" class="form-control csv-input-mysize" id="filename" />
+                    <input type="file" name="filename" class="form-control csv-input-mysize" id="newGroupFile" />
                     <br>
                     <center>
                         <input type="button" class="btn" onclick="createNewGroup()" value="Create Group" />
@@ -69,7 +69,7 @@
                 </div>
             </div>
 
-            <div class="csv-container" id="settingscontainer" style="display:none;">
+            <div class="popup" id="settings" style="display:none;">
                 <div class="form-group">
                     <h2>Settings</h2>
                     <h3>Group Name</h3>
@@ -88,7 +88,7 @@
 
         <div class="sideright" id="right">
             <a href="#">
-                <div class="bottom" id="csvBtn">
+                <div class="bottom" id="newGroupBtn">
                     <img class="circle" id="plusBtn" src="assets/plus.png" />
                 </div>
             </a>
