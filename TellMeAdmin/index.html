@@ -56,15 +56,15 @@
 
             <div class="csv-container" id="csvcontainer" style="display:none;">
                 <div class="form-group">
-                    <h2>Add Module</h2>
-                    <h3>Module Name</h3>
+                    <h2>Add Group</h2>
+                    <h3>Group Name</h3>
                     <input type="text" class="form-control csv-input-mysize" id="usr" />
                     <br>
                     <h3>Upload Students</h3>
                     <input type="file" name="filename" class="form-control csv-input-mysize" id="filename" />
                     <br>
                     <center>
-                        <input type="button" class="btn" onclick="create()" value="Create Module" />
+                        <input type="button" class="btn" onclick="createNewGroup()" value="Create Group" />
                     </center>
                 </div>
             </div>
@@ -72,14 +72,14 @@
             <div class="csv-container" id="settingscontainer" style="display:none;">
                 <div class="form-group">
                     <h2>Settings</h2>
-                    <h3>Module Name</h3>
-                    <input type="text" class="form-control csv-input-mysize" id="groupname" />
+                    <h3>Group Name</h3>
+                    <input type="text" class="form-control csv-input-mysize" id="settingsName" />
                     <br>
                     <h3>Add Students</h3>
-                    <input type="file" name="filename" class="form-control csv-input-mysize" id="filename" />
+                    <input type="file" name="filename" class="form-control csv-input-mysize" id="settingsFile" />
                     <br>
                     <center>
-                        <input type="button" class="btn" onclick="save()" value="Save settings" />
+                        <input type="button" class="btn" onclick="updateGroup()" value="Save settings" />
                         <input type="button" class="deleteBtn" onclick="deleteforever()" value="Delete group" />
                     </center>
                 </div>
@@ -88,7 +88,7 @@
 
         <div class="sideright" id="right">
             <a href="#">
-                <div class="bottom"id="csvBtn">
+                <div class="bottom" id="csvBtn">
                     <img class="circle" id="plusBtn" src="assets/plus.png" />
                 </div>
             </a>
