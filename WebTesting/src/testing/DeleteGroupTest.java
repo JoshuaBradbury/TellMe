@@ -8,10 +8,11 @@ public class DeleteGroupTest {
 
     public static void main(String[] args) throws InterruptedException{
         // declaration and instantiation of objects/variables
-		System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/chromedriver/chromedriver");
+    	System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/src/testing/chromedriver/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://tellmesite.newagedev.co.uk/");
 		
+		//grabs list of existing groups
 		String testGroup = "5AAHf2008";
 		String listOfGroups = driver.findElement(By.xpath("//*[@id=\"right\"]")).getText();
 		Thread.sleep(1000);
@@ -22,11 +23,11 @@ public class DeleteGroupTest {
 		Thread.sleep(1000);
 		
 		//Clicks on settings
-		driver.findElement(By.xpath("//*[@id=\"settings\"]")).click();
+		driver.findElement(By.xpath("//*[@id=\"settingsBtn\"]")).click();
 		System.out.println("Going into settings...");
 		Thread.sleep(1000);
 		
-		driver.findElement(By.xpath("//*[@id=\"settingscontainer\"]/div/center/input[2]")).click();
+		driver.findElement(By.xpath("//*[@id=\"settings\"]/div/center/input[2]")).click();
 		System.out.println("Deleting group...");
 		Thread.sleep(1000);
 		

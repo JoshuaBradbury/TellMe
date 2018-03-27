@@ -9,14 +9,15 @@ public class GroupTitleTest {
 
     public static void main(String[] args) throws InterruptedException{
         // declaration and instantiation of objects/variables
-		System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/chromedriver/chromedriver");
+    	System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/src/testing/chromedriver/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://tellmesite.newagedev.co.uk/");
     	
         String expectedGroupTitle = "n5AAH2003";
         String actualGroupTitle = "";
 		Thread.sleep(1000);
-
+		System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/src/testing/chromedriver/chromedriver");
+		
         //Selects group from sidebar
 		driver.findElement(By.xpath("//*[@id=\"module-name\"][contains(text(), \""+ expectedGroupTitle +"\")]")).click();
 		System.out.println("Going into module n5AAH2003...");

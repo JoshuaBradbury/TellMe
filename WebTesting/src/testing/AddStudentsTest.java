@@ -2,54 +2,58 @@ package testing;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class AddStudentsTest {
-	
-	//NOTE !!! need to do cases such as invalid names or things
 
     public static void main(String[] args) throws InterruptedException{
         // declaration and instantiation of objects/variables
-		System.setProperty("webdriver.chrome.driver", "/chromedriver/chromedriver");
+    	System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/src/testing/chromedriver/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://tellmesite.newagedev.co.uk/");
 		
-		String testGroup = "sd5AAH2001";
-		
+		String testGroup = "5sAAH2002";
+
 		//click on module, go to its settings
 		driver.findElement(By.xpath("//*[@id=\"module-name\"][contains(text(), \""+ testGroup +"\")]")).click();
 		System.out.println("Selecting Group...");
 		Thread.sleep(1000);
 		
 		//Clicks on settings
-		driver.findElement(By.xpath("//*[@id=\"settings\"]")).click();
+		driver.findElement(By.xpath("//*[@id=\"settingsBtn\"]")).click();
 		System.out.println("Going into settings...");		
 		Thread.sleep(1000);
 		
-		//Clicks on Choose File
-		System.out.println(driver.findElement(By.xpath("//*[@id=\"settingsFile\"]")).getText());
-
-		//.sendKeys("/home/k1631285/git/tellMe/WebTesting/src/testing/testStudentlist.csv");	
-			Thread.sleep(1000);
-	
-		driver.findElement(By.className("btn")).click();
-		System.out.println("Uploading student file...");
+		//Enters group name 
+		driver.findElement(By.xpath("//*[@id=\"settingsName\"]")).sendKeys("fillerForTestToWorkAtm");
 		Thread.sleep(1000);
 		
-		//.sendKeys("/home/k1631285/git/tellMe/WebTesting/src/testing/testStudentlist.csv")
+		//Clicks on choose file
+	    WebElement chooseFile = driver.findElement(By.id("settingsFile"));
+	    chooseFile.sendKeys("/home/k1631285/git/tellMe/WebTesting/src/testing/TestStudentlist.csv");
+		System.out.println("Uploading student list...");
+		Thread.sleep(1000);
 		
-		//refresh browser
-		driver.navigate().refresh();
+		//clicks on save settings
+		driver.findElement(By.xpath("//*[@id=\"settings\"]/div/center/input[1]")).click();
+		System.out.println("Saving settings...");
+		Thread.sleep(1000);
+		
+		String studentList = "/home/k1631285/git/tellMe/WebTesting/src/testing/TestStudentlist.csv";
+		
+		System.out.println(studentList);
+		String listOfStudents = driver.findElement(By.xpath("//*[@id=\"left\"]")).getText();
 		
 		//check for new group within group list
-   //    if (driver.findElements(By.className("menu-box-tab")).contains(testGroup)){
-   //         System.out.println("Test Passed! The test students were 		driver.findEleme.sendKeys("/home/k1631285/git/tellMe/WebTesting/src/testing/testStudentlist.csv")nt(By.name("btn")).click();		driver.findElement(By.name("btn")).click();added to the group."); 
-   //     } else {
-   //         System.out.println("Test Failed! The test students were not added.");
- //       }
-	//	
+		if (listOfStudents.contains(studentList)){
+            System.out.println("Test Passed! The test students were added to the group."); 
+		} else {
+			System.out.println("Test Failed! The test students were not added.");
+        }
+
         //close chrome
         driver.close();  
     }
-}//ADDFILE TODO
+}
 

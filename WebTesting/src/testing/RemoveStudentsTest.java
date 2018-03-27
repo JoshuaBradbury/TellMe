@@ -8,11 +8,12 @@ public class RemoveStudentsTest {
 
     public static void main(String[] args) throws InterruptedException{
         // declaration and instantiation of objects/variables
-		System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/chromedriver/chromedriver");
+    	System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/src/testing/chromedriver/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://tellmesite.newagedev.co.uk/");
 		
 		//grabs first student on list and list of current students 
+		String firstTestGroup = "sd5AAH2001";
 		String studentToDelete = driver.findElement(By.xpath("//*[@id=\"student-name0\"]")).getText();
 		String listOfCurrentStudents = driver.findElement(By.xpath("//*[@id=\"left\"]")).getText();
 		Thread.sleep(1000);
@@ -29,14 +30,15 @@ public class RemoveStudentsTest {
 		
 		//checks if the list of students contains the student just deleted and prints the result of the test
 		if(listOfCurrentStudents.contains(studentToDelete)) {
-				System.out.println("Test Passed! The first student \"" + studentToDelete + "\" was deleted."); 
+				System.out.println("Test Passed! The first student \"" + studentToDelete + "\" from group \"" + firstTestGroup + "\" was deleted."); 
 	        } else {
-	        	System.out.println("Test Failed! The first student \"" + studentToDelete + "\" was not deleted."); 
+	        	System.out.println("Test Failed! The first student \"" + studentToDelete + "\" from group \"" + firstTestGroup + "\" was not deleted."); 
 		    }
 	
 		
 		//selects a different group
-		driver.findElement(By.xpath("//*[@id=\"module-name\"][contains(text(), \"n5AAH2003\")]")).click();
+		String secondTestGroup = "n5AAH2003";
+		driver.findElement(By.xpath("//*[@id=\"module-name\"][contains(text(), \""+ secondTestGroup + "\")]")).click();
 		System.out.println("Going into module n5AAH2003...");
 		Thread.sleep(1000);
 		
@@ -57,9 +59,9 @@ public class RemoveStudentsTest {
 		
 		//checks if the list of students contains the student just deleted and prints the result of the test
 		if(secondListOfCurrentStudents.contains(secondStudentToDelete)) {
-				System.out.println("Test Passed! The student \"" + secondStudentToDelete + "\" was deleted."); 
+				System.out.println("Test Passed! The student \"" + secondStudentToDelete + "\" from group \"" + secondTestGroup + "\" was deleted."); 
 	        } else {
-	        	System.out.println("Test Failed! The student \"" + secondStudentToDelete + "\" was not deleted."); 
+	        	System.out.println("Test Failed! The student \"" + secondStudentToDelete + "\" from group \"" + secondTestGroup + "\" was not deleted."); 
 		    }
 		
         //close chrome
