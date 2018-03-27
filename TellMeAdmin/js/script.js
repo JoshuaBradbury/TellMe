@@ -203,12 +203,12 @@ function update(e) {
                 //close.classList.add("close"); //TODO change to custom close element for students
                 my_container.appendChild(new_mod);
                 var text = document.createElement("h1");
-                text.id = "student-name";
+                text.id = "student-name" + x;
                 text.innerHTML = obj.students[x]; //backend load students
                 //new_mod.appendChild(close);
 
                 text.onclick = function() {
-                    removestudent(this, e.innerHTML, text.innerHTML);
+                    removestudent(this, e, this.innerHTML);
                     return false; //TODO fix this
                 }
 
