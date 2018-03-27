@@ -9,8 +9,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class TestAnnoucements {
 
 	public static void main(String[] args) throws InterruptedException {
-		
-		System.setProperty("webdriver.chrome.driver", "/home/k1631233/Documents/chromedriver");
+        // declaration and instantiation of objects/variables
+		System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/chromedriver/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://tellmesite.newagedev.co.uk/");
 		
@@ -83,6 +83,6 @@ public class TestAnnoucements {
 		
 		Thread.sleep(1000);
 		
-		driver.quit();
+		driver.close();
 	}
 }
