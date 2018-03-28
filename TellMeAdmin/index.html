@@ -74,7 +74,7 @@
                             <div class="rounded d-flex mx-auto w-75">
                                 <h5 class="mb-0 mx-auto">
                                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <div class="form-group d-flex">
+                                        <div id="announcementInputGroup" class="form-group d-flex">
                                             <label for="announcementTitle"></label>
                                             <input type="text" placeholder="Title" class="form-control input-mysize d-flex" id="announcementTitle" />
                                             <div class="placeholder d-flex" id="postBtn" onclick="show()">
@@ -90,9 +90,6 @@
                                     <div class="form-group bubble">
                                         <label for="usr"></label>
                                         <div class="text" placeholder='&nbsp;&nbsp;Body' id="text" contenteditable="true"></div>
-                                        <input type="button" class="textBtn" id="boldBtn" onclick="document.execCommand('bold');" value="Bold" />
-                                        <input type="button" class="textBtn" id="italicBtn" onclick="document.execCommand('italic');" value="Italic" />
-                                        <input type="button" class="textBtn" id="ulineBtn" onclick="document.execCommand('underline');" value="Underline" />
                                         <br><input type="button" class="submitBtn btn" id="submitBtn" onclick="submit()" value="Submit announcement" />
                                     </div>
                                 </div>
