@@ -9,7 +9,7 @@
   height: 15%;
   width: 15%;
   border-radius: 4%;
-  margin: 5%;
+  margin: 3em 5%;
 }
 .lpwin {
   margin-left: 49.5%;
@@ -30,6 +30,7 @@ col-md-1
   z-index: -0;
 }
 .white {
+  float: right;
   font-size: 18px;
   color: white !important;
 }
