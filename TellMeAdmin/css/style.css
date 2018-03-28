@@ -9,6 +9,10 @@ body, html {
     min-height: 108px;
 }
 
+.text-title {
+    font-size: 1.5em;
+}
+
 .title {
     margin-top: .8em;
     font-size: 20px;

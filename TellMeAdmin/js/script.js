@@ -14,7 +14,6 @@ newGroupBtn.onclick = function() {
     }
 }
 
-/*open settings ui*/
 var newGroupBtn = document.getElementById("settingsBtn");
 
 newGroupBtn.onclick = function() {
@@ -34,7 +33,7 @@ newGroupBtn.onclick = function() {
 
 var popupIDs = [["settings", "settingsBtn"], ["newGroup", "newGroupBtn"], ["collapseOne", "announcementInputGroup", "announcementTitle", "text", "submitBtn"]];
 
-window.addEventListener("click", function(e) { //detect outside click
+window.addEventListener("click", function(e) {
     var outsideClick = true;
     var displayed = "";
 
@@ -64,7 +63,6 @@ window.addEventListener("click", function(e) { //detect outside click
     }
 });
 
-/*Write announcement*/
 function submit() {
     var title = document.getElementById("announcementTitle").value;
     var text = document.getElementById("text").innerHTML;
@@ -72,14 +70,13 @@ function submit() {
     if (title == "" || text == "") {
         alert("Missing text field");
     } else {
-        $(".pop-container").fadeOut(); //removes dropdown on exit
-        $("div#cover").fadeOut("");
+        document.getElementById("announcementTitle").value = "";
+        document.getElementById("text").innerHTML = "";
+        $('div#collapseOne').collapse("hide");
 
-        document.getElementById("announcementTitle").value = ""; //clears text field on successful submit
-        document.getElementById("text").innerHTML = ""; //@TODO doesnt work!!
-
-        console.log(document.getElementById("title").innerHTML); // backend module code used to identify which module message belongs to
-        add_announcement(title, text); //calls add func, replace paramters with backend call
+        sendEndpointRequest("announcement", "POST", { "groupId": getOpenGroupId(), "subject": title, "announcement": text }, function(json) {
+            update(document.getElementById("title").innerHTML);
+        }, null);
     }
 }
 
@@ -106,9 +103,17 @@ function addAnnouncement(announcement) {
     text_container.classList.add("extra-margin");
     close.style.marginLeft = "10px";
 
+    var titleText = document.createElement("p");
+    titleText.classList.add("text-title");
+    titleText.innerHTML = title;
+
+    var messageText = document.createElement("p");
+    messageText.innerHTML = text;
+
     new_announcement.appendChild(text_container);
     new_announcement.id = "announcement " + announcement.announcement_id;
-    text_container.innerHTML += text;
+    text_container.appendChild(titleText);
+    text_container.appendChild(messageText);
 
     close.onclick = function() {
         deleteannouncement(this);
@@ -118,6 +123,25 @@ function addAnnouncement(announcement) {
     new_announcement.appendChild(close);
 }
 
+function addGroupToWeb(group) {
+    var new_mod = document.createElement("li");
+    var my_container = document.getElementById("groupList");
+    new_mod.classList.add("menu-box-tab");
+    new_mod.classList.add("nav-item");
+    my_container.appendChild(new_mod);
+
+    var text = document.createElement("h1");
+    text.id = "group " + group.groupId;
+    text.innerHTML = group.groupName;
+
+    new_mod.onclick = function() {
+        update(this.children[0].innerHTML);
+        return false;
+    }
+
+    new_mod.appendChild(text);
+}
+
 $(document).ready(function() {
     document.getElementById("cover").style.display = "none";
 
@@ -125,29 +149,25 @@ $(document).ready(function() {
         sendEndpointRequest("group", "GET", null, function(json) {
             var groups = json.groups;
             for (var i = 0; i < groups.length; i++) {
-                var obj = groups[i];
-                var new_mod = document.createElement("li");
-                var my_container = document.getElementById("groupList");
-                new_mod.classList.add("menu-box-tab");
-                new_mod.classList.add("nav-item");
-                my_container.appendChild(new_mod);
-
-                var text = document.createElement("h1");
-                text.id = "group " + obj.groupId;
-                text.innerHTML = obj.groupName;
-
-                new_mod.onclick = function() {
-                    update(this.children[0].innerHTML);
-                    return false;
-                }
-
-                new_mod.appendChild(text);
+                addGroupToWeb(groups[i]);
             }
 
             update(groups[0].groupName);
         }, null);
     }
 });
+
+function getOpenGroupId() {
+    var groupId = -1;
+    for (let group of document.getElementById("groupList").children) {
+        if (group.children[0].innerHTML == document.getElementById("title").innerHTML) {
+            groupId = group.children[0].id.split(" ")[1]
+            break;
+        }
+    }
+
+    return groupId;
+}
 
 function update(e) {
     if(typeof e === "string" || e instanceof String) {
@@ -162,13 +182,7 @@ function update(e) {
     document.getElementById("settingsBtn").style.display = "block";
 
     if (getUser()) {
-        var groupId = -1;
-        for (let group of document.getElementById("groupList").children) {
-            if (group.children[0].innerHTML == document.getElementById("title").innerHTML) {
-                groupId = group.children[0].id.split(" ")[1]
-                break;
-            }
-        }
+        var groupId = getOpenGroupId();
 
         sendEndpointRequest("announcement/" + groupId + "?n=all", "GET", null, function(json) {
             var announcements = json.announcements;
@@ -224,7 +238,23 @@ function deleteannouncement(e) {
 function deleteGroup(e) {
     var answer = confirm("Delete this group?")
     if (answer) {
-        e.parentNode.parentNode.removeChild(e.parentNode);
+        if (getUser()) {
+            sendEndpointRequest("group", "DELETE", { "groupId": getOpenGroupId() }, function(json) {
+                for (let group of document.getElementById("groupList").children) {
+                    if (group.children[0].innerHTML == document.getElementById("title").innerHTML) {
+                        document.getElementById("groupList").removeChild(group);
+                        break;
+                    }
+                }
+
+                if (document.getElementById("groupList").children.length > 0) {
+                    update(document.getElementById("groupList").children[0].children[0].innerHTML);
+                }
+            });
+        }
+
+        $("div#settings").fadeOut("fast");
+        $("div#cover").fadeOut("");
     } else {}
 }
 
@@ -278,7 +308,13 @@ function createGroup(file, group) {
                         }
                     }
 
-                    console.log(users);
+                    if (getUser()) {
+                        sendEndpointRequest("group?groupName=" + group, "GET", null, function(json) {
+                            updateGroupRequest(getOpenGroupId(), users);
+                        }, function() {
+                            createNewGroupRequest(group, users);
+                        });
+                    }
                 }
             }
         }
@@ -289,6 +325,20 @@ function createGroup(file, group) {
     }
 
     return false;
+}
+
+function updateGroupRequest(gid, students) {
+    sendEndpointRequest("group", "PUT", { groupId: gid, users: students }, function (json) {
+        update(document.getElementById("title").innerHTML);
+    }, null);
+}
+
+function createNewGroupRequest(gname, students) {
+    sendEndpointRequest("group", "POST", { "groupName": gname }, function (json) {
+        addGroupToWeb({ groupId: json.groupid, groupName: gname });
+        document.getElementById("title").innerHTML = gname;
+        updateGroupRequest(json.groupid, students);
+    }, null);
 }
 
 function evalJSON(json) {
