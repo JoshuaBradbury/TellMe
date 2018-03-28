@@ -37,16 +37,6 @@ router.use(morgan("dev"));
 
 router.use(bodyParser.json());
 
-router.use(function(req, res, next) {
-	res.header('Access-Control-Allow-Credentials', true);
-	res.header('Access-Control-Allow-Origin', "*");
-	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-	next();
-}).options('*', function (req, res, next) {
-	res.end();
-});
-
 const asyncMiddleware = fn => (req, res, next) => {
 	Promise.resolve(fn(req, res, next)).catch(next);
 };
@@ -186,8 +176,17 @@ async function getGroupByNameOrId(gid, gname) {
     return [];
 }
 
+router.options("/*", upload.array(), asyncMiddleware(async (req, res, next) => {
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+    res.send(200);
+}));
+
 router.get("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, next) => {
 	if (req.secure && req.accepts('application/json')) {
+        res.header("Access-Control-Allow-Origin", "*");
         if (await isUserAuthorisedForRead(req.get("authorization"))) {
             var groupq = await getGroupByNameOrId(req.query.groupId, req.query.groupName);
 
@@ -196,21 +195,29 @@ router.get("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, 
             } else if (req.query.groupId || req.query.groupName) {
                 res.status(400).json({"status": 400, "message": "Bad Request: groupId or groupName isn't valid"});
             } else {
-                user = fromB64(req.get("authorization").split(" ")[1]);
-                if (user.indexOf(":") !== -1) {
-                    user = user.replace(":", "");
-                }
-
-                const q = await query("SELECT * FROM modules WHERE `module_id` in (SELECT module_id FROM students_in_groups WHERE `k_number` = ?)", [convertEmailToUser(user)]);
-
                 var groups = [];
+                if (await isUserAuthorisedForWrite(req.get("authorization"))) {
+                    const q = await query("SELECT * FROM modules");
 
-                for (var i in q[0]) {
-                    var row = q[0][i];
-                    groups.push({"groupId": row.module_id, "groupName": row.module_name});
+                    for (var i in q[0]) {
+                        var row = q[0][i];
+                        groups.push({"groupId": row.module_id, "groupName": row.module_name});
+                    }
+                } else {
+                    user = fromB64(req.get("authorization").split(" ")[1]);
+                    if (user.indexOf(":") !== -1) {
+                        user = user.replace(":", "");
+                    }
+
+                    const q = await query("SELECT * FROM modules WHERE `module_id` in (SELECT module_id FROM students_in_groups WHERE `k_number` = ?)", [convertEmailToUser(user)]);
+
+                    for (var i in q[0]) {
+                        var row = q[0][i];
+                        groups.push({"groupId": row.module_id, "groupName": row.module_name});
+                    }
                 }
 
-                res.status(200).json({"status": 200, "message": "Ok: All " + q[0].length + " group(s) have been selected", "groups": groups});
+                res.status(200).json({"status": 200, "message": "Ok: All " + groups.length + " group(s) have been selected", "groups": groups});
             }
         } else {
             res.status(401).json({"status": 401, "message": "Unauthorised"});
@@ -220,8 +227,38 @@ router.get("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, 
 	}
 }));
 
+router.get("/api/v1.0/group/users", upload.array(), asyncMiddleware(async (req, res, next) => {
+	if (req.secure && req.accepts('application/json')) {
+        res.header("Access-Control-Allow-Origin", "*");
+        if (await isUserAuthorisedForWrite(req.get("authorization"))) {
+            var groupq = await getGroupByNameOrId(req.query.groupId, req.query.groupName);
+
+            if (groupq.length > 0) {
+                const q = await query("SELECT k_number FROM students_in_groups WHERE `module_id` = ?", [groupq[0][0].module_id]);
+
+                var students = [];
+
+                for (var i in q[0]) {
+                    students.push("k" + q[0][i].k_number);
+                }
+
+                res.status(200).json({"status": 200, "message": "Ok: group found", "groupId": groupq[0][0].module_id, "groupName": groupq[0][0].module_name, "students": students});
+            } else if (req.query.groupId || req.query.groupName) {
+                res.status(400).json({"status": 400, "message": "Bad Request: groupId or groupName isn't valid"});
+            } else {
+                res.status(400).json({"status": 400, "message": "Bad Request: groupName or groupId must be specified in the body"});
+            }
+        } else {
+            res.status(401).json({"status": 401, "message": "Unauthorised"});
+        }
+    } else {
+        res.sendStatus(406);
+    }
+}));
+
 router.post("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, next) => {
 	if (req.secure && req.accepts('application/json')) {
+        res.header("Access-Control-Allow-Origin", "*");
         if (await isUserAuthorisedForWrite(req.get("authorization"))) {
     		if (req.body.groupName && isString(req.body.groupName)) {
     			const existing = await query("SELECT * FROM modules WHERE `module_name` = ?", [req.body.groupName]);
@@ -245,6 +282,7 @@ router.post("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res,
 
 router.put("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, next) => {
 	if (req.secure && req.accepts('application/json')) {
+        res.header("Access-Control-Allow-Origin", "*");
         if (await isUserAuthorisedForWrite(req.get("authorization"))) {
     		if (req.body.users && req.body.users.constructor === Array) {
                 var groupq = await getGroupByNameOrId(req.body.groupId, req.body.groupName);
@@ -300,6 +338,7 @@ router.put("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, 
 
 router.delete("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, res, next) => {
 	if (req.secure && req.accepts('application/json')) {
+        res.header("Access-Control-Allow-Origin", "*");
         if (await isUserAuthorisedForWrite(req.get("authorization"))) {
             var groupq = await getGroupByNameOrId(req.body.groupId, req.body.groupName);
             if (groupq.length > 0) {
@@ -320,6 +359,7 @@ router.delete("/api/v1.0/group/", upload.array(), asyncMiddleware(async (req, re
 
 router.get("/api/v1.0/announcement/:groupid", upload.array(), asyncMiddleware(async (req, res, next) => {
     if (req.secure && req.accepts('application/json')) {
+        res.header("Access-Control-Allow-Origin", "*");
         if (await isUserAuthorisedForRead(req.get("authorization"))) {
             var retval;
             if (req.query) {
@@ -354,6 +394,7 @@ router.get("/api/v1.0/announcement/:groupid", upload.array(), asyncMiddleware(as
 
 router.delete("/api/v1.0/announcement/", upload.array(), asyncMiddleware(async (req, res, next) => {
     if (req.secure && req.accepts('application/json')) {
+        res.header("Access-Control-Allow-Origin", "*");
         if (await isUserAuthorisedForWrite(req.get("authorization"))) {
             if (req.body.announcement_id) {
                 var announcementExists = await query('SELECT * FROM messages_sent WHERE `announcement_id` = ?', [req.body.announcement_id]);
@@ -376,6 +417,7 @@ router.delete("/api/v1.0/announcement/", upload.array(), asyncMiddleware(async (
 
 router.post("/api/v1.0/announcement/", upload.array(), asyncMiddleware(async (req, res, next) => {
     if (req.secure && req.accepts('application/json')) {
+        res.header("Access-Control-Allow-Origin", "*");
         if (await isUserAuthorisedForWrite(req.get("authorization"))) {
             var groupq = await getGroupByNameOrId(req.body.groupId, req.body.groupName);
             if (groupq.length > 0 && isString(req.body.announcement) && isString(req.body.subject)) {
