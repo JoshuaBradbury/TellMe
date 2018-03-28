@@ -13,12 +13,12 @@ window.onload = function () {
         var user = userAgentApplication.getUser();
         if (user) {
             loginOrOut(false);
-            if (window.location.href.indexOf("app") === -1) {
-                window.location.replace("https://tellmesite.newagedev.co.uk/app");
+            if (window.location.href.indexOf("login") !== -1) {
+                window.location.replace("https://tellmesite.newagedev.co.uk/");
             }
         } else {
-            if (window.location.href.indexOf("app") !== -1) {
-                window.location.replace("https://tellmesite.newagedev.co.uk");
+            if (window.location.href.indexOf("login") === -1) {
+                window.location.replace("https://tellmesite.newagedev.co.uk/login");
             }
         }
     }
