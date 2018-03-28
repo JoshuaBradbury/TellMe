@@ -14,11 +14,11 @@ window.onload = function () {
         if (user) {
             loginOrOut(false);
             if (window.location.href.indexOf("app") === -1) {
-                window.location = "https://tellmesite.newagedev.co.uk/app"
+                window.location.replace("https://tellmesite.newagedev.co.uk/app");
             }
         } else {
             if (window.location.href.indexOf("app") !== -1) {
-                window.location = "https://tellmesite.newagedev.co.uk"
+                window.location.replace("https://tellmesite.newagedev.co.uk");
             }
         }
     }
