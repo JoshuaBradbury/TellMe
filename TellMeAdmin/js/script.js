@@ -27,12 +27,12 @@ newGroupBtn.onclick = function() {
         } else {
             $("div#cover").fadeIn("");
             $("div#settings").fadeIn("");
-            document.getElementById("settings").value = document.getElementById("title").innerHTML;
+            document.getElementById("settingsName").value = document.getElementById("title").innerHTML;
         }
     }
 }
 
-var popupIDs = [["settings", "settingsBtn"], ["newGroup", "newGroupBtn"]];
+var popupIDs = [["settings", "settingsBtn"], ["newGroup", "newGroupBtn"], ["collapseOne", "announcementInputGroup", "announcementTitle", "text", "submitBtn"]];
 
 window.addEventListener("click", function(e) { //detect outside click
     var outsideClick = true;
@@ -41,7 +41,7 @@ window.addEventListener("click", function(e) { //detect outside click
     for (let popGroup of popupIDs) {
         let cont = popGroup[0];
 
-        if (document.getElementById(cont).style.display !== "none") {
+        if (document.getElementById(cont).style.display !== "none" || document.getElementById(cont).classList.contains("show")) {
             for (let popID of popGroup) {
                 if (document.getElementById(popID).contains(e.target)) {
                     outsideClick = false;
@@ -55,11 +55,13 @@ window.addEventListener("click", function(e) { //detect outside click
     }
 
     if (outsideClick && displayed != "") {
-        $("div#" + displayed).fadeOut("fast");
-        $("div#cover").fadeOut("");
+        if (displayed == "collapseOne") {
+                $('div#collapseOne').collapse("hide");
+        } else {
+            $("div#" + displayed).fadeOut("fast");
+            $("div#cover").fadeOut("");
+        }
     }
-
-    $('div#collapseOne').collapse();
 });
 
 /*Write announcement*/
@@ -136,6 +138,11 @@ $(document).ready(function() {
         text.id = "module-name";
         text.innerHTML = obj.ModuleName; //backend load each module (line 127)
 
+        new_mod.onclick = function() {
+            update(this.children[0].innerHTML);
+            return false;
+        }
+
         text.onclick = function() {
             update(this);
             return false;
@@ -150,7 +157,7 @@ $(document).ready(function() {
 /*
  * update() changes divs/text to match selected module
  * id module-name : selected module
- * id title-text : top title text
+ * id title : top title text
  */
 function update(e) {
     if(typeof e === "string" || e instanceof String) {
@@ -176,17 +183,14 @@ function update(e) {
                 var my_container = document.getElementById("left");
                 new_mod.classList.add("students");
 
-                //var close = document.createElement("div");
-                //close.classList.add("close"); //TODO change to custom close element for students
                 my_container.appendChild(new_mod);
                 var text = document.createElement("h1");
                 text.id = "student-name" + x;
-                text.innerHTML = obj.students[x]; //backend load students
-                //new_mod.appendChild(close);
+                text.innerHTML = obj.students[x];
 
                 text.onclick = function() {
-                    removestudent(this, e, this.innerHTML);
-                    return false; //TODO fix this
+                    removestudent(this, document.getElementById("title").innerHTML, this.innerHTML);
+                    return false;
                 }
 
                 new_mod.appendChild(text);
@@ -243,36 +247,38 @@ function createNewGroup() {
 }
 
 function createGroup(file, group) {
-    if(file && group != "") {
-        var reader = new FileReader();
-        reader.readAsText(file);
+    if(group != "") {
+        if (file) {
+            var reader = new FileReader();
+            reader.readAsText(file);
 
-        var text = reader.result;
+            var text = reader.result;
 
-        reader.onloadend = function(e) {
-    		if (e.target.readyState == FileReader.DONE) {
-                var csvval = e.target.result.split("\n");
+            reader.onloadend = function(e) {
+                if (e.target.readyState == FileReader.DONE) {
+                    var csvval = e.target.result.split("\n");
 
-                var users = [];
-                var userIndex = csvval[0].split(",").indexOf("Username");
+                    var users = [];
+                    var userIndex = csvval[0].split(",").indexOf("Username");
 
-                for (var i = 1; i < csvval.length; i++) {
-                    var temp = csvval[i].split(",");
-                    if (temp.length > userIndex) {
-                        if (temp[userIndex] && temp[userIndex].trim()) {
-                            users.push(temp[userIndex].trim());
+                    for (var i = 1; i < csvval.length; i++) {
+                        var temp = csvval[i].split(",");
+                        if (temp.length > userIndex) {
+                            if (temp[userIndex] && temp[userIndex].trim()) {
+                                users.push(temp[userIndex].trim());
+                            }
                         }
                     }
-                }
 
-                // make request here
-                console.log(users);
+                    // make request here
+                    console.log(users);
+                }
             }
         }
 
         return true;
     } else {
-        alert("Missing field");
+        alert("Missing group name");
     }
 
     return false;
