@@ -83,15 +83,17 @@ function submit() {
     }
 }
 
-/*Add announcement*/
-function add_announcement(title, text) { //backend @TODO format the announcement
+function addAnnouncement(announcement) {
+    var title = announcement.subject;
+    var time = announcement.time_sent;
+    var text = announcement.message;
     var new_announcement = document.createElement("div");
     var my_container = document.getElementById("announcements")
     var urgent_flag = document.createElement("div");
     var del = document.createElement("div");
 
     new_announcement.classList.add("del");
-    new_announcement.appendChild(urgent_flag); //adds urgent flag
+    new_announcement.appendChild(urgent_flag);
     new_announcement.appendChild(del);
     my_container.prepend(new_announcement);
     new_announcement.classList.add("post");
@@ -101,17 +103,11 @@ function add_announcement(title, text) { //backend @TODO format the announcement
     var close = document.createElement("div");
     close.classList.add("close");
 
-    /*urgent flag, currently not in use, too lazy to change else*/
-    if (title == "abcdefghijklmnopqrstuvwxyz123") { //set subject as abcdefghijklmnopqrstuvwxyz123 for urgent flag idk
-        new_announcement.classList.add("urgent");
-    } else {
-        //text_container.style.marginRight = "10px";
-        text_container.classList.add("extra-margin");
-        close.style.marginLeft = "10px";
-    }
+    text_container.classList.add("extra-margin");
+    close.style.marginLeft = "10px";
 
-    new_announcement.appendChild(text_container); //adds urgent flag
-    new_announcement.id = "announcement-module";
+    new_announcement.appendChild(text_container);
+    new_announcement.id = "announcement " + announcement.announcement_id;
     text_container.innerHTML += text;
 
     close.onclick = function() {
@@ -122,43 +118,37 @@ function add_announcement(title, text) { //backend @TODO format the announcement
     new_announcement.appendChild(close);
 }
 
-/*load in modules after page is opened initially*/
 $(document).ready(function() {
     document.getElementById("cover").style.display = "none";
 
-    for (var i = 0; i < json.length; i++) { //backend loops through list of modules
-        var obj = json[i]; //backend loop
-        var new_mod = document.createElement("li");
-        var my_container = document.getElementById("groupList");
-        new_mod.classList.add("menu-box-tab");
-        new_mod.classList.add("nav-item");
-        my_container.appendChild(new_mod);
+    if (getUser()) {
+        sendEndpointRequest("group", "GET", null, function(json) {
+            var groups = json.groups;
+            for (var i = 0; i < groups.length; i++) {
+                var obj = groups[i];
+                var new_mod = document.createElement("li");
+                var my_container = document.getElementById("groupList");
+                new_mod.classList.add("menu-box-tab");
+                new_mod.classList.add("nav-item");
+                my_container.appendChild(new_mod);
 
-        var text = document.createElement("h1");
-        text.id = "module-name";
-        text.innerHTML = obj.ModuleName; //backend load each module (line 127)
+                var text = document.createElement("h1");
+                text.id = "group " + obj.groupId;
+                text.innerHTML = obj.groupName;
 
-        new_mod.onclick = function() {
-            update(this.children[0].innerHTML);
-            return false;
-        }
+                new_mod.onclick = function() {
+                    update(this.children[0].innerHTML);
+                    return false;
+                }
 
-        text.onclick = function() {
-            update(this);
-            return false;
-        }
+                new_mod.appendChild(text);
+            }
 
-        new_mod.appendChild(text);
+            update(groups[0].groupName);
+        }, null);
     }
-
-    update(json[0].ModuleName);
 });
 
-/*
- * update() changes divs/text to match selected module
- * id module-name : selected module
- * id title : top title text
- */
 function update(e) {
     if(typeof e === "string" || e instanceof String) {
         document.getElementById("title").innerHTML = e;
@@ -166,27 +156,38 @@ function update(e) {
         document.getElementById("title").innerHTML = e.innerHTML;
     }
 
-    $(".post").remove(); //clears existing announcements
-    $(".students").remove(); //clears existing students
+    $(".post").remove();
+    $(".students").remove();
 
     document.getElementById("settingsBtn").style.display = "block";
 
-    for (var i = 0; i < json.length; i++) { //backend loop
-        var obj = json[i]; //backend loop
-        if (obj.ModuleName == e || obj.ModuleName == e.innerHTML) {
-            for (var j = 0; j < obj.Announcements.length; j++) {
-                add_announcement(obj.Announcements[j], obj.Announcements[j]); //TODO change when format is decided
+    if (getUser()) {
+        var groupId = -1;
+        for (let group of document.getElementById("groupList").children) {
+            if (group.children[0].innerHTML == document.getElementById("title").innerHTML) {
+                groupId = group.children[0].id.split(" ")[1]
+                break;
             }
+        }
 
-            for (var x = 0; x < obj.students.length; x++) { //backend loop through students
+        sendEndpointRequest("announcement/" + groupId + "?n=all", "GET", null, function(json) {
+            var announcements = json.announcements;
+            for (var j = 0; j < announcements.length; j++) {
+                addAnnouncement(announcements[j]);
+            }
+        }, null);
+
+        sendEndpointRequest("group/users?groupId=" + groupId, "GET", null, function(json) {
+            var users = json.students;
+            for (var j = 0; j < users.length; j++) {
                 var new_mod = document.createElement("div");
                 var my_container = document.getElementById("left");
                 new_mod.classList.add("students");
 
                 my_container.appendChild(new_mod);
                 var text = document.createElement("h1");
-                text.id = "student-name" + x;
-                text.innerHTML = obj.students[x];
+                text.id = "student-name" + j;
+                text.innerHTML = users[j];
 
                 text.onclick = function() {
                     removestudent(this, document.getElementById("title").innerHTML, this.innerHTML);
@@ -195,28 +196,35 @@ function update(e) {
 
                 new_mod.appendChild(text);
             }
-        }
+        }, null);
     }
 
-    if (screen.width <= 750) { //condition for mobiles
+    if (screen.width <= 750) {
         document.getElementById("newGroupBtn").style.display = "none";
         document.getElementById("newGroupBtn").style.visibility = "hidden";
     }
 }
 
-/*Remove student*/
 function removestudent(e, course, student) {
     var answer = confirm("Remove " + student + " from " + course)
     if (answer) {
-        e.parentNode.parentNode.removeChild(e.parentNode); //backend remove student
+        e.parentNode.parentNode.removeChild(e.parentNode);
     } else {}
 }
 
-/*Delete announcement*/
 function deleteannouncement(e) {
     var answer = confirm("Delete this announcement?")
     if (answer) {
-        e.parentNode.parentNode.removeChild(e.parentNode); //backend delete announcement
+        sendEndpointRequest("announcement", "DELETE", { announcement_id: Number(e.parentNode.id.split(" ")[1]) }, function(json) {
+            e.parentNode.parentNode.removeChild(e.parentNode);
+        }, null);
+    } else {}
+}
+
+function deleteGroup(e) {
+    var answer = confirm("Delete this group?")
+    if (answer) {
+        e.parentNode.parentNode.removeChild(e.parentNode);
     } else {}
 }
 
@@ -270,7 +278,6 @@ function createGroup(file, group) {
                         }
                     }
 
-                    // make request here
                     console.log(users);
                 }
             }
@@ -282,4 +289,42 @@ function createGroup(file, group) {
     }
 
     return false;
+}
+
+function evalJSON(json) {
+    return eval("(" + json + ")");
+}
+
+function makeHttpObject() {
+    try {
+        return new XMLHttpRequest();
+    } catch (error) {}
+    try {
+        return new ActiveXObject("Msxml2.XMLHTTP");
+    } catch (error) {}
+    try {
+        return new ActiveXObject("Microsoft.XMLHTTP");
+    } catch (error) {}
+
+    throw new Error("Could not create HTTP request object.");
+}
+
+function sendEndpointRequest(endpoint, method, body, success, failure) {
+    var request = makeHttpObject();
+    request.open(method, "https://tellme.newagedev.co.uk/api/v1.0/" + endpoint, true);
+    request.setRequestHeader("Authorization", "Basic " + btoa(getUser() + ":"));
+    if (body) {
+        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        request.send(JSON.stringify(body));
+    } else {
+        request.send(null);
+    }
+    request.onreadystatechange = function() {
+        if (request.readyState == 4) {
+            if (request.status >= 200 && request.status < 300)
+                success(evalJSON(request.responseText));
+            else if (failure)
+                failure(request.status, request.statusText);
+        }
+    };
 }
