@@ -40,6 +40,7 @@ public class AddStudentsTest {
 		System.out.println("Saving settings...");
 		Thread.sleep(1000);
 		
+        //TODO get list of students to compare !
 		String studentList = "/home/k1631285/git/tellMe/WebTesting/src/testing/TestStudentlist.csv";
 		
 		System.out.println(studentList);
