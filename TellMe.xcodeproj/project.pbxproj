@@ -11,6 +11,8 @@
 		67B85BF911311F9308870436 /* Pods_TellMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335F50FEF8E7FF228752DF9B /* Pods_TellMe.framework */; };
 		A13108A520684D4500EDEE60 /* TestAnnouncmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13108A420684D4500EDEE60 /* TestAnnouncmentViewController.swift */; };
 		A172C1B7206184E800E35BE1 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A172C1B6206184E800E35BE1 /* LaunchViewController.swift */; };
+		A18BA5C4206961CC004637DF /* AnnouncmentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18BA5C3206961CC004637DF /* AnnouncmentTest.swift */; };
+		A18BA5CE20696966004637DF /* TestLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18BA5CD20696966004637DF /* TestLaunchViewController.swift */; };
 		A1988B06205846A400099A23 /* NetworkingErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1988B05205846A400099A23 /* NetworkingErrors.swift */; };
 		EC49B8CE203B994F00428779 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC49B8CD203B994F00428779 /* AppDelegate.swift */; };
 		EC49B8D0203B994F00428779 /* AnnouncementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC49B8CF203B994F00428779 /* AnnouncementController.swift */; };
@@ -41,6 +43,13 @@
 			remoteGlobalIDString = EC49B8C9203B994F00428779;
 			remoteInfo = TellMe;
 		};
+		A18BA5C6206961CC004637DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC49B8C2203B994F00428779 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC49B8C9203B994F00428779;
+			remoteInfo = TellMe;
+		};
 		EC49B8DF203B994F00428779 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EC49B8C2203B994F00428779 /* Project object */;
@@ -59,6 +68,10 @@
 		A131089E20684CD300EDEE60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A13108A420684D4500EDEE60 /* TestAnnouncmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAnnouncmentViewController.swift; sourceTree = "<group>"; };
 		A172C1B6206184E800E35BE1 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		A18BA5C1206961CC004637DF /* AnnouncmentTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnnouncmentTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A18BA5C3206961CC004637DF /* AnnouncmentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncmentTest.swift; sourceTree = "<group>"; };
+		A18BA5C5206961CC004637DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A18BA5CD20696966004637DF /* TestLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLaunchViewController.swift; sourceTree = "<group>"; };
 		A1988B05205846A400099A23 /* NetworkingErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingErrors.swift; sourceTree = "<group>"; };
 		CB9559A5C1FC279561CDD549 /* Pods-TellMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TellMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TellMe/Pods-TellMe.debug.xcconfig"; sourceTree = "<group>"; };
 		E7A569FC1FE50C1D88F3AEEC /* Pods-TellMeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TellMeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TellMeUITests/Pods-TellMeUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +102,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		A131089720684CD300EDEE60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A18BA5BE206961CC004637DF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -131,8 +151,18 @@
 			children = (
 				A131089E20684CD300EDEE60 /* Info.plist */,
 				A13108A420684D4500EDEE60 /* TestAnnouncmentViewController.swift */,
+				A18BA5CD20696966004637DF /* TestLaunchViewController.swift */,
 			);
 			path = TellMeTests;
+			sourceTree = "<group>";
+		};
+		A18BA5C2206961CC004637DF /* AnnouncmentTest */ = {
+			isa = PBXGroup;
+			children = (
+				A18BA5C3206961CC004637DF /* AnnouncmentTest.swift */,
+				A18BA5C5206961CC004637DF /* Info.plist */,
+			);
+			path = AnnouncmentTest;
 			sourceTree = "<group>";
 		};
 		EC49B8C1203B994F00428779 = {
@@ -141,6 +171,7 @@
 				EC49B8CC203B994F00428779 /* TellMe */,
 				EC49B8E1203B994F00428779 /* TellMeUITests */,
 				A131089B20684CD300EDEE60 /* TellMeTests */,
+				A18BA5C2206961CC004637DF /* AnnouncmentTest */,
 				EC49B8CB203B994F00428779 /* Products */,
 				EC49B8ED203B9BEB00428779 /* Frameworks */,
 				7520D31550B84288B41B0773 /* Pods */,
@@ -153,6 +184,7 @@
 				EC49B8CA203B994F00428779 /* TellMe.app */,
 				EC49B8DE203B994F00428779 /* TellMeUITests.xctest */,
 				A131089A20684CD300EDEE60 /* TellMeTests.xctest */,
+				A18BA5C1206961CC004637DF /* AnnouncmentTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -288,6 +320,24 @@
 			productReference = A131089A20684CD300EDEE60 /* TellMeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		A18BA5C0206961CC004637DF /* AnnouncmentTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A18BA5CA206961CC004637DF /* Build configuration list for PBXNativeTarget "AnnouncmentTest" */;
+			buildPhases = (
+				A18BA5BD206961CC004637DF /* Sources */,
+				A18BA5BE206961CC004637DF /* Frameworks */,
+				A18BA5BF206961CC004637DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A18BA5C7206961CC004637DF /* PBXTargetDependency */,
+			);
+			name = AnnouncmentTest;
+			productName = AnnouncmentTest;
+			productReference = A18BA5C1206961CC004637DF /* AnnouncmentTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		EC49B8C9203B994F00428779 /* TellMe */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC49B8E7203B994F00428779 /* Build configuration list for PBXNativeTarget "TellMe" */;
@@ -346,6 +396,11 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = EC49B8C9203B994F00428779;
 					};
+					A18BA5C0206961CC004637DF = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = EC49B8C9203B994F00428779;
+					};
 					EC49B8C9203B994F00428779 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -373,12 +428,20 @@
 				EC49B8C9203B994F00428779 /* TellMe */,
 				EC49B8DD203B994F00428779 /* TellMeUITests */,
 				A131089920684CD300EDEE60 /* TellMeTests */,
+				A18BA5C0206961CC004637DF /* AnnouncmentTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A131089820684CD300EDEE60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A18BA5BF206961CC004637DF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -528,6 +591,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A13108A520684D4500EDEE60 /* TestAnnouncmentViewController.swift in Sources */,
+				A18BA5CE20696966004637DF /* TestLaunchViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A18BA5BD206961CC004637DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A18BA5C4206961CC004637DF /* AnnouncmentTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,6 +639,11 @@
 			isa = PBXTargetDependency;
 			target = EC49B8C9203B994F00428779 /* TellMe */;
 			targetProxy = A131089F20684CD300EDEE60 /* PBXContainerItemProxy */;
+		};
+		A18BA5C7206961CC004637DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC49B8C9203B994F00428779 /* TellMe */;
+			targetProxy = A18BA5C6206961CC004637DF /* PBXContainerItemProxy */;
 		};
 		EC49B8E0203B994F00428779 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -625,6 +702,39 @@
 				PRODUCT_BUNDLE_IDENTIFIER = K1630534.TellMeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TellMe.app/TellMe";
+			};
+			name = Release;
+		};
+		A18BA5C8206961CC004637DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 65UDWSH428;
+				INFOPLIST_FILE = AnnouncmentTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = K1630534.AnnouncmentTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TellMe.app/TellMe";
+			};
+			name = Debug;
+		};
+		A18BA5C9206961CC004637DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 65UDWSH428;
+				INFOPLIST_FILE = AnnouncmentTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = K1630534.AnnouncmentTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TellMe.app/TellMe";
@@ -823,6 +933,15 @@
 			buildConfigurations = (
 				A13108A120684CD300EDEE60 /* Debug */,
 				A13108A220684CD300EDEE60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A18BA5CA206961CC004637DF /* Build configuration list for PBXNativeTarget "AnnouncmentTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A18BA5C8206961CC004637DF /* Debug */,
+				A18BA5C9206961CC004637DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

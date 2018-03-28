@@ -11,13 +11,10 @@ import SideMenu
 
 
 
-class AnnouncementController: UIViewController , UITableViewDelegate, UITableViewDataSource, SideMenuHandlerDelegate{
+class AnnouncementController: UIViewController , UITableViewDelegate, UITableViewDataSource{
     
     
-    func change() {
-        self.dismiss(animated: false, completion: nil)
-    }
-    
+
     func update() {
          announcementTableView.reloadData()
     }
@@ -35,7 +32,6 @@ class AnnouncementController: UIViewController , UITableViewDelegate, UITableVie
         announcementTableView.delegate = self
         announcementTableView.dataSource = self
         
-        SideMenuController.delegate = self
         
         announcementTableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "customMessageCell")
         
