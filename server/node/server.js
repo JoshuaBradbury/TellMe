@@ -136,9 +136,12 @@ async function isUserAuthorisedForRead(user) {
                 user = user.replace(":", "");
             }
 
-            const q = await query("SELECT * FROM students_in_groups WHERE `k_number` = ?", [convertEmailToUser(user)]);
+	    if(isUserAuthorisedForWrite(user)){
+		return true;
+	    }
 
-            return q && (q[0].length > 0 || isUserAuthorisedForWrite(user));
+            const q = await query("SELECT * FROM students_in_groups WHERE `k_number` = ?", [convertEmailToUser(user)]);
+            return q && q[0].length > 0;
         }
     }
     return false;
