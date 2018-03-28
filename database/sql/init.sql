@@ -17,6 +17,3 @@ CREATE TABLE students_in_groups (module_id INT NOT NULL,
                                  FOREIGN KEY (module_id)
                                  REFERENCES modules(module_id)
                                  ON DELETE CASCADE);
-
-CREATE TABLE authorised_logins (email VARCHAR(100) NOT NULL,
-                                PRIMARY KEY(email));
