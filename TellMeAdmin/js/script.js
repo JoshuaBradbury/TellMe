@@ -27,12 +27,12 @@ newGroupBtn.onclick = function() {
         } else {
             $("div#cover").fadeIn("");
             $("div#settings").fadeIn("");
-            document.getElementById("settingsName").value = document.getElementById("title").innerHTML;
+            document.getElementById("settings").value = document.getElementById("title").innerHTML;
         }
     }
 }
 
-var popupIDs = [["settings", "settingsBtn"], ["newGroup", "newGroupBtn"], ["collapseOne", "announcementInputGroup", "announcementTitle", "text", "submitBtn"]];
+var popupIDs = [["settings", "settingsBtn"], ["newGroup", "newGroupBtn"]];
 
 window.addEventListener("click", function(e) { //detect outside click
     var outsideClick = true;
@@ -41,7 +41,7 @@ window.addEventListener("click", function(e) { //detect outside click
     for (let popGroup of popupIDs) {
         let cont = popGroup[0];
 
-        if (document.getElementById(cont).style.display !== "none" || document.getElementById(cont).classList.contains("show")) {
+        if (document.getElementById(cont).style.display !== "none") {
             for (let popID of popGroup) {
                 if (document.getElementById(popID).contains(e.target)) {
                     outsideClick = false;
@@ -55,13 +55,11 @@ window.addEventListener("click", function(e) { //detect outside click
     }
 
     if (outsideClick && displayed != "") {
-        if (displayed == "collapseOne") {
-                $('div#collapseOne').collapse("hide");
-        } else {
-            $("div#" + displayed).fadeOut("fast");
-            $("div#cover").fadeOut("");
-        }
+        $("div#" + displayed).fadeOut("fast");
+        $("div#cover").fadeOut("");
     }
+
+    $('div#collapseOne').collapse();
 });
 
 /*Write announcement*/
@@ -83,17 +81,15 @@ function submit() {
     }
 }
 
-function addAnnouncement(announcement) {
-    var title = announcement.subject;
-    var time = announcement.time_sent;
-    var text = announcement.message;
+/*Add announcement*/
+function add_announcement(title, text) { //backend @TODO format the announcement
     var new_announcement = document.createElement("div");
     var my_container = document.getElementById("announcements")
     var urgent_flag = document.createElement("div");
     var del = document.createElement("div");
 
     new_announcement.classList.add("del");
-    new_announcement.appendChild(urgent_flag);
+    new_announcement.appendChild(urgent_flag); //adds urgent flag
     new_announcement.appendChild(del);
     my_container.prepend(new_announcement);
     new_announcement.classList.add("post");
@@ -103,11 +99,17 @@ function addAnnouncement(announcement) {
     var close = document.createElement("div");
     close.classList.add("close");
 
-    text_container.classList.add("extra-margin");
-    close.style.marginLeft = "10px";
+    /*urgent flag, currently not in use, too lazy to change else*/
+    if (title == "abcdefghijklmnopqrstuvwxyz123") { //set subject as abcdefghijklmnopqrstuvwxyz123 for urgent flag idk
+        new_announcement.classList.add("urgent");
+    } else {
+        //text_container.style.marginRight = "10px";
+        text_container.classList.add("extra-margin");
+        close.style.marginLeft = "10px";
+    }
 
-    new_announcement.appendChild(text_container);
-    new_announcement.id = "announcement " + announcement.announcement_id;
+    new_announcement.appendChild(text_container); //adds urgent flag
+    new_announcement.id = "announcement-module";
     text_container.innerHTML += text;
 
     close.onclick = function() {
@@ -118,37 +120,38 @@ function addAnnouncement(announcement) {
     new_announcement.appendChild(close);
 }
 
+/*load in modules after page is opened initially*/
 $(document).ready(function() {
     document.getElementById("cover").style.display = "none";
 
-    if (getUser()) {
-        sendEndpointRequest("group", "GET", null, function(json) {
-            var groups = json.groups;
-            for (var i = 0; i < groups.length; i++) {
-                var obj = groups[i];
-                var new_mod = document.createElement("li");
-                var my_container = document.getElementById("groupList");
-                new_mod.classList.add("menu-box-tab");
-                new_mod.classList.add("nav-item");
-                my_container.appendChild(new_mod);
+    for (var i = 0; i < json.length; i++) { //backend loops through list of modules
+        var obj = json[i]; //backend loop
+        var new_mod = document.createElement("li");
+        var my_container = document.getElementById("groupList");
+        new_mod.classList.add("menu-box-tab");
+        new_mod.classList.add("nav-item");
+        my_container.appendChild(new_mod);
 
-                var text = document.createElement("h1");
-                text.id = "group " + obj.groupId;
-                text.innerHTML = obj.groupName;
+        var text = document.createElement("h1");
+        text.id = "module-name";
+        text.innerHTML = obj.ModuleName; //backend load each module (line 127)
 
-                new_mod.onclick = function() {
-                    update(this.children[0].innerHTML);
-                    return false;
-                }
+        text.onclick = function() {
+            update(this);
+            return false;
+        }
 
-                new_mod.appendChild(text);
-            }
-
-            update(groups[0].groupName);
-        }, null);
+        new_mod.appendChild(text);
     }
+
+    update(json[0].ModuleName);
 });
 
+/*
+ * update() changes divs/text to match selected module
+ * id module-name : selected module
+ * id title-text : top title text
+ */
 function update(e) {
     if(typeof e === "string" || e instanceof String) {
         document.getElementById("title").innerHTML = e;
@@ -156,75 +159,60 @@ function update(e) {
         document.getElementById("title").innerHTML = e.innerHTML;
     }
 
-    $(".post").remove();
-    $(".students").remove();
+    $(".post").remove(); //clears existing announcements
+    $(".students").remove(); //clears existing students
 
     document.getElementById("settingsBtn").style.display = "block";
 
-    if (getUser()) {
-        var groupId = -1;
-        for (let group of document.getElementById("groupList").children) {
-            if (group.children[0].innerHTML == document.getElementById("title").innerHTML) {
-                groupId = group.children[0].id.split(" ")[1]
-                break;
+    for (var i = 0; i < json.length; i++) { //backend loop
+        var obj = json[i]; //backend loop
+        if (obj.ModuleName == e || obj.ModuleName == e.innerHTML) {
+            for (var j = 0; j < obj.Announcements.length; j++) {
+                add_announcement(obj.Announcements[j], obj.Announcements[j]); //TODO change when format is decided
             }
-        }
 
-        sendEndpointRequest("announcement/" + groupId + "?n=all", "GET", null, function(json) {
-            var announcements = json.announcements;
-            for (var j = 0; j < announcements.length; j++) {
-                addAnnouncement(announcements[j]);
-            }
-        }, null);
-
-        sendEndpointRequest("group/users?groupId=" + groupId, "GET", null, function(json) {
-            var users = json.students;
-            for (var j = 0; j < users.length; j++) {
+            for (var x = 0; x < obj.students.length; x++) { //backend loop through students
                 var new_mod = document.createElement("div");
                 var my_container = document.getElementById("left");
                 new_mod.classList.add("students");
 
+                //var close = document.createElement("div");
+                //close.classList.add("close"); //TODO change to custom close element for students
                 my_container.appendChild(new_mod);
                 var text = document.createElement("h1");
-                text.id = "student-name" + j;
-                text.innerHTML = users[j];
+                text.id = "student-name" + x;
+                text.innerHTML = obj.students[x]; //backend load students
+                //new_mod.appendChild(close);
 
                 text.onclick = function() {
-                    removestudent(this, document.getElementById("title").innerHTML, this.innerHTML);
-                    return false;
+                    removestudent(this, e, this.innerHTML);
+                    return false; //TODO fix this
                 }
 
                 new_mod.appendChild(text);
             }
-        }, null);
+        }
     }
 
-    if (screen.width <= 750) {
+    if (screen.width <= 750) { //condition for mobiles
         document.getElementById("newGroupBtn").style.display = "none";
         document.getElementById("newGroupBtn").style.visibility = "hidden";
     }
 }
 
+/*Remove student*/
 function removestudent(e, course, student) {
     var answer = confirm("Remove " + student + " from " + course)
     if (answer) {
-        e.parentNode.parentNode.removeChild(e.parentNode);
+        e.parentNode.parentNode.removeChild(e.parentNode); //backend remove student
     } else {}
 }
 
+/*Delete announcement*/
 function deleteannouncement(e) {
     var answer = confirm("Delete this announcement?")
     if (answer) {
-        sendEndpointRequest("announcement", "DELETE", { announcement_id: Number(e.parentNode.id.split(" ")[1]) }, function(json) {
-            e.parentNode.parentNode.removeChild(e.parentNode);
-        }, null);
-    } else {}
-}
-
-function deleteGroup(e) {
-    var answer = confirm("Delete this group?")
-    if (answer) {
-        e.parentNode.parentNode.removeChild(e.parentNode);
+        e.parentNode.parentNode.removeChild(e.parentNode); //backend delete announcement
     } else {}
 }
 
@@ -255,76 +243,135 @@ function createNewGroup() {
 }
 
 function createGroup(file, group) {
-    if(group != "") {
-        if (file) {
-            var reader = new FileReader();
-            reader.readAsText(file);
+    if(/*file && */ group != "") {
+        var reader = new FileReader();
+        //reader.readAsText(file);
 
-            var text = reader.result;
+        var obj = new FormData();
+        obj.append("groupName", group);
+        var response = sendXmlHttpRequest(obj, "https://tellme.newagedev.co.uk/api/v1.0/group", "POST");
+        console.log("response = " + response);
 
-            reader.onloadend = function(e) {
-                if (e.target.readyState == FileReader.DONE) {
-                    var csvval = e.target.result.split("\n");
+        //var text = reader.result;
 
-                    var users = [];
-                    var userIndex = csvval[0].split(",").indexOf("Username");
+      //   reader.onloadend = function(e) {
+    		// if (e.target.readyState == FileReader.DONE) {
+      //           var csvval = e.target.result.split("\n");
 
-                    for (var i = 1; i < csvval.length; i++) {
-                        var temp = csvval[i].split(",");
-                        if (temp.length > userIndex) {
-                            if (temp[userIndex] && temp[userIndex].trim()) {
-                                users.push(temp[userIndex].trim());
-                            }
-                        }
-                    }
+      //           var users = [];
+      //           var userIndex = csvval[0].split(",").indexOf("Username");
 
-                    console.log(users);
-                }
-            }
-        }
+      //           for (var i = 1; i < csvval.length; i++) {
+      //               var temp = csvval[i].split(",");
+      //               if (temp.length > userIndex) {
+      //                   if (temp[userIndex] && temp[userIndex].trim()) {
+      //                       users.push(temp[userIndex].trim());
+      //                   }
+      //               }
+      //           }
+
+      //           // make request here
+
+      //           var obj = new FormData();
+      //           obj.append(group, groupName);
+      //           var response = sendXmlHttpRequest(obj, "https://tellme.newagedev.co.uk/api/v1.0/group", "POST");
+      //           console.log("response = " + response);
+      //           console.log(users);
+      //       }
+      //   }
 
         return true;
     } else {
-        alert("Missing group name");
+        alert("Missing field");
     }
 
     return false;
 }
 
-function evalJSON(json) {
-    return eval("(" + json + ")");
+function getListOfModules() {
+    var response = sendXmlHttpRequest(null, "https://tellme.newagedev.co.uk/api/v1.0/group", "GET");
+    return response;
 }
 
-function makeHttpObject() {
-    try {
-        return new XMLHttpRequest();
-    } catch (error) {}
-    try {
-        return new ActiveXObject("Msxml2.XMLHTTP");
-    } catch (error) {}
-    try {
-        return new ActiveXObject("Microsoft.XMLHTTP");
-    } catch (error) {}
-
-    throw new Error("Could not create HTTP request object.");
+function getListOfAnnouncements(groupId, n, date){
+    var queries = "n=" + n + "&"+ "date=" + date;
+    var reponse = sendXmlHttpRequest(obj, "https://tellme.newagedev.co.uk/api/v1.0/announcement/" + groupId + "?" + queries, "GET");
+    console.log("response = " + response);
+    return response;
 }
 
-function sendEndpointRequest(endpoint, method, body, success, failure) {
-    var request = makeHttpObject();
-    request.open(method, "https://tellme.newagedev.co.uk/api/v1.0/" + endpoint, true);
-    request.setRequestHeader("Authorization", "Basic " + btoa(getUser() + ":"));
-    if (body) {
-        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        request.send(JSON.stringify(body));
-    } else {
-        request.send(null);
+/*Delete announcement*/
+function deleteAnnouncement(e) {
+    var answer = confirm("Delete this announcement?")
+    if (answer) {
+        e.parentNode.parentNode.removeChild(e.parentNode); //backend delete announcement
+    } else {}
+}
+
+function addNewGroup() {
+    var groupName = $('#new-group-name').val();
+
+    var obj = new FormData();
+    obj.append("groupName", groupName);
+
+    var response = sendXmlHttpRequest(obj, "https://tellme.newagedev.co.uk/api/v1.0/group", "POST");
+    console.log("response = " + response);
+    //display response
+    //reload list of modules
+}
+
+// function sendAnnouncementToServer(){
+//     var response = sendXmlHttpRequest()
+// }
+
+function sendXmlHttpRequest(obj, url, requestType){
+    var xhr = new XMLHttpRequest();
+    var username = "k1630518@kcl.ac.uk";
+    xhr.open(requestType, url, true);
+    xhr.setRequestHeader ("Authorization", "Basic " + btoa(username));
+
+    //xhr.setRequestHeader('Authorization','Basic ' + Base64StringOfUserColonPassword);
+
+
+    xhr.onload = function() {
+    
+        var retval;
+        retval.status = xhr.status;
+        retval.response = JSON.parse(xhr.responseText);
+
+        // if (xhr.readyState == 4 && (xhr.status == "201" || xhr.status == "200")) {
+        //     return retavl;
+        // } else {
+        //     return "Request unsuccessful. Error: " + response;
+        // }
+        return retval;
     }
-    request.onreadystatechange = function() {
-        if (request.readyState == 4) {
-            if (request.status >= 200 && request.status < 300)
-                success(evalJSON(request.responseText));
-            else if (failure)
-                failure(request.status, request.statusText);
-        }
-    };
+    xhr.send(obj);
 }
+
+
+
+function deleteGroup() {
+    var groupName;
+
+    var obj = new FormData();
+    obj.append("groupName", groupName);
+
+    var response = sendXmlHttpRequest(obj, "https://tellme.newagedev.co.uk/api/v1.0/group", "DELETE");
+    console.log("response = " + response);
+    // display response
+    //reload module list
+}
+
+function getGroupNames() {
+    var groupName;
+
+    var obj = new FormData();
+    obj.append("groupName", groupName);
+
+    var response = sendXmlHttpRequest(obj, "https://tellme.newagedev.co.uk/api/v1.0/group", "GET");
+    console.log("response = " + response);
+
+    //TODO
+}
+
