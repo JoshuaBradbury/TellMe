@@ -14,15 +14,34 @@ public static void main(String[] args) throws InterruptedException {
 	System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/chromedriver/chromedriver");
 	WebDriver driver = new ChromeDriver();
 	driver.get("https://tellmesite.newagedev.co.uk/");
-		
-	driver.findElement(By.className("close")).click();
-		
+
+	String testContent = "Test announcement content.";
+
+	driver.findElement(By.id("postBtn")).click();
+	title.sendKeys("Test Title");
+	content.sendKeys(testContent);
+	submit.click();
+	System.out.println("Posting test annoucement...");
+	System.out.println("Finding announcement...");
+
+	WebElement announcement = driver.findElement(By.xpath("//*[@id=\"announcements\"][contains(text(), \""+ testContent +"\")]"));
+	System.out.println("Selecting Annoucement...");
 	Thread.sleep(1000);
-		
+
+	announcement.findElement(By.className("close")).click();
+	System.out.println("Deleted announcement");
+	Thread.sleep(1000);
+
+	if(driver.findElement(driver.findElement(By.xpath("//*[@id=\"announcements\"][contains(text(), \""+ testContent +"\")]")))) {
+		System.out.println("Test Failed");
+	} else {
+		System.out.println("Test Success");
+	}
+
 	driver.switchTo().alert().accept();
-	
+
 	//closes chrome
 	driver.close();
-		
+
 	}
 }

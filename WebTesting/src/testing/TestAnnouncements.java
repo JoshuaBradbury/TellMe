@@ -9,80 +9,30 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class TestAnnouncements {
 
 	public static void main(String[] args) throws InterruptedException {
-        // declaration and instantiation of objects/variables
+    // declaration and instantiation of objects/variables
 		System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/chromedriver/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://tellmesite.newagedev.co.uk/");
-		
-		String realContent = "Test announcement content."; 
-		
+
+		//stores elements
 		WebElement newPost = driver.findElement(By.id("postBtn"));
 		WebElement content = driver.findElement(By.id("text"));
 		WebElement title = driver.findElement(By.id("titleBtn"));
 		WebElement submit = driver.findElement(By.id("submitBtn"));
-		
+
+		//fills in text for annoucement and submits
 		driver.findElement(By.id("postBtn")).click();
 		title.sendKeys("Test Title");
 		content.sendKeys("Test announcement content.");
 		submit.click();
-		
-		if(driver.findElement(By.xpath("//*[@id='announcement-module']/div[3]")).getText().equals(realContent)) {
-			System.out.println("Successfully posted!");
+
+		//check the post shows
+		if(driver.findElement(driver.findElement(By.xpath("//*[@id=\"announcements\"][contains(text(), \""+ testContent +"\")]")))) {
+			System.out.println("Test Success");
+		} else {
+			System.out.println("Test Failed");
 		}
-		
-		
-		Thread.sleep(1000);
-		
-		newPost.click();
-		content.clear();
-		title.sendKeys("Test Title");
-		content.click();
-		driver.findElement(By.id("boldBtn")).click();
-		content.click();
-		content.sendKeys("Test announcement content in BOLD.");
-		submit.click();
-		
-		System.out.println("FONT WEIGHT" + driver.findElement(By.xpath("//*[@id='announcement-module']/div[3]")).getCssValue("font-weight"));
-		
-		if(driver.findElement(By.xpath("//*[@id='announcement-module']/div[3]")).getCssValue("font-weight").equals("bold")) {
-			System.out.println("Successfully posted in bold!");
-		}
-		
-		Thread.sleep(1000);
-		
-		newPost.click();
-		content.clear();
-		title.sendKeys("Test Title");
-		content.click();
-		driver.findElement(By.id("italicBtn")).click();
-		content.click();
-		content.sendKeys("Test announcement content in ITALIC");
-		submit.click();
-		
-		System.out.println("FONT WEIGHT" + driver.findElement(By.xpath("//*[@id='announcement-module']/div[3]")).getCssValue("font-weight"));
-		
-		if(driver.findElement(By.xpath("//*[@id='announcement-module']/div[3]")).getText().equals(realContent)) {
-			System.out.println("Successfully posted in italics!");
-		}
-		
-		Thread.sleep(1000);
-		
-		newPost.click();
-		content.clear();
-		
-		title.sendKeys("Test Title");
-		content.click();
-		driver.findElement(By.id("ulineBtn")).click();
-		content.click();
-		content.sendKeys("Test announcement content in UNDERLINE.");
-		submit.click();
-		
-		if(driver.findElement(By.xpath("//*[@id='announcement-module']/div[3]")).getText().equals(realContent)) {
-			System.out.println("Successfully posted in italics!");
-		}
-		
-		Thread.sleep(1000);
-		
+
 		driver.close();
 	}
 }
