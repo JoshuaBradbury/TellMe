@@ -43,6 +43,9 @@ const asyncMiddleware = fn => (req, res, next) => {
 
 const queryError = function (err, results, fields) {
 	if (err) {
+		console.log(err);
+		console.log(results);
+		console.log(fields);
 		throw err;
 	}
 };
@@ -91,6 +94,7 @@ function convertUserToEmail(user) {
 }
 
 function convertEmailToUser(user) {
+
     if (isString(user)) {
         var u = user;
         if (u.indexOf("@") !== -1) {
@@ -103,7 +107,7 @@ function convertEmailToUser(user) {
 
         u = Number(u);
 
-        if (u !== NaN) {
+        if (!isNaN(u)) {
             return u;
         }
     }
@@ -117,10 +121,8 @@ async function isUserAuthorisedForWrite(user) {
             if (user.indexOf(":") !== -1) {
                 user = user.replace(":", "");
             }
-
-            const q = await query("SELECT * FROM authorised_logins WHERE `email` = ? ", [convertUserToEmail(user)]);
-
-            return q && q[0].length > 0;
+            var knumberEmail = new RegExp(/k\d\d\d\d\d\d\d@kcl.ac.uk/);
+            return (!knumberEmail.test(user));
         }
     }
     return false;
@@ -134,9 +136,12 @@ async function isUserAuthorisedForRead(user) {
                 user = user.replace(":", "");
             }
 
-            const q = await query("SELECT * FROM students_in_groups WHERE `k_number` = ?", [convertEmailToUser(user)]);
+	    if(isUserAuthorisedForWrite(user)){
+		return true;
+	    }
 
-            return q && (q[0].length > 0 || isUserAuthorisedForWrite(user));
+            const q = await query("SELECT * FROM students_in_groups WHERE `k_number` = ?", [convertEmailToUser(user)]);
+            return q && q[0].length > 0;
         }
     }
     return false;
