@@ -1,121 +1,52 @@
 <!DOCTYPE HTML>
+
 <html>
-    <head>
-        <title>Tell Me</title>
 
-        <link rel="icon" type="image/png" href="assets/logo16x16.png" sizes="32x32" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/style.css" type="text/css">
-        <link rel="stylesheet" href="css/popup.css" type="text/css">
-        <link rel="stylesheet" href="css/scroll.css" type="text/css">
-        <link rel="stylesheet" href="css/ecs.css" type="text/css">
-        <link rel="stylesheet" href="css/sidebar.css" type="text/css">
-        <link rel="stylesheet" href="css/btn.css" type="text/css">
-    </head>
+<head>
+  <title>Tell Me</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/logo16x16.png" sizes="32x32" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" href="css/lp.css" type="text/css">
+<link rel="stylesheet" href="css/btn.css" type="text/css">
 
-    <body>
-        <div id="cover"></div>
+</head>
+<body class="lp">
 
-        <div class="popup" id="settings" style="display:none;">
-            <div class="form-group">
-                <h2>Settings</h2>
-                <h3>Group Name</h3>
-                <input type="text" class="form-control csv-input-mysize" id="settingsName" />
-                <br>
-                <h3>Add Students</h3>
-                <input type="file" name="filename" class="form-control csv-input-mysize" id="settingsFile" />
-                <br>
-                <center>
-                    <input type="button" class="btn" onclick="updateGroup()" value="Save settings" />
-                    <input type="button" class="deleteBtn" onclick="deleteGroup()" value="Delete group" />
-                </center>
-            </div>
-        </div>
 
-        <div class="popup" id="newGroup" style="display:none;">
-            <div class="form-group">
-                <h2>Add Group</h2>
-                <h3>Group Name</h3>
-                <input type="text" class="form-control csv-input-mysize" id="newGroupName" />
-                <br>
-                <h3>Upload Students</h3>
-                <input type="file" name="filename" class="form-control csv-input-mysize" id="newGroupFile" />
-                <br>
-                <center>
-                    <input type="button" class="btn" onclick="createNewGroup()" value="Create Group" />
-                </center>
-            </div>
-        </div>
-
-        <a href="#">
-            <div class="bottom" id="newGroupBtn">
-                <img class="circle" id="plusBtn" src="assets/plus.png" />
-            </div>
+    <nav class="navbar nav-col border-bottom">
+        <a class="navbar-brand" href="#">
+            <img src="assets/kcl-logo.jpg" height="75" class="d-inline-block align-top" alt="TellMe">
         </a>
+    </nav>
 
-        <div class="d-flex flex-column h-100">
-            <nav class="navbar nav-col border-bottom">
-                <a class="navbar-brand" href="#">
-                    <img src="assets/kcl-logo.jpg" height="75" class="d-inline-block align-top" alt="TellMe">
-                </a>
-                <label class="nav-item title" id="title">Title</label>
-                <div class="nav-item d-flex align-items-stretch">
-                    <img id="settingsBtn" src="assets/settings.png" height="80" class="d-inline-block align-top" alt="Settings">
-                    <button type="button" class="btn" id="login" onclick="loginOrOut()" style="margin-left: 10px">login</button>
-                </div>
-            </nav>
 
-            <div class="container-fluid d-flex flex-column flex-grow h-75">
-                <div class="d-flex justify-content-between row flex-grow h-100">
-                    <div id="left" class="col side-col"></div>
+<div class="login">
+  <div class=lpwin>
+  <h>TELL ME</h>
+  <p>Redefining communication</p>
+  <button class="button-two" onclick="loginOrOut()"><span>LOGIN</span></button>
+  </div>
+<img src="assets/logo1000x1000.png">
+</div>
 
-                    <div class="col-8 main-pad">
-                        <div class="message-bar no-gutters d-flex flex-column">
-                            <div class="rounded d-flex mx-auto w-75">
-                                <h5 class="mb-0 mx-auto">
-                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <div id="announcementInputGroup" class="form-group d-flex">
-                                            <label for="announcementTitle"></label>
-                                            <input type="text" placeholder="Title" class="form-control input-mysize d-flex" id="announcementTitle" />
-                                            <div class="placeholder d-flex" id="postBtn" onclick="show()">
-                                                <img id="plusBtn" class="h-100 w-100" src="assets/plus.png" />
-                                            </div>
-                                        </div>
-                                    </button>
-                                </h5>
-                            </div>
 
-                            <div id="collapseOne" class="collapse" aria-labelledby="announcements" data-parent="#accordion">
-                                <div class="card-body">
-                                    <div class="form-group bubble">
-                                        <label for="usr"></label>
-                                        <div class="text" placeholder='&nbsp;&nbsp;Body' id="text" contenteditable="true"></div>
-                                        <br><input type="button" class="submitBtn btn" id="submitBtn" onclick="submit()" value="Submit announcement" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<div class="container-fluid">
+<div class="lpbot row">
+  <div class="col circ"><center><img class="h-50 w-50" src="assets/bubble.png"><br><p class="white">An easy way for professors to communicate to students!</p></center></div>
+  <div class="col circ"><center><img class="h-50 w-50" src="assets/wrench.png"><br><p class="white">Clean and easy interface</p></center></div>
+  <div class="col circ"><center><img class="h-50 w-50" src="assets/comp.png"><br><center><p class="white">Web dashboard available for professors</p></center></div>
+  <div class="col circ"><center><img class="h-50 w-50" src="assets/mobile.png"><br><center><p class="white">Student app available on IOS and Android</p></center></div>
 
-                        <div class="announcement-posts" id="announcements"></div>
-                    </div>
+</div>
+</div>
 
-                    <div id="right" class="col side-col">
-                        <ul id="groupList" class="nav-stacked nav">
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="js/msal.js"></script>
-        <script type="text/javascript" src="js/db.js"></script>
-        <script type="text/javascript" src="js/login.js"></script>
-        <script type="text/javascript" src="js/script.js"></script>
-    </body>
-</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/msal.js"></script>
+  <script type="text/javascript" src="js/login.js"></script>
+  </body>
+  </html>
