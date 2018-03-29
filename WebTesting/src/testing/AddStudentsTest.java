@@ -11,7 +11,7 @@ public class AddStudentsTest {
 
     public static void main(String[] args) throws InterruptedException, IOException{
         // declaration and instantiation of objects/variables
-    	System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/src/testing/chromedriver/chromedriver");
+    	System.setProperty("webdriver.chrome.driver", "/chromedriver/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://tellmesite.newagedev.co.uk/");
 
@@ -29,7 +29,7 @@ public class AddStudentsTest {
 				
 		//Clicks on choose file and adds more students to group
 	    WebElement chooseFile = driver.findElement(By.id("settingsFile"));
-	    chooseFile.sendKeys("/home/k1631285/git/tellMe/WebTesting/src/testing/TestStudentlist.csv");
+	    chooseFile.sendKeys("/TestStudentlist.csv");
 		System.out.println("Uploading student list...");
 		Thread.sleep(1000);
 		

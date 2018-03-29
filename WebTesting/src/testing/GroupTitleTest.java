@@ -8,21 +8,26 @@ public class GroupTitleTest {
 
     public static void main(String[] args) throws InterruptedException{
         // declaration and instantiation of objects/variables
-    	System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/src/testing/chromedriver/chromedriver");
+    	System.setProperty("webdriver.chrome.driver", "/chromedriver/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://tellmesite.newagedev.co.uk/");
 		
 		//browser waits so kings login can be manually input
 		Thread.sleep(10000);
 		
+		//refreshes page once logged in
+		driver.navigate().refresh();
+		Thread.sleep(1000);
+
+		
 		//grabs the first module in the list on the sidebar
-        String expectedGroupTitle = driver.findElement(By.xpath("//*[@id=\"groupList\"]/li[1]")).getText();
+        String expectedGroupTitle = driver.findElement(By.xpath("//*[@id=\"groupList\"]/li[2]")).getText();
         String actualGroupTitle = "";
 		Thread.sleep(1000);
 			
         //selects group from sidebar
-		driver.findElement(By.xpath("//*[@id=\"module-name\"][contains(text(), \""+ expectedGroupTitle +"\")]")).click();
-		System.out.println("Going into module n5AAH2003...");
+		driver.findElement(By.xpath("//*[@id=\"groupList\"]/li[2]")).click();
+		System.out.println("Going into module " + expectedGroupTitle + "...");
 		Thread.sleep(1000);
 		
 		//retrieves title of module page

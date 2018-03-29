@@ -11,11 +11,17 @@ public class TestDeletion {
 
 public static void main(String[] args) throws InterruptedException {
     // declaration and instantiation of objects/variables
-	System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/chromedriver/chromedriver");
+	System.setProperty("webdriver.chrome.driver", "/chromedriver/chromedriver");
 	WebDriver driver = new ChromeDriver();
 	driver.get("https://tellmesite.newagedev.co.uk/");
 
 	String testContent = "Test announcement content.";
+
+	WebElement newPost = driver.findElement(By.id("postBtn"));
+	WebElement content = driver.findElement(By.id("text"));
+	WebElement title = driver.findElement(By.id("titleBtn"));
+	WebElement submit = driver.findElement(By.id("submitBtn"));
+
 
 	driver.findElement(By.id("postBtn")).click();
 	title.sendKeys("Test Title");

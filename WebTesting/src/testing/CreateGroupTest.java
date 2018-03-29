@@ -9,12 +9,15 @@ public class CreateGroupTest {
 	
     public static void main(String[] args) throws InterruptedException{
         // declaration and instantiation of objects/variables
-		System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/src/testing/chromedriver/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "/chromedriver/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://tellmesite.newagedev.co.uk/");
 		
 		//browser waits so kings login can be manually input
 		Thread.sleep(10000);
+		
+		//refreshes page once logged in
+		driver.navigate().refresh();
 		
 		//click on new group button
 		driver.findElement(By.xpath("//*[@id=\"newGroupBtn\"]")).click();
@@ -30,7 +33,7 @@ public class CreateGroupTest {
 		
 		//uploads test student csv file
 	    WebElement chooseFile = driver.findElement(By.id("newGroupFile"));
-	    chooseFile.sendKeys("/home/k1631285/git/tellMe/WebTesting/src/testing/TestStudentlist.csv");
+	    chooseFile.sendKeys("TestStudentlist.csv");
 		System.out.println("Uploading student list...");
 		Thread.sleep(1000);
 		
