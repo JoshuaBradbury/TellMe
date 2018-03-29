@@ -13,6 +13,13 @@ window.onload = function () {
         var user = userAgentApplication.getUser();
         if (user) {
             loginOrOut(false);
+            if (window.location.href.indexOf("login") !== -1) {
+                window.location.replace("https://tellmesite.newagedev.co.uk/");
+            }
+        } else {
+            if (window.location.href.indexOf("login") === -1) {
+                window.location.replace("https://tellmesite.newagedev.co.uk/login");
+            }
         }
     }
 }
@@ -25,10 +32,7 @@ function loginOrOut(forceLogOut) {
     } else {
         if (forceLogOut) {
             userAgentApplication.logout();
-            document.getElementById("login").classList.remove("loggedin");
         } else {
-            document.getElementById("login").classList.add("loggedin");
-
             userAgentApplication.acquireTokenSilent(graphAPIScopes).then(function (token) {
                 callWebApiWithToken(graphApiEndpoint, token);
             }, function (error) {

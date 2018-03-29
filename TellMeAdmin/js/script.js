@@ -63,6 +63,29 @@ window.addEventListener("click", function(e) {
     }
 });
 
+(function($) {
+    $.fn.innerText = function(msg) {
+        if (msg) {
+            if (document.body.innerText) {
+                for (var i in this) {
+                    this[i].innerText = msg;
+                }
+            } else {
+                for (var i in this) {
+                    this[i].innerHTML.replace(/&lt;br&gt;/gi,"n").replace(/(&lt;([^&gt;]+)&gt;)/gi, "");
+                }
+            }
+            return this;
+        } else {
+            if (document.body.innerText) {
+                return this[0].innerText;
+            } else {
+                return this[0].innerHTML.replace(/&lt;br&gt;/gi,"n").replace(/(&lt;([^&gt;]+)&gt;)/gi, "");
+            }
+        }
+    };
+})(jQuery);
+
 function submit() {
     var title = document.getElementById("announcementTitle").value;
     var text = document.getElementById("text").innerHTML;
@@ -70,12 +93,11 @@ function submit() {
     if (title == "" || text == "") {
         alert("Missing text field");
     } else {
-        document.getElementById("announcementTitle").value = "";
-        document.getElementById("text").innerHTML = "";
-        $('div#collapseOne').collapse("hide");
-
-        sendEndpointRequest("announcement", "POST", { "groupId": getOpenGroupId(), "subject": title, "announcement": text }, function(json) {
+        sendEndpointRequest("announcement", "POST", { "groupId": getOpenGroupId(), "subject": title, "announcement": $("div#text").innerText() }, function(json) {
             update(document.getElementById("title").innerHTML);
+            document.getElementById("announcementTitle").value = "";
+            document.getElementById("text").innerHTML = "";
+            $('div#collapseOne').collapse("hide");
         }, null);
     }
 }
@@ -191,9 +213,9 @@ function update(e) {
             }
         }, null);
 
-        sendEndpointRequest("group/users?groupId=" + groupId, "GET", null, function(json) {
-            var users = json.students;
-            for (var j = 0; j < users.length; j++) {
+        sendEndpointRequest("group/student?groupId=" + groupId, "GET", null, function(json) {
+            var students = json.students;
+            for (var j = 0; j < students.length; j++) {
                 var new_mod = document.createElement("div");
                 var my_container = document.getElementById("left");
                 new_mod.classList.add("students");
@@ -201,7 +223,7 @@ function update(e) {
                 my_container.appendChild(new_mod);
                 var text = document.createElement("h1");
                 text.id = "student-name" + j;
-                text.innerHTML = users[j];
+                text.innerHTML = students[j];
 
                 text.onclick = function() {
                     removestudent(this, document.getElementById("title").innerHTML, this.innerHTML);
@@ -222,7 +244,11 @@ function update(e) {
 function removestudent(e, course, student) {
     var answer = confirm("Remove " + student + " from " + course)
     if (answer) {
-        e.parentNode.parentNode.removeChild(e.parentNode);
+        if (getUser()) {
+            sendEndpointRequest("group/student", "DELETE", { "groupId": getOpenGroupId(), "student": student }, function(json) {
+                e.parentNode.parentNode.removeChild(e.parentNode);
+            }, null);
+        }
     } else {}
 }
 
@@ -284,6 +310,18 @@ function createNewGroup() {
     }
 }
 
+function asNumber(obj) {
+    if (obj) {
+        var n = Number(obj);
+
+        if (!isNaN(n)) {
+            return n;
+        }
+    }
+
+    return null;
+}
+
 function createGroup(file, group) {
     if(group != "") {
         if (file) {
@@ -296,23 +334,22 @@ function createGroup(file, group) {
                 if (e.target.readyState == FileReader.DONE) {
                     var csvval = e.target.result.split("\n");
 
-                    var users = [];
-                    var userIndex = csvval[0].split(",").indexOf("Username");
+                    var students = [];
 
-                    for (var i = 1; i < csvval.length; i++) {
+                    for (var i = 0; i < csvval.length; i++) {
                         var temp = csvval[i].split(",");
-                        if (temp.length > userIndex) {
-                            if (temp[userIndex] && temp[userIndex].trim()) {
-                                users.push(temp[userIndex].trim());
+                        for (var j = 0; j < temp.length; j++) {
+                            if (temp[j].toLowerCase()[0] == "k" && asNumber(temp[j][1]) != null) {
+                                students.push(temp[j].trim());
                             }
                         }
                     }
 
                     if (getUser()) {
                         sendEndpointRequest("group?groupName=" + group, "GET", null, function(json) {
-                            updateGroupRequest(getOpenGroupId(), users);
+                            updateGroupRequest(getOpenGroupId(), students);
                         }, function() {
-                            createNewGroupRequest(group, users);
+                            createNewGroupRequest(group, students);
                         });
                     }
                 }
@@ -328,16 +365,16 @@ function createGroup(file, group) {
 }
 
 function updateGroupRequest(gid, students) {
-    sendEndpointRequest("group", "PUT", { groupId: gid, users: students }, function (json) {
+    sendEndpointRequest("group", "PUT", { "users": students, "groupId": gid }, function (json) {
         update(document.getElementById("title").innerHTML);
     }, null);
 }
 
 function createNewGroupRequest(gname, students) {
     sendEndpointRequest("group", "POST", { "groupName": gname }, function (json) {
-        addGroupToWeb({ groupId: json.groupid, groupName: gname });
+        addGroupToWeb({ groupId: json.groupId, groupName: gname });
         document.getElementById("title").innerHTML = gname;
-        updateGroupRequest(json.groupid, students);
+        updateGroupRequest(json.groupId, students);
     }, null);
 }
 
@@ -362,7 +399,7 @@ function makeHttpObject() {
 function sendEndpointRequest(endpoint, method, body, success, failure) {
     var request = makeHttpObject();
     request.open(method, "https://tellme.newagedev.co.uk/api/v1.0/" + endpoint, true);
-    request.setRequestHeader("Authorization", "Basic " + btoa(getUser() + ":"));
+    request.setRequestHeader("Authorization", "Basic " + btoa("joshua.bradbury@kcl.ac.uk:"));
     if (body) {
         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         request.send(JSON.stringify(body));

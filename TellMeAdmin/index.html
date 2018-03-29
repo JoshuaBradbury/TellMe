@@ -3,14 +3,14 @@
     <head>
         <title>Tell Me</title>
 
-        <link rel="icon" type="image/png" href="assets/logo16x16.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="/assets/logo16x16.png" sizes="32x32" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/style.css" type="text/css">
-        <link rel="stylesheet" href="css/popup.css" type="text/css">
-        <link rel="stylesheet" href="css/scroll.css" type="text/css">
-        <link rel="stylesheet" href="css/ecs.css" type="text/css">
-        <link rel="stylesheet" href="css/sidebar.css" type="text/css">
-        <link rel="stylesheet" href="css/btn.css" type="text/css">
+        <link rel="stylesheet" href="/css/style.css" type="text/css">
+        <link rel="stylesheet" href="/css/popup.css" type="text/css">
+        <link rel="stylesheet" href="/css/scroll.css" type="text/css">
+        <link rel="stylesheet" href="/css/ecs.css" type="text/css">
+        <link rel="stylesheet" href="/css/sidebar.css" type="text/css">
+        <link rel="stylesheet" href="/css/btn.css" type="text/css">
     </head>
 
     <body>
@@ -49,19 +49,19 @@
 
         <a href="#">
             <div class="bottom" id="newGroupBtn">
-                <img class="circle" id="plusBtn" src="assets/plus.png" />
+                <img class="circle" id="plusBtn" src="/assets/plus.png" />
             </div>
         </a>
 
         <div class="d-flex flex-column h-100">
             <nav class="navbar nav-col border-bottom">
                 <a class="navbar-brand" href="#">
-                    <img src="assets/kcl-logo.jpg" height="75" class="d-inline-block align-top" alt="TellMe">
+                    <img src="/assets/kcl-logo.jpg" height="75" class="d-inline-block align-top" alt="TellMe">
                 </a>
                 <label class="nav-item title" id="title">Title</label>
                 <div class="nav-item d-flex align-items-stretch">
-                    <img id="settingsBtn" src="assets/settings.png" height="80" class="d-inline-block align-top" alt="Settings">
-                    <button type="button" class="btn" id="login" onclick="loginOrOut()" style="margin-left: 10px">login</button>
+                    <img id="settingsBtn" src="/assets/settings.png" height="80" class="d-inline-block align-top" alt="Settings">
+                    <button type="button" class="btn" onclick="loginOrOut()" style="margin-left: 10px">Log Out</button>
                 </div>
             </nav>
 
@@ -78,7 +78,7 @@
                                             <label for="announcementTitle"></label>
                                             <input type="text" placeholder="Title" class="form-control input-mysize d-flex" id="announcementTitle" />
                                             <div class="placeholder d-flex" id="postBtn" onclick="show()">
-                                                <img id="plusBtn" class="h-100 w-100" src="assets/plus.png" />
+                                                <img id="plusBtn" class="h-100 w-100" src="/assets/plus.png" />
                                             </div>
                                         </div>
                                     </button>
@@ -113,9 +113,8 @@
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="js/msal.js"></script>
-        <script type="text/javascript" src="js/db.js"></script>
-        <script type="text/javascript" src="js/login.js"></script>
-        <script type="text/javascript" src="js/script.js"></script>
+        <script type="text/javascript" src="/js/msal.js"></script>
+        <script type="text/javascript" src="/js/login.js"></script>
+        <script type="text/javascript" src="/js/script.js"></script>
     </body>
 </html>
