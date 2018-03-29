@@ -1,5 +1,7 @@
 package testing;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,29 +9,25 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class AddStudentsTest {
 
-    public static void main(String[] args) throws InterruptedException{
+    public static void main(String[] args) throws InterruptedException, IOException{
         // declaration and instantiation of objects/variables
     	System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/src/testing/chromedriver/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://tellmesite.newagedev.co.uk/");
-		
-		String testGroup = "5sAAH2002";
 
-		//click on module, go to its settings
-		driver.findElement(By.xpath("//*[@id=\"module-name\"][contains(text(), \""+ testGroup +"\")]")).click();
-		System.out.println("Selecting Group...");
-		Thread.sleep(1000);
+		//browser waits so kings login can be manually input
+		Thread.sleep(10000);
 		
-		//Clicks on settings
+		//refreshes page once logged in
+		driver.navigate().refresh();
+		
+		//clicks on settings of first module
+		Thread.sleep(1000);
 		driver.findElement(By.xpath("//*[@id=\"settingsBtn\"]")).click();
 		System.out.println("Going into settings...");		
 		Thread.sleep(1000);
-		
-		//Enters group name 
-		driver.findElement(By.xpath("//*[@id=\"settingsName\"]")).sendKeys("fillerForTestToWorkAtm");
-		Thread.sleep(1000);
-		
-		//Clicks on choose file
+				
+		//Clicks on choose file and adds more students to group
 	    WebElement chooseFile = driver.findElement(By.id("settingsFile"));
 	    chooseFile.sendKeys("/home/k1631285/git/tellMe/WebTesting/src/testing/TestStudentlist.csv");
 		System.out.println("Uploading student list...");
@@ -40,14 +38,17 @@ public class AddStudentsTest {
 		System.out.println("Saving settings...");
 		Thread.sleep(1000);
 		
-        //TODO get list of students to compare !
-		String studentList = "/home/k1631285/git/tellMe/WebTesting/src/testing/TestStudentlist.csv";
-		
-		System.out.println(studentList);
+		//list of students in the csv file and list of students in the group
+		ArrayList<String> studentList = new ArrayList<String>();
+		studentList.add("k1631485");
+		studentList.add("k1631289");
+		studentList.add("k1631288");
+		studentList.add("k1734855");
 		String listOfStudents = driver.findElement(By.xpath("//*[@id=\"left\"]")).getText();
-		
+	
 		//check for new group within group list
-		if (listOfStudents.contains(studentList)){
+		
+		if (listOfStudents.contains(studentList.get(0)) && listOfStudents.contains(studentList.get(1)) && listOfStudents.contains(studentList.get(2)) && listOfStudents.contains(studentList.get(3))){
             System.out.println("Test Passed! The test students were added to the group."); 
 		} else {
 			System.out.println("Test Failed! The test students were not added.");

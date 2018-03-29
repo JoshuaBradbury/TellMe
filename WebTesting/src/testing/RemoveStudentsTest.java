@@ -12,14 +12,19 @@ public class RemoveStudentsTest {
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://tellmesite.newagedev.co.uk/");
 		
-		//grabs first student on list and list of current students 
-		String firstTestGroup = "sd5AAH2001";
-		String studentToDelete = driver.findElement(By.xpath("//*[@id=\"student-name0\"]")).getText();
-		String listOfCurrentStudents = driver.findElement(By.xpath("//*[@id=\"left\"]")).getText();
-		Thread.sleep(1000);
+		//browser waits so kings login can be manually input
+		Thread.sleep(10000);
 		
+		//refreshes page once logged in
+		driver.navigate().refresh();
+
+		//grabs first student on list and list of current students 
+	//	String studentToDelete = driver.findElement(By.xpath("//*[@id=\"student-name0\"]")).getText();
+		String listOfCurrentStudents = driver.findElement(By.xpath("//*[@id=\"left\"]/div[1]")).getText();
+	//	Thread.sleep(1000);
+		System.out.println(listOfCurrentStudents);
 		//clicks on first student
-		driver.findElement(By.xpath("//*[@id=\"student-name0\"]")).click();
+		//driver.findElement(By.xpath("//*[@id=\"student-name0\"]"))[contains(text(),'k16')].click();
 		System.out.println("Selecting First Student...");
 		Thread.sleep(1000);
 		
@@ -29,17 +34,17 @@ public class RemoveStudentsTest {
 		Thread.sleep(2000);
 		
 		//checks if the list of students contains the student just deleted and prints the result of the test
-		if(listOfCurrentStudents.contains(studentToDelete)) {
-				System.out.println("Test Passed! The first student \"" + studentToDelete + "\" from group \"" + firstTestGroup + "\" was deleted."); 
-	        } else {
-	        	System.out.println("Test Failed! The first student \"" + studentToDelete + "\" from group \"" + firstTestGroup + "\" was not deleted."); 
-		    }
+	//	if(listOfCurrentStudents.contains(studentToDelete)) {
+		//		System.out.println("Test Passed! The first student \"" + studentToDelete + "\" was deleted."); 
+	   //     } else {
+	   ///     	System.out.println("Test Failed! The first student \"" + studentToDelete + "\" was not deleted."); 
+		//    }
 	
 		
-		//selects a different group
-		String secondTestGroup = "n5AAH2003";
-		driver.findElement(By.xpath("//*[@id=\"module-name\"][contains(text(), \""+ secondTestGroup + "\")]")).click();
-		System.out.println("Going into module n5AAH2003...");
+		//selects second group group
+		String secondTestGroup = driver.findElement(By.xpath("//*[@id=\"groupList\"]/li[2]")).getText();
+		driver.findElement(By.xpath("//*[@id=\"groupList\"]/li[2]")).click();
+		System.out.println("Going into second group...");
 		Thread.sleep(1000);
 		
 		//grabs third student on list and list of current students 
