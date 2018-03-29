@@ -1,8 +1,6 @@
 package testing;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TitleTest {
@@ -15,7 +13,7 @@ public class TitleTest {
     	
         String expectedTitle = "Tell Me";
         String actualTitle = "";
-		Thread.sleep(1000);		String listOfGroups = driver.findElement(By.xpath("//*[@id=\"right\"]")).getText();
+		Thread.sleep(1000);
 
 		// retrieve the actual the title
 		actualTitle = driver.getTitle();

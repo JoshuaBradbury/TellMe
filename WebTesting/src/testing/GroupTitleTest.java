@@ -2,7 +2,6 @@ package testing;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class GroupTitleTest {
@@ -12,19 +11,22 @@ public class GroupTitleTest {
     	System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/src/testing/chromedriver/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://tellmesite.newagedev.co.uk/");
-    	
-        String expectedGroupTitle = "n5AAH2003";
+		
+		//browser waits so kings login can be manually input
+		Thread.sleep(10000);
+		
+		//grabs the first module in the list on the sidebar
+        String expectedGroupTitle = driver.findElement(By.xpath("//*[@id=\"groupList\"]/li[1]")).getText();
         String actualGroupTitle = "";
 		Thread.sleep(1000);
-		System.setProperty("webdriver.chrome.driver", "/home/k1631285/git/tellMe/WebTesting/src/testing/chromedriver/chromedriver");
-		
-        //Selects group from sidebar
+			
+        //selects group from sidebar
 		driver.findElement(By.xpath("//*[@id=\"module-name\"][contains(text(), \""+ expectedGroupTitle +"\")]")).click();
 		System.out.println("Going into module n5AAH2003...");
 		Thread.sleep(1000);
 		
-        WebElement groupTitle = driver.findElement(By.id("title-text"));
-        actualGroupTitle = groupTitle.getText();
+		//retrieves title of module page
+        actualGroupTitle = driver.findElement(By.id("title")).getText();
         System.out.println("Retrieving title...");
 		Thread.sleep(1000);
         

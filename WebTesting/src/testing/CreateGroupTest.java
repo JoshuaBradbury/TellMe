@@ -13,8 +13,8 @@ public class CreateGroupTest {
 		WebDriver driver = new ChromeDriver();
 		driver.get("https://tellmesite.newagedev.co.uk/");
 		
-		String testGroup = "Test Group";
-		Thread.sleep(1000);
+		//browser waits so kings login can be manually input
+		Thread.sleep(10000);
 		
 		//click on new group button
 		driver.findElement(By.xpath("//*[@id=\"newGroupBtn\"]")).click();
@@ -22,6 +22,7 @@ public class CreateGroupTest {
 		Thread.sleep(1000);
 		
 		//clicks on group name
+		String testGroup = "Test Create Group";
 		WebElement groupNameField = driver.findElement(By.xpath("//*[@id=\"newGroupName\"]"));
 		groupNameField.sendKeys(testGroup);
 		System.out.println("Adding name to new group...");
