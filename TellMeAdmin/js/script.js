@@ -339,8 +339,7 @@ function createGroup(file, group) {
                     for (var i = 0; i < csvval.length; i++) {
                         var temp = csvval[i].split(",");
                         for (var j = 0; j < temp.length; j++) {
-                            if (temp[j][0] == "k" && asNumber(temp[j][1]) != null) {
-                                console.log(temp[j]);
+                            if (temp[j].toLowerCase()[0] == "k" && asNumber(temp[j][1]) != null) {
                                 students.push(temp[j].trim());
                             }
                         }
